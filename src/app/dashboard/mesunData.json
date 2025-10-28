@@ -1,0 +1,123 @@
+[
+  {
+    "name": "modules",
+    "sub": [
+      "home",
+      {
+        "name": "sales",
+        "children": [
+          "leads",
+          "contacts",
+          "accounts",
+          "deals",
+          "forecasts",
+          "documents",
+          "campaigns"
+        ]
+      },
+      {
+        "name": "activities",
+        "children": [
+          "tasks",
+          "meetings",
+          "calls"
+        ]
+      },
+      {
+        "name": "inventory",
+        "children": [
+          "products",
+          "priceBooks",
+          "quotes",
+          "salesOrders",
+          "purchaseOrders",
+          "invoices",
+          "vendors"
+        ]
+      },
+      {
+        "name": "support",
+        "children": [
+          "cases",
+          "solutions"
+        ]
+      },
+      {
+        "name": "integrations",
+        "children": [
+          "saleInbox",
+          "social",
+          "visits"
+        ]
+      },
+      "services",
+      "projects"
+    ]
+  },
+
+  {
+    "name": "reports",
+    "sub": [
+      "allReports",
+      "myReports",
+      "favorites",
+      "recentlyViewed",
+      "sharedReports",
+      "scheduledReports",
+      "recentlyDeleted",
+      "accountAndContactReports",
+      "dealReports",
+      "leadReports",
+      "campaignReports",
+      "caseAndSolutionReports",
+      "productReports",
+      "vendorReports",
+      "quoteReports",
+      "salesOrderReports",
+      "purchaseOrderReports",
+      "invoiceReports",
+      "salesMetricsReports",
+      "emailReports",
+      "meetingReports",
+      "forecastReports"
+    ]
+  },
+
+  {
+    "name": "dashboard",
+    "sub": [
+      "orgOverview",
+      "leadAnalytics",
+      "dealInsights",
+      "marketingMetrics",
+      "salesTrend",
+      "salesFollowUpTrend",
+      "activityStats"
+    ]
+  },
+  {
+    "name": "marketplace",
+    "sub": [
+      {
+        "name": "integrations",
+        "children": [
+          "hr-360",
+          "google",
+          "microsoft",
+          "extensionBuilder",
+          "facebook",
+          "linkedin",
+          "tiktok"
+        ]
+      },
+      {
+        "name": "marketplace",
+        "children": [
+          "all",
+          "installed",
+          "updates"
+        ]
+      }
+    ]
+  }
+]

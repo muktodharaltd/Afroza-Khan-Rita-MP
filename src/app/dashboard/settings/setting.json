@@ -1,0 +1,136 @@
+[
+  {
+    "name": "general",
+    "children": [
+      "personalSettings",
+      "users",
+      "companySettings",
+      "calendarBooking",
+      "motivator"
+    ]
+  },
+  {
+    "name": "securityControl",
+    "children": [
+      "profiles",
+      "rolesAndSharing",
+      "zohoMailAddonUsers",
+      "complianceSettings",
+      "territoryManagement",
+      "trustedDomain",
+      "supportAccess",
+      "singleSignOnSAML",
+      "securityPolicies",
+      "activeDirectorySync",
+      "loginHistory",
+      "auditLog"
+    ]
+  },
+  {
+    "name": "channels",
+    "children": [
+      "email",
+      "telephony",
+      "businessMessaging",
+      "notificationSMS",
+      "webforms",
+      "social",
+      "chat",
+      "portals"
+    ]
+  },
+  {
+    "name": "customization",
+    "children": [
+      "modulesAndFields",
+      "pipelines",
+      "wizards",
+      "kioskStudio",
+      "canvas",
+      "customizeHomePage",
+      "translations",
+      "templates",
+      "teamspace"
+    ]
+  },
+  {
+    "name": "automation",
+    "children": [
+      "workflowRules",
+      "actions",
+      "schedules",
+      "assignment",
+      "caseEscalationRules",
+      "scoringRules",
+      "cadences"
+    ]
+  },
+  {
+    "name": "processManagement",
+    "children": [
+      "blueprint",
+      "approvalProcesses",
+      "reviewProcesses",
+      "connectedWorkflow"
+    ]
+  },
+  {
+    "name": "experienceCenter",
+    "children": [
+      "signals",
+      "commandCenter",
+      "segmentation"
+    ]
+  },
+  {
+    "name": "dataAdministration",
+    "children": [
+      "import",
+      "export",
+      "dataBackup",
+      "removeSampleData",
+      "storage",
+      "recycleBin",
+      "sandbox",
+      "copyCustomization"
+    ]
+  },
+  {
+    "name": "developerHub",
+    "children": [
+      "apisAndSDKs",
+      "connections",
+      "variables",
+      "circuits",
+      "functions",
+      "widgets",
+      "dataModel",
+      "queries",
+      "clientScript",
+      "catalystSolutions"
+    ]
+  },
+  {
+    "name": "zia",
+    "children": [
+      "dataEnrichment",
+      "prediction",
+      "recommendation",
+      "communication",
+      "vision",
+      "notifications",
+      "smartPrompt",
+      "customAI",
+      "competitors",
+      "usageData"
+    ]
+  },
+  {
+    "name": "cpq",
+    "children": [
+      "productConfigurator",
+      "priceRules",
+      "guidedSelling"
+    ]
+  }
+]
