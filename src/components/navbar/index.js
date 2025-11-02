@@ -7,6 +7,8 @@ import Link from "next/link";
 import NavItem from "./menusData";
 import { GoChevronDown } from "react-icons/go";
 import { FaChevronRight } from "react-icons/fa6";
+
+import { FaFacebook } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { usePathname } from "next/navigation";
 
@@ -117,9 +119,9 @@ const Navbar = () => {
           {/* 🟦 Desktop Button */}
           <Link
             href="/"
-            className="hover:bg-sky-900 bg-sky-900 text-white rounded px-3 py-2 hidden md:flex items-center gap-2"
+            className="hover:bg-sky-900 bg-sky-900 text-white rounded px-3 text-3xl py-2 hidden md:flex items-center gap-2"
           >
-            <p>FB use koro</p>
+           <FaFacebook/>
           </Link>
 
           {/* 🟦 Mobile Menu Toggle */}
