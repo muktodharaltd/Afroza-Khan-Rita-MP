@@ -55,14 +55,14 @@ export default function Contact() {
             <h1 className="text-4xl md:text-5xl font-bold mb-2 text-sky-800">
               Afroza Khan Rita
             </h1>
-            <p className="text-lg mb-4 text-sky-900">Member of Parliament  <span  className="text-blue-500">Read More</span></p>
+            <p className="text-lg mb-4 text-sky-900">Member of Parliament  <span  className="text-blue-500 underline">Read More</span></p>
            
           </div>
 
           {/* Right Form */}
           <div className="bg-sky-900 rounded-xl max-w-xl shadow-lg p-6 mt-10 md:mt-0 text-white">
             <h4 className="text-center text-xl font-bold mb-6">
-              Enter Your Report
+            Submit your complaint
             </h4>
 
             <form onSubmit={handleSubmit} className="space-y-4">
