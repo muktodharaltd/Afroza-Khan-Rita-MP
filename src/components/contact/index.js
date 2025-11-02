@@ -55,7 +55,7 @@ export default function Contact() {
             <h1 className="text-4xl md:text-5xl font-bold mb-2 text-sky-800">
               Afroza Khan Rita
             </h1>
-            <p className="text-lg mb-4 text-sky-900">Member of Parliament  <span  className="text-blue-500 underline">Read More</span></p>
+            <p className="text-lg mb-4 text-sky-900">Member of Parliament  <span  className="text-blue-500 underline">About</span></p>
            
           </div>
 

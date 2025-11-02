@@ -60,9 +60,7 @@ const HeroSlider = () => {
       </Swiper>
 
       {/* Optional Form */}
-      <div className="mt-4 px-4 sm:px-8">
-        <form> </form>
-      </div>
+      
     </div>
   );
 };

@@ -5,6 +5,7 @@ import Navber from "@/components/navbar/index";
 import Contact from "@/components/contact/index";
 import Footer from "@/components/footer";
 import Video from "@/components/video/index";
+import Blog from "@/components/blog/index"
 
 
 
@@ -16,6 +17,7 @@ export default function HomePage (){
             <Carousel/>
             <Contact/>
             <Video/>
+            <Blog/>
             <Footer/>
          
 

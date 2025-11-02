@@ -3,7 +3,7 @@ import React from "react";
 
 export default function VideoGallery() {
   return (
-    <section className="py-12 bg-gray-100">
+    <section className="py-12 ">
       <h2 className="text-3xl font-bold mb-12 text-gray-800 text-center">
         Video Gallery
       </h2>
