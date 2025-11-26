@@ -7,6 +7,8 @@ import Footer from "@/components/footer";
 import Video from "@/components/video/index";
 import Blog from "@/components/blog/index"
 import Report from "@/components/report/index"
+import Galary from "@/components/galary/galary"
+
 
 
 
@@ -17,10 +19,11 @@ export default function HomePage (){
         <div>
         <Navber/>
             <Carousel/>
-            <Contact/>
-            <Video/>
             <Blog/>
+            <Galary/>
             <Report/>
+            <Video/>
+            <Contact/>
             <Footer/>
          
 

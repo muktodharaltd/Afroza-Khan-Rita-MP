@@ -38,101 +38,108 @@ export default function Contact() {
 
   return (
     <>
-      {/* 🏔️ Hero Section */}
-      <section className="relative bg-cover bg-center min-h-[70vh] flex items-center bg-indigo-50">
-             <div className="mx-10 md:pl-20 md:mx-20 flex flex-col md:flex-row items-center  justify-between gap-12">
+      <section className="relative bg-cover bg-center min-h-[70vh] flex flex-col md:flex-row items-start bg-white pb-6">
+        <div className="w-full px-2 md:px-0">
+          <div className="md:max-w-7xl md:mx-auto md:py-12 flex flex-col md:flex-row gap-6 md:gap-12">
 
-        <div className="relative container mx-auto px-4 z-10 grid md:grid-cols-2 gap-10  justify-between items-center text-white">
-          {/* Left Text */}
-          <div className="pt-32">
-            <Image
-              src="/contact.jpg"
-              alt="Afroza Khan Rita"
-              width={470}
-              height={20}
-              className="rounded-lg shadow-lg mb-5"
-            />
-            <h1 className="text-4xl md:text-5xl font-bold mb-2 text-sky-800">
-              Afroza Khan Rita
-            </h1>
-            <p className="text-lg mb-4 text-sky-900">Member of Parliament  <span  className="text-blue-500 underline">About</span></p>
-           
+            {/* LEFT: Image */}
+            <div className="w-full md:w-1/2 flex flex-col">
+              <div className="relative w-full h-[300px] md:h-[640px] overflow-hidden rounded-lg">
+                <Image
+                  src="/contact.jpg"
+                  alt="Afroza Khan Rita"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+
+              {/* Mobile Name / Title */}
+              <h1 className="mt-3 md:mt-6 text-2xl md:text-5xl font-bold text-red-600 text-center md:text-left">
+                Afroza Khan Rita
+              </h1>
+
+              <p className="text-sm md:text-lg mt-1 text-sky-900 text-center md:text-left">
+                Member of Parliament <span className="text-blue-500 underline">About</span>
+              </p>
+            </div>
+
+            {/* RIGHT: Form */}
+            <div className="w-full md:w-1/2 flex items-center justify-center">
+              <div className="w-full bg-green-600 text-white p-3 md:p-8 md:rounded-xl md:shadow-lg md:max-w-xl h-auto md:h-[640px] flex flex-col">
+                <h4 className="text-center text-base md:text-xl font-bold mb-3 md:mb-6">
+                  Submit your complaint
+                </h4>
+
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-3 md:space-y-4 overflow-auto flex-1"
+                >
+                  <input
+                    type="text"
+                    name="username"
+                    value={form.username}
+                    onChange={handleChange}
+                    placeholder="Your Name"
+                    required
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <input
+                    type="text"
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
+                    placeholder="Subject"
+                    required
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <input
+                    type="text"
+                    name="location"
+                    value={form.location}
+                    onChange={handleChange}
+                    placeholder="Incident Location"
+                    required
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="Email"
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <input
+                    type="tel"
+                    name="mobile"
+                    value={form.mobile}
+                    onChange={handleChange}
+                    placeholder="Mobile Number"
+                    required
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <textarea
+                    name="description"
+                    value={form.description}
+                    onChange={handleChange}
+                    placeholder="Description"
+                    rows="4"
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none resize-none"
+                  />
+
+                  <button
+                    type="submit"
+                    className="w-full bg-white text-red-700 font-semibold py-2 rounded transition"
+                  >
+                    Submit Your Application
+                  </button>
+                </form>
+              </div>
+            </div>
+
           </div>
-
-          {/* Right Form */}
-          <div className="bg-sky-900 rounded-xl max-w-xl shadow-lg p-6 mt-10 md:mt-0 text-white">
-            <h4 className="text-center text-xl font-bold mb-6">
-            Submit your complaint
-            </h4>
-
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
-                name="username"
-                value={form.username}
-                onChange={handleChange}
-                placeholder="Your Name"
-                required
-                className="w-full p-3 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-              />
-
-              <input
-                type="text"
-                name="subject"
-                value={form.subject}
-                onChange={handleChange}
-                placeholder="Subject"
-                required
-                className="w-full p-3 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-              />
-
-              <input
-                type="text"
-                name="location"
-                value={form.location}
-                onChange={handleChange}
-                placeholder="Incident Location"
-                required
-                className="w-full p-3 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-              />
-
-              <input
-                type="email"
-                name="email"
-                value={form.email}
-                onChange={handleChange}
-                placeholder="Email"
-                className="w-full p-3 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-              />
-
-              <input
-                type="tel"
-                name="mobile"
-                value={form.mobile}
-                onChange={handleChange}
-                placeholder="Mobile Number"
-                required
-                className="w-full p-3 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-              />
-
-              <textarea
-                name="description"
-                value={form.description}
-                onChange={handleChange}
-                placeholder="Description"
-                rows="3"
-                className="w-full p-3 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none resize-none"
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-black hover:bg-gray-800 text-white font-medium py-3 rounded transition"
-              >
-                Submit Your Application
-              </button>
-            </form>
-          </div>
-        </div>
         </div>
       </section>
 
