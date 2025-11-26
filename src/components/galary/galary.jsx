@@ -81,9 +81,9 @@ export default function PhotoGallery() {
       `}</style>
 
       <div className="max-w-7xl mx-auto">
-        <div className="mb-6 flex items-center justify-between">
+        <div className="mb-6 items-center ">
           <h2 className="text-2xl font-semibold text-green-700">ফটো গ্যালারী</h2>
-          <p className="text-sm text-green-600">মিতার বিভিন্ন কার্যক্রমের মুহূর্তসমূহ</p>
+          <p className="text-sm text-green-600"> রিতার বিভিন্ন কার্যক্রমের মুহূর্তসমূহ</p>
         </div>
 
         {/* Controls for desktop */}
