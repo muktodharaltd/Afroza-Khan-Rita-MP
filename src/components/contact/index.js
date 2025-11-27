@@ -44,16 +44,17 @@ export default function Contact() {
 
             {/* LEFT: Image */}
             <div className="w-full md:w-1/2 flex flex-col">
-              <div className="relative w-full h-[300px] md:h-[640px] overflow-hidden rounded-lg">
-                <Image
-                  src="/contact.jpg"
-                  alt="Afroza Khan Rita"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover mt-14"
-                  priority
-                />
-              </div>
+             <div className="relative w-full h-[300px] md:h-[640px] overflow-hidden rounded-lg mt-0 md:mt-14">
+  <Image
+    src="/contact.jpg"
+    alt="Afroza Khan Rita"
+    fill
+    sizes="(max-width: 768px) 100vw, 50vw"
+    className="object-cover"
+    priority
+  />
+</div>
+
 
               {/* Mobile Name / Title */}
               <h1 className="mt-3 md:mt-6 text-2xl md:text-5xl font-bold text-red-600 text-center md:text-left">

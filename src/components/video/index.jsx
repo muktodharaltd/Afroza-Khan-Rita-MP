@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const videos = [
@@ -14,26 +14,26 @@ const videos = [
 export default function VideoGallery() {
   const [startIndex, setStartIndex] = useState(0);
   const [activeVideo, setActiveVideo] = useState(null);
+  const [visibleCount, setVisibleCount] = useState(4);
   const carouselRef = useRef(null);
 
-  const getVisibleCount = () => {
-    if (typeof window !== "undefined") {
-      if (window.innerWidth < 640) return 1; // mobile
-      if (window.innerWidth < 1024) return 2; // tablet
-    }
-    return 4; // desktop
+  // Update visible count based on screen width
+  const updateVisibleCount = () => {
+    if (window.innerWidth < 640) setVisibleCount(2); // mobile → 2 videos
+    else if (window.innerWidth < 1024) setVisibleCount(3); // tablet → 3 videos
+    else setVisibleCount(4); // desktop → 4 videos
   };
 
-  const visibleCount = getVisibleCount();
+  useEffect(() => {
+    updateVisibleCount();
+    window.addEventListener("resize", updateVisibleCount);
+    return () => window.removeEventListener("resize", updateVisibleCount);
+  }, []);
+
   const maxStartIndex = videos.length - visibleCount;
 
-  const next = () => {
-    setStartIndex((prev) => Math.min(prev + 1, maxStartIndex));
-  };
-
-  const prev = () => {
-    setStartIndex((prev) => Math.max(prev - 1, 0));
-  };
+  const next = () => setStartIndex((prev) => Math.min(prev + 1, maxStartIndex));
+  const prev = () => setStartIndex((prev) => Math.max(prev - 1, 0));
 
   // Touch swipe handlers
   let touchStartX = 0;
@@ -49,8 +49,8 @@ export default function VideoGallery() {
 
   const handleTouchEnd = () => {
     const distance = touchStartX - touchEndX;
-    if (distance > 50) next(); // swipe left
-    if (distance < -50) prev(); // swipe right
+    if (distance > 50) next(); // swipe left → next
+    if (distance < -50) prev(); // swipe right → prev
   };
 
   return (
@@ -79,6 +79,7 @@ export default function VideoGallery() {
         <ChevronRight size={24} />
       </button>
 
+      {/* Carousel */}
       <div
         className="overflow-hidden relative"
         ref={carouselRef}
@@ -88,14 +89,12 @@ export default function VideoGallery() {
       >
         <div
           className="flex transition-transform duration-500 ease-in-out"
-          style={{
-            transform: `translateX(-${(startIndex * 100) / visibleCount}%)`,
-          }}
+          style={{ transform: `translateX(-${(startIndex * 100) / visibleCount}%)` }}
         >
           {videos.map((video) => (
             <div
               key={video.id}
-              className={`flex-shrink-0 p-2 cursor-pointer`}
+              className="flex-shrink-0 p-2 cursor-pointer"
               style={{ width: `${100 / visibleCount}%` }}
               onClick={() => setActiveVideo(video)}
             >
