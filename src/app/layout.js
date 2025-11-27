@@ -1,6 +1,6 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Providers from "./providers";
+import Providers from "./providers"; // 🔹 নতুন Providers import
 
 const inter = Inter({
   subsets: ["latin"],
@@ -17,24 +17,9 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`
-          ${inter.variable} 
-          antialiased
-          min-h-[100dvh] 
-          w-full 
-          overflow-x-hidden !overflow-y-auto
-        `}
+        className={`${inter.variable} antialiased`}
       >
-        {/* FORCE ALWAYS SCROLL TOP AFTER HYDRATION */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.history.scrollRestoration = "manual";
-              window.scrollTo(0, 0);
-            `,
-          }}
-        />
-
+        {/* 🔹 এখন react-query provider পুরো অ্যাপকে wrap করবে */}
         <Providers>{children}</Providers>
       </body>
     </html>

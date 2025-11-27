@@ -74,7 +74,7 @@ export default function HeroSlider() {
               </h1>
 
               <p className="text-green-600 mt-15 text-base sm:text-xl md:text-2xl text-center md:text-left">
-                আফরোজা খান রিতা — নারী শক্তিকে এগিয়ে নেওয়ার দৃঢ় অঙ্গীকার
+                আফরোজা খানম রিতা — নারী শক্তিকে এগিয়ে নেওয়ার দৃঢ় অঙ্গীকার
               </p>
             </div>
           </div>

@@ -90,7 +90,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-red-700 text-white py-8 px-4">
+    <footer className="bg-red-600 text-white py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Top: responsive grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 items-start">
@@ -167,7 +167,7 @@ const Footer = () => {
             <p className="opacity-90 mt-1">Email: info@example.com</p>
 
             <div className="mt-3">
-              <a href="/contact" className="inline-block px-3 py-1 bg-white text-red-700 font-semibold rounded-md shadow-sm hover:shadow transition text-sm">Contact Office</a>
+              <a href="/contact" className="inline-block px-3 py-1 bg-white text-red-600 font-semibold rounded-md shadow-sm hover:shadow transition text-sm">Contact Office</a>
             </div>
           </div>
         </div>

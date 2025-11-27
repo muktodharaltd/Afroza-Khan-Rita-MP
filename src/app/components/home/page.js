@@ -17,7 +17,7 @@ import Galary from "@/components/galary/galary"
 export default function HomePage (){
     return(
         <div>
-        <Navber/>
+            <Navber/>
             <Carousel/>
             <Blog/>
             <Galary/>

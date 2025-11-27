@@ -50,17 +50,17 @@ export default function Contact() {
                   alt="Afroza Khan Rita"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
+                  className="object-cover mt-14"
                   priority
                 />
               </div>
 
               {/* Mobile Name / Title */}
               <h1 className="mt-3 md:mt-6 text-2xl md:text-5xl font-bold text-red-600 text-center md:text-left">
-                Afroza Khan Rita
+                Afroza Khanam Rita
               </h1>
 
-              <p className="text-sm md:text-lg mt-1 text-sky-900 text-center md:text-left">
+              <p className="text-sm md:text-lg mt-1 text-green-600 text-center md:text-left">
                 Member of Parliament <span className="text-blue-500 underline">About</span>
               </p>
             </div>
@@ -131,7 +131,7 @@ export default function Contact() {
 
                   <button
                     type="submit"
-                    className="w-full bg-white text-red-700 font-semibold py-2 rounded transition"
+                    className="w-full bg-white text-red-600 font-semibold py-2 rounded transition"
                   >
                     Submit Your Application
                   </button>

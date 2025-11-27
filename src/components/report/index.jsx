@@ -27,7 +27,7 @@ export default function ComplaintsTable() {
 
   return (
     <div className=" max-w-7xl mx-auto ">
-      <h2 className="text-3xl font-bold text-center mb-8 text-green-700">
+      <h2 className="text-3xl font-bold text-center mb-8 text-green-600">
         প্রাপ্ত অভিযোগ
       </h2>
 

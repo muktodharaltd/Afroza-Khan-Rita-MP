@@ -241,7 +241,7 @@ const Navbar = () => {
   return (
     <>
       {/* 🔸 Sticky Navbar */}
-      <div className="sticky top-0 uppercase font-semibold text-sm z-50 bg-red-700 shadow-md">
+      <div className="sticky top-0 uppercase font-semibold text-sm z-50 bg-red-600 shadow-md">
         <div className="w-full mx-auto px-6 h-13 md:h-17 py-4 flex items-center justify-between">
           {/* 🔹 Logo */}
           <div className="flex items-center gap-2">
@@ -254,7 +254,7 @@ const Navbar = () => {
                 className="rounded-full object-cover"
               />
             </div>
-            <p className="text-base text-white md:text-lg">Afroza Khan Rita</p>
+            <p className="text-base text-white md:text-lg">আফরোজা খানম রিতা</p>
           </div>
 
           {/* 🟦 Desktop Menu */}
@@ -268,7 +268,7 @@ const Navbar = () => {
               >
                 <Link
                   href={item.href || "#"}
-                  className={`cursor-pointer select-none flex items-center gap-1 hover:text-sky-700 ${
+                  className={`cursor-pointer select-none flex items-center gap-1 hover:text-green-800 ${
                     pathname === item.href ? "text-white" : ""
                   }`}
                 >
@@ -304,7 +304,7 @@ const Navbar = () => {
                             className={`w-full min-w-[200px] font-mono text-sm py-2 px-4 whitespace-nowrap flex items-center justify-between duration-300 ${
                               pathname === subItem.href
                                 ? "text-white"
-                                : "text-black hover:text-sky-900"
+                                : "text-black hover:text-green-600"
                             }`}
                           >
                             <span>{subItem.name}</span>
