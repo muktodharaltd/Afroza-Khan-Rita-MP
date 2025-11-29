@@ -57,12 +57,13 @@ export default function HeroSlider() {
   }, [index])
 
   return (
-    <section className="w-full bg-white mt-5">
-      <div className="w-full px-0 py-0">
-        <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">
+<section className="w-full bg-white mt-5">
+  <div className="w-full px-0 md:px-10 py-0">
+    <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">
           {/* Left Text Section */}
-          <div className="w-full md:w-5/12 flex items-center mt-10 h-30 justify-center md:justify-start px-4 md:ml-20">
-            <div className="w-full">
+          <div className="w-full md:w-5/12 flex items-center justify-center md:justify-start px-4  mt-10 md:mt-0 md:h-[420px]">
+            {/* make inner container fill height and center vertically */}
+            <div className="w-full flex flex-col justify-center h-full">
               <h1 className="text-2xl h-10 sm:text-3xl md:text-4xl font-semibold text-green-600 leading-tight text-center md:text-left">
                 <span>{display}</span>
                 <span className="inline-block ml-2 align-middle">
@@ -73,16 +74,16 @@ export default function HeroSlider() {
                 </span>
               </h1>
 
-              <p className="text-green-600 mt-15 text-base sm:text-xl md:text-2xl text-center md:text-left">
+              <p className="text-green-600 mt-14 text-base sm:text-xl md:text-2xl text-center md:text-left">
                 আফরোজা খানম রিতা — নারী শক্তিকে এগিয়ে নেওয়ার দৃঢ় অঙ্গীকার
               </p>
             </div>
           </div>
 
           {/* Right Slider Section (mild overlap / mingle on desktop) */}
-          <div className="w-full md:w-7/12 relative shadow-l">
+          <div className="w-full md:w-7/12 relative shadow-l ">
             {/* To create a subtle 'mingle' effect on larger screens we shift the slider slightly left */}
-            <div className="relative h-[220px] md:h-[420px]  overflow-hidden shadow-lg md:-ml-6">
+            <div className="relative h-[178px] md:h-[372px] overflow-hidden shadow-xl md:-ml-6">
               <Swiper
                 spaceBetween={0}
                 slidesPerView={1}
@@ -99,9 +100,9 @@ export default function HeroSlider() {
                     <Image
                       src="/carousel11.jpg"
                       alt="Slide 1"
-                      width='1500'
-                      height='1500'
-                      className="object-cover "
+                      width="1500"
+                      height="1500"
+                      className="object-cover"
                       priority
                     />
                   </div>
@@ -112,9 +113,9 @@ export default function HeroSlider() {
                     <Image
                       src="/carousel22.jpg"
                       alt="Slide 2"
-                      width='1500'
-                      height='1500'
-                      className="object-cover "
+                      width="1500"
+                      height="1500"
+                      className="object-cover"
                       priority
                     />
                   </div>
@@ -125,8 +126,8 @@ export default function HeroSlider() {
                     <Image
                       src="/carousel33.jpg"
                       alt="Slide 3"
-                      width='1500'
-                      height='1500'
+                      width="1500"
+                      height="1500"
                       className="object-cover"
                       priority
                     />

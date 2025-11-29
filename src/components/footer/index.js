@@ -85,7 +85,7 @@
 
 import React from "react";
 import Link from "next/link";
-import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin, FaTiktok  } from "react-icons/fa";
 import Image from "next/image";
 
 const Footer = () => {
@@ -100,7 +100,7 @@ const Footer = () => {
             <div className="flex items-center gap-3">
               <div className="w-14 h-14 relative flex-shrink-0 rounded-full overflow-hidden shadow-md">
                 <Image
-                  src="/logo.jpg"
+                  src="/logo.png"
                   alt="Afroza Khan Rita Logo"
                   fill
                   sizes="56px"
@@ -112,20 +112,20 @@ const Footer = () => {
                 <p className="text-sm opacity-90">Member of Parliament</p>
               </div>
             </div>
-            <p className="text-sm opacity-90">
-              Dedicated to serving the people with integrity and development. Reach out for any community support.
+            <p className=" text-white">
+             সততা এবং উন্নয়নের সাথে জনগণের সেবা করার জন্য নিবেদিতপ্রাণ। যেকোনো সম্প্রদায়ের সহায়তার জন্য যোগাযোগ করুন।
             </p>
             <div className="flex gap-2 mt-2">
-              <a href="#" aria-label="Facebook" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
+              <a href="https://www.facebook.com/afroza.rita.khanam" aria-label="Facebook" target='blank' className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
                 <FaFacebook />
               </a>
-              <a href="#" aria-label="Instagram" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
-                <FaInstagram />
+              <a href="https://www.tiktok.com/@afroza_khanam_rita" target='blank' aria-label="Instagram" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
+                <FaTiktok  />
               </a>
-              <a href="#" aria-label="Twitter" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
+              <a href="https://x.com/AfrozaKRita" target='blank' aria-label="Twitter" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
                 <FaTwitter />
               </a>
-              <a href="#" aria-label="LinkedIn" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
+              <a href="https://www.linkedin.com/feed/" target='blank' aria-label="LinkedIn" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
                 <FaLinkedin />
               </a>
             </div>

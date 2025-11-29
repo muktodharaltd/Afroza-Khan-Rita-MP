@@ -1,16 +1,16 @@
 // data/navItems.js
 
 const navItems = [
-  { name: 'Home', 
+  { name: 'প্রথম পাতা', 
     href: '/' 
   },
   
   {
-    name: 'About us',
+    name: 'পরিচিতি',
     href: '/',
   },
   {
-    name: 'Contact',
+    name: 'যোগাযোগ',
     href: '/',
   },
   

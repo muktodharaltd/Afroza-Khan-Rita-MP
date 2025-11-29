@@ -55,8 +55,8 @@ export default function VideoGallery() {
 
   return (
     <section className="py-12 max-w-7xl mx-auto relative">
-      <h2 className="text-3xl font-bold mb-12 text-gray-800 text-center">
-        Video Gallery
+      <h2 className="text-3xl font-bold mb-12 text-green-600 ">
+       ভিডিও গ্যালারি
       </h2>
 
       {/* Carousel Controls */}

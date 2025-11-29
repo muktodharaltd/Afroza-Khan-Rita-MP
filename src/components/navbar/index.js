@@ -208,6 +208,7 @@
 
 
 
+
 "use client";
 
 import { useState, useRef, useEffect } from "react";
@@ -241,13 +242,19 @@ const Navbar = () => {
   return (
     <>
       {/* 🔸 Sticky Navbar */}
-      <div className="sticky top-0 uppercase font-semibold text-sm z-50 bg-red-600 shadow-md">
-        <div className="w-full mx-auto px-6 h-13 md:h-17 py-4 flex items-center justify-between">
+      <div
+        className="sticky top-0 uppercase font-semibold text-sm z-50 bg-red-600"
+        style={{
+          // darker gray/black shadow
+          boxShadow: "0 1px 1px rgba(5, 3, 4, 0.5), 0 4px 5px rgba(5,3,4,0.5)",
+        }}
+      >
+        <div className="w-full mx-auto px-6 h-13 md:h-17 py-4 flex items-center justify-between ">
           {/* 🔹 Logo */}
           <div className="flex items-center gap-2">
             <div className="relative w-[50px] h-[50px]">
               <Image
-                src="/logo.jpg"
+                src="/logo.png"
                 alt="Logo"
                 width={50}
                 height={50}
@@ -323,7 +330,8 @@ const Navbar = () => {
 
           {/* 🟦 Desktop Button */}
           <Link
-            href="/"
+            href="https://www.facebook.com/afroza.rita.khanam"
+            target='blank'
             className=" bg-white text-blue rounded-full px-1 text-3xl py-1 hidden md:flex items-center gap-2"
           >
             <FaFacebook />
@@ -339,6 +347,9 @@ const Navbar = () => {
         </div>
       </div>
 
+      {/* darker gray gradient shadow/separator below navbar */}
+      <div className="w-full h-3 pointer-events-none bg-gradient-to-b from-gray-900/30 to-transparent" />
+
       {/* 🔸 Mobile Menu Drawer — TOP SLIDE */}
       <AnimatePresence>
         {isMobileMenuOpen && (
@@ -348,6 +359,10 @@ const Navbar = () => {
             exit={{ y: "-100%" }}
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="fixed top-13 left-0 w-full h-auto bg-white rounded-b-2xl shadow-2xl z-50 p-6 overflow-y-auto"
+            style={{
+              // keep drawer shadow consistent with navbar
+              boxShadow: "0 14px 40px rgba(15,23,42,0.45)",
+            }}
           >
             <ul className="flex flex-col items-left space-y-0 w-full">
               {NavItem.map((item, i) => (
@@ -395,7 +410,7 @@ const Navbar = () => {
       {/* 🔹 Background Overlay */}
       {isMobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-black/10 z-40"
+          className="fixed inset-0 bg-black/20 z-40"
           onClick={() => setIsMobileMenuOpen(false)}
         ></div>
       )}

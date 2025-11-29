@@ -8,6 +8,7 @@ import Video from "@/components/video/index";
 import Blog from "@/components/blog/index"
 import Report from "@/components/report/index"
 import Galary from "@/components/galary/galary"
+import NewsPage from "@/components/news/newsPaga"
 
 
 
@@ -19,6 +20,7 @@ export default function HomePage (){
         <div>
             <Navber/>
             <Carousel/>
+            <NewsPage/>
             <Blog/>
             <Galary/>
             <Report/>
