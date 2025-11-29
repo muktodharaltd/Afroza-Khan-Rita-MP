@@ -39,9 +39,8 @@ export default function Contact() {
   return (
     <>
       <section className="relative bg-cover bg-center min-h-[70vh] flex flex-col md:flex-row items-start">
-       
         <div className="w-full px-2 md:px-0">
-          <div className="md:max-w-7xl md:mx-auto md:py-5 flex flex-col md:flex-row gap-6 md:gap-12">
+          <div className="md:max-w-7xl md:mx-auto mb-5 md:py-5 flex flex-col md:flex-row gap-6 md:gap-12">
             {/* LEFT: Image */}
             <div className="w-full md:w-1/2 flex flex-col">
               <div className="relative w-full h-[300px] md:h-[640px] overflow-hidden rounded-lg md:mt-26">
@@ -66,81 +65,80 @@ export default function Contact() {
               </p>
             </div>
 
+           
             {/* RIGHT: Form */}
-           {/* RIGHT: Form */}
-<div className="w-full md:w-1/2 flex items-center justify-center">
-  <div className="w-full bg-green-600 text-white p-3 md:p-8 md:rounded-xl md:shadow-2xl md:max-w-xl h-auto md:h-[640px] flex flex-col shadow-lg">
-    <h4 className="text-center text-base md:text-xl font-bold mb-3 md:mb-6">
-      আপনার অভিযোগ জমা দিন
-    </h4>
+            <div className="w-full md:w-1/2 flex items-center justify-center">
+              <div className="w-full bg-green-600 text-white p-3 md:p-8 md:rounded-xl md:shadow-2xl md:max-w-xl h-auto md:h-[640px] flex flex-col shadow-lg">
+                <h4 className="text-center text-base md:text-xl font-bold mb-3 md:mb-6">
+                  আপনার অভিযোগ জমা দিন
+                </h4>
 
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-3 md:space-y-4 overflow-auto flex-1"
-    >
-      <input
-        type="text"
-        name="username"
-        value={form.username}
-        onChange={handleChange}
-        placeholder="আপনার নাম"
-        required
-        className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-      />
-      <input
-        type="text"
-        name="subject"
-        value={form.subject}
-        onChange={handleChange}
-        placeholder="বিষয়"
-        required
-        className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-      />
-      <input
-        type="text"
-        name="location"
-        value={form.location}
-        onChange={handleChange}
-        placeholder="ঘটনার স্থান"
-        required
-        className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-      />
-      <input
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        placeholder="ইমেইল"
-        className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-      />
-      <input
-        type="tel"
-        name="mobile"
-        value={form.mobile}
-        onChange={handleChange}
-        placeholder="মোবাইল নম্বর"
-        required
-        className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
-      />
-      <textarea
-        name="description"
-        value={form.description}
-        onChange={handleChange}
-        placeholder="বিস্তারিত বিবরণ"
-        rows="4"
-        className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none resize-none"
-      />
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-3 md:space-y-4 overflow-auto flex-1"
+                >
+                  <input
+                    type="text"
+                    name="username"
+                    value={form.username}
+                    onChange={handleChange}
+                    placeholder="আপনার নাম"
+                    required
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <input
+                    type="text"
+                    name="subject"
+                    value={form.subject}
+                    onChange={handleChange}
+                    placeholder="বিষয়"
+                    required
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <input
+                    type="text"
+                    name="location"
+                    value={form.location}
+                    onChange={handleChange}
+                    placeholder="ঘটনার স্থান"
+                    required
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <input
+                    type="email"
+                    name="email"
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="ইমেইল"
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <input
+                    type="tel"
+                    name="mobile"
+                    value={form.mobile}
+                    onChange={handleChange}
+                    placeholder="মোবাইল নম্বর"
+                    required
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                  />
+                  <textarea
+                    name="description"
+                    value={form.description}
+                    onChange={handleChange}
+                    placeholder="বিস্তারিত বিবরণ"
+                    rows="4"
+                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none resize-none"
+                  />
 
-      <button
-        type="submit"
-        className="w-full bg-white text-red-600 font-semibold py-2 rounded transition"
-      >
-         জমা দিন
-      </button>
-    </form>
-  </div>
-</div>
-
+                  <button
+                    type="submit"
+                    className="w-full bg-white text-red-600 font-semibold py-2 rounded transition"
+                  >
+                    জমা দিন
+                  </button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </section>
