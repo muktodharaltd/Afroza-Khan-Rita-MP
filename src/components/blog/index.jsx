@@ -7,9 +7,8 @@ const BlogPosts = () => {
   return (
     <div className="max-w-7xl mx-auto py-10 ">
       <h2 className="text-3xl font-bold mb-8 text-green-600">
-        সাম্প্রতিক ব্লগ পোস্ট
+        সাম্প্রতিক ব্লগ পোস্ট 
       </h2>
-
       {/* flex gap added */}
       <div className="flex flex-wrap -mx-4 gap-y-8">
         {BlogData.map((post) => (
@@ -44,7 +43,6 @@ const BlogPosts = () => {
                   <span className="underline cursor-pointer">Read more...</span>
                 </p>
               </div>
-
             </div>
           </div>
         ))}
