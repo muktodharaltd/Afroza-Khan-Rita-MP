@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import Image from 'next/image'
+import Button from '@/components/common/Button'
 
 const slogans = [
   'প্রতিটি নারীর স্বপ্ন পূরণের পাশে রিতা',
@@ -57,9 +58,9 @@ export default function HeroSlider() {
   }, [index])
 
   return (
-<section className="w-full bg-white mt-5 shadow-sm ">
-  <div className="w-full px-0 md:px-10 py-0">
-    <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">
+    <section className="w-full bg-white mt-5 shadow-sm ">
+      <div className="w-full px-0 md:px-10 py-0">
+        <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">
           {/* Left Text Section */}
           <div className="w-full md:w-5/12 flex items-center justify-center md:justify-start px-4  mt-10 md:mt-0 md:h-[420px]">
             {/* make inner container fill height and center vertically */}
@@ -77,6 +78,10 @@ export default function HeroSlider() {
               <p className="text-green-600 mt-14 text-base sm:text-xl md:text-2xl text-center md:text-left">
                 আফরোজা খানম রিতা — নারী শক্তিকে এগিয়ে নেওয়ার দৃঢ় অঙ্গীকার
               </p>
+              <div className="text-right  mr-20 pt-20">
+
+            <button  className="w-auto md:min-w-24 text-center rounded bg-red-600 text-white px-6 py-2 font-semibold hover:bg-bg-green-600 transition "> register now</button>
+              </div>
             </div>
           </div>
 
@@ -136,7 +141,6 @@ export default function HeroSlider() {
               </Swiper>
 
               {/* optional overlay gradient to help text readability if needed */}
-              
             </div>
           </div>
         </div>
