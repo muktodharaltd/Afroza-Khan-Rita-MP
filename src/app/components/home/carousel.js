@@ -80,7 +80,7 @@ export default function HeroSlider() {
               </p>
               <div className="text-right  mr-20 pt-20">
 
-            <button  className="w-auto md:min-w-24 text-center rounded bg-red-600 text-white px-6 py-2 font-semibold hover:bg-bg-green-600 transition "> register now</button>
+            <button  className="w-auto md:min-w-24 text-center rounded bg-red-600 text-white px-6 py-2 font-semibold hover:bg-bg-green-600 transition "> Register Now</button>
               </div>
             </div>
           </div>
