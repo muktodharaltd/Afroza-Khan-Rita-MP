@@ -48,7 +48,7 @@ const BlogPosts = () => {
             </div>
           </div>
         ))}
-      </div>
+      </div> 
     </div>
   );
 };
