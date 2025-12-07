@@ -78,8 +78,10 @@ export default function HeroSlider() {
               <p className="text-green-600 mt-14 text-base sm:text-xl md:text-2xl text-center md:text-left">
                 আফরোজা খানম রিতা — নারী শক্তিকে এগিয়ে নেওয়ার দৃঢ় অঙ্গীকার
               </p>
-              <div className="text-right  mr-20 pt-20">
 
+              {/* ? register button  */}
+              
+              <div className="text-right  mr-20 pt-20">
             <button  className="w-auto md:min-w-24 text-center rounded bg-red-600 text-white px-6 py-2 font-semibold hover:bg-bg-green-600 transition "> Register Now</button>
               </div>
             </div>

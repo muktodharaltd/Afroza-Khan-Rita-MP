@@ -13,6 +13,10 @@ const navItems = [
     name: 'যোগাযোগ',
     href: '/',
   },
+  {
+    name: 'নারী শক্তি',
+    href: '/',
+  },
   
 ]
 
