@@ -38,15 +38,15 @@ export default function Contact() {
 
   return (
     <>
-      <section className="relative bg-cover bg-center min-h-[70vh] flex flex-col md:flex-row items-start">
+      <section className="relative bg-cover bg-center  min-h-[70vh] flex flex-col md:flex-row items-start shadow-sm ">
         <div className="w-full px-2 md:px-0">
           <div className="md:max-w-7xl md:mx-auto mb-5 md:py-5 flex flex-col md:flex-row gap-6 md:gap-12">
             {/* LEFT: Image */}
             <div className="w-full md:w-1/2 flex flex-col">
-              <div className="relative w-full h-[300px] md:h-[640px] overflow-hidden rounded-lg md:mt-26">
+              <div className="relative w-full h-[300px] md:h-[640px] overflow-hidden rounded-lg mt-1 md:mt-26">
                 <Image
                   src="/contact.jpg"
-                  alt="Afroza Khan Rita"
+                  alt="Afroza Khanam Rita"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
                   className="object-cover"
@@ -60,7 +60,7 @@ export default function Contact() {
               </h1>
 
               <p className="text-sm md:text-lg mt-1 text-green-600 text-center md:text-left">
-                সংসদ সদস্য{' '}
+                সংসদ সদস্য
                 <span className="text-blue-500 underline">বিস্তারিত</span>
               </p>
             </div>

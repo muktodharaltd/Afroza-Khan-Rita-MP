@@ -20,12 +20,12 @@ export default function HomePage (){
         <div>
             <Navber/>
             <Carousel/>
-            <NewsPage/>
-            <Blog/>
-            <Galary/>
-            <Report/>
-            <Video/>
             <Contact/>
+            <Report/>
+            <NewsPage/>
+            <Galary/>
+            <Video/>
+            <Blog/>
             <Footer/>
          
 

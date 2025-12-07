@@ -218,6 +218,7 @@ import Link from "next/link";
 import NavItem from "./menusData";
 import { GoChevronDown } from "react-icons/go";
 import { FaChevronRight, FaFacebook } from "react-icons/fa6";
+import { FaTwitter, FaLinkedin, FaTiktok  } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
 import { usePathname } from "next/navigation";
 
@@ -242,110 +243,117 @@ const Navbar = () => {
   return (
     <>
       {/* 🔸 Sticky Navbar */}
-      <div
-        className="sticky top-0 uppercase font-semibold text-sm z-50 bg-red-600"
-        style={{
-          // darker gray/black shadow
-          boxShadow: "0 1px 1px rgba(5, 3, 4, 0.5), 0 4px 5px rgba(5,3,4,0.5)",
-        }}
-      >
-        <div className="w-full mx-auto px-6 h-13 md:h-17 py-4 flex items-center justify-between ">
-          {/* 🔹 Logo */}
-          <div className="flex items-center gap-2">
-            <div className="relative w-[50px] h-[50px]">
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={50}
-                height={50}
-                className="rounded-full object-cover"
-              />
-            </div>
-            <p className="text-base text-white md:text-lg">আফরোজা খানম রিতা</p>
-          </div>
+     <div
+  className="sticky top-0 uppercase font-semibold text-sm z-50 bg-red-600"
+  style={{
+    boxShadow: "0 1px 1px rgba(5, 3, 4, 0.5), 0 4px 5px rgba(5,3,4,0.5)",
+  }}
+>
+  <div className="w-full mx-auto px-6 h-13 md:h-17 py-4 flex items-center justify-between md:justify-center relative">
 
-          {/* 🟦 Desktop Menu */}
-          <ul className="hidden md:flex space-x-7 h-20 items-center relative z-[60]">
-            {NavItem.map((item) => (
-              <li
-                key={item.name}
-                className="relative"
-                onMouseEnter={() => handleMouseEnter(item.name)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link
-                  href={item.href || "#"}
-                  className={`cursor-pointer select-none flex items-center gap-1 hover:text-green-800 ${
-                    pathname === item.href ? "text-white" : ""
-                  }`}
-                >
-                  <span>{item.name}</span>
-                  {item.dropdown && <GoChevronDown className="text-sm mt-[1px]" />}
-                </Link>
+    {/* 🔹 Logo + Name (Left) */}
+    <div className="flex items-center gap-2 absolute left-6 md:left-10">
+      <div className="relative w-[50px] h-[50px]">
+        <Image
+          src="/logo.png"
+          alt="Logo"
+          width={50}
+          height={50}
+          className="rounded-full object-cover"
+        />
+      </div>
+      <p className="text-base text-white md:text-lg">আফরোজা খানম রিতা</p>
+    </div>
 
-                {/* spacer for dropdown hover zone */}
-                <div className="absolute top-full left-0 w-full h-7"></div>
-
-                <AnimatePresence>
-                  {openDropdown === item.name && item.dropdown && (
-                    <motion.ul
-                      initial={{ height: 0 }}
-                      animate={{
-                        height: dropdownHeight || "auto",
-                        transition: { duration: 0.2, ease: "easeOut" },
-                      }}
-                      exit={{
-                        height: 0,
-                        transition: { duration: 0, ease: "easeIn" },
-                      }}
-                      className={`mt-[24px] overflow-hidden ${
-                        item.dropdown.length > 7
-                          ? "absolute left-1/2 top-full -translate-x-1/2 bg-white shadow-xl border border-gray-300 grid grid-cols-2 gap-x-6 px-8 py-5 max-w-[700px] min-w-[500px] z-[60]"
-                          : "absolute top-full left-0 bg-white shadow-xl border border-gray-300 flex flex-col w-auto px-4 py-2 z-[60]"
-                      }`}
-                    >
-                      {item.dropdown.map((subItem, index) => (
-                        <li key={subItem.name + index} className="relative">
-                          <Link
-                            href={subItem.href || "#"}
-                            className={`w-full min-w-[200px] font-mono text-sm py-2 px-4 whitespace-nowrap flex items-center justify-between duration-300 ${
-                              pathname === subItem.href
-                                ? "text-white"
-                                : "text-black hover:text-green-600"
-                            }`}
-                          >
-                            <span>{subItem.name}</span>
-                            {subItem.dropdown && (
-                              <FaChevronRight className="text-sm mt-[1px]" />
-                            )}
-                          </Link>
-                        </li>
-                      ))}
-                    </motion.ul>
-                  )}
-                </AnimatePresence>
-              </li>
-            ))}
-          </ul>
-
-          {/* 🟦 Desktop Button */}
+    {/* 🟦 Desktop Menu (Centered) */}
+    <ul className="hidden md:flex space-x-7 h-20 items-center relative z-[60]">
+      {NavItem.map((item) => (
+        <li
+          key={item.name}
+          className="relative"
+          onMouseEnter={() => handleMouseEnter(item.name)}
+          onMouseLeave={handleMouseLeave}
+        >
           <Link
-            href="https://www.facebook.com/afroza.rita.khanam"
-            target='blank'
-            className=" bg-white text-blue rounded-full px-1 text-3xl py-1 hidden md:flex items-center gap-2"
+            href={item.href || "#"}
+            className={`cursor-pointer select-none flex items-center gap-1 hover:text-green-800 ${
+              pathname === item.href ? "text-white" : ""
+            }`}
           >
-            <FaFacebook />
+            <span>{item.name}</span>
+            {item.dropdown && <GoChevronDown className="text-sm mt-[1px]" />}
           </Link>
 
-          {/* 🟦 Mobile Menu Toggle */}
-          <div
-            className="md:hidden text-3xl cursor-pointer text-white select-none"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <IoMdClose /> : "☰"}
-          </div>
-        </div>
-      </div>
+          <div className="absolute top-full left-0 w-full h-7"></div>
+
+          <AnimatePresence>
+            {openDropdown === item.name && item.dropdown && (
+              <motion.ul
+                initial={{ height: 0 }}
+                animate={{
+                  height: dropdownHeight || "auto",
+                  transition: { duration: 0.2, ease: "easeOut" },
+                }}
+                exit={{
+                  height: 0,
+                  transition: { duration: 0, ease: "easeIn" },
+                }}
+                className={`mt-[24px] overflow-hidden ${
+                  item.dropdown.length > 7
+                    ? "absolute left-1/2 top-full -translate-x-1/2 bg-white shadow-xl border grid grid-cols-2 gap-x-6 px-8 py-5 max-w-[700px] min-w-[500px] z-[60]"
+                    : "absolute top-full left-0 bg-white shadow-xl border flex flex-col w-auto px-4 py-2 z-[60]"
+                }`}
+              >
+                {item.dropdown.map((subItem, index) => (
+                  <li key={subItem.name + index} className="relative">
+                    <Link
+                      href={subItem.href || "#"}
+                      className={`w-full min-w-[200px] font-mono text-sm py-2 px-4 whitespace-nowrap flex items-center justify-between duration-300 ${
+                        pathname === subItem.href
+                          ? "text-white"
+                          : "text-black hover:text-green-600"
+                      }`}
+                    >
+                      <span>{subItem.name}</span>
+                      {subItem.dropdown && (
+                        <FaChevronRight className="text-sm mt-[1px]" />
+                      )}
+                    </Link>
+                  </li>
+                ))}
+              </motion.ul>
+            )}
+          </AnimatePresence>
+        </li>
+      ))}
+    </ul>
+
+    {/* 🟦 Desktop Only Social Icons — Mobile এ লুকানো */}
+    <div className="hidden md:flex gap-2 absolute right-6 top-1/2 -translate-y-1/2">
+      <a href="https://www.facebook.com/afroza.rita.khanam" target="blank" className="p-2 rounded-full bg-white hover:bg-gray-200 shadow-sm">
+        <FaFacebook />
+      </a>
+      <a href="https://www.tiktok.com/@afroza_khanam_rita" target="blank" className="p-2 rounded-full bg-white hover:bg-gray-200 shadow-sm">
+        <FaTiktok />
+      </a>
+      <a href="https://x.com/AfrozaKRita" target="blank" className="p-2 rounded-full bg-white hover:bg-gray-200 shadow-sm">
+        <FaTwitter />
+      </a>
+      <a href="https://www.linkedin.com/feed/" target="blank" className="p-2 rounded-full bg-white hover:bg-gray-200 shadow-sm">
+        <FaLinkedin />
+      </a>
+    </div>
+
+    {/* 🟦 Mobile Menu Toggle */}
+    <div
+      className="md:hidden text-3xl text-white ml-auto cursor-pointer select-none"
+      onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+    >
+      {isMobileMenuOpen ? <IoMdClose /> : "☰"}
+    </div>
+  </div>
+</div>
+
 
       {/* darker gray gradient shadow/separator below navbar */}
       <div className="w-full h-3 pointer-events-none bg-gradient-to-b from-gray-900/30 to-transparent" />

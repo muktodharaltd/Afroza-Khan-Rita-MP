@@ -7,7 +7,7 @@ import { FaRegEye } from 'react-icons/fa'
 export default function ComplaintsView() {
   const [visibleCount, setVisibleCount] = useState(6)
   const [expandedRows, setExpandedRows] = useState([])
-  const [viewMode, setViewMode] = useState('grid') // default grid
+  const [viewMode, setViewMode] = useState('table') // default table
 
   const handleViewAll = () => {
     setVisibleCount(complaintsData.length)
@@ -55,6 +55,17 @@ export default function ComplaintsView() {
         <div className="flex items-center gap-3 mt-3 md:mt-0">
           <div className="flex bg-white shadow-sm rounded-md p-1">
             <button
+              onClick={() => setViewMode('table')}
+              className={`px-3 py-1 rounded-md text-sm ${
+                viewMode === 'table'
+                  ? 'bg-green-600 text-white'
+                  : 'text-gray-600'
+              }`}
+            >
+              Table
+            </button>
+            
+            <button
               onClick={() => setViewMode('grid')}
               className={`px-3 py-1 rounded-md text-sm ${
                 viewMode === 'grid'
@@ -65,16 +76,6 @@ export default function ComplaintsView() {
               Grid
             </button>
 
-            <button
-              onClick={() => setViewMode('table')}
-              className={`px-3 py-1 rounded-md text-sm ${
-                viewMode === 'table'
-                  ? 'bg-green-600 text-white'
-                  : 'text-gray-600'
-              }`}
-            >
-              Table
-            </button>
           </div>
 
           <select

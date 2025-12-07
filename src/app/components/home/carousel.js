@@ -57,7 +57,7 @@ export default function HeroSlider() {
   }, [index])
 
   return (
-<section className="w-full bg-white mt-5">
+<section className="w-full bg-white mt-5 shadow-sm ">mb
   <div className="w-full px-0 md:px-10 py-0">
     <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">
           {/* Left Text Section */}
@@ -81,7 +81,7 @@ export default function HeroSlider() {
           </div>
 
           {/* Right Slider Section (mild overlap / mingle on desktop) */}
-          <div className="w-full md:w-7/12 relative shadow-l ">
+          <div className="w-full md:w-7/12 relative shadow-l mb-5 ">
             {/* To create a subtle 'mingle' effect on larger screens we shift the slider slightly left */}
             <div className="relative h-[178px] md:h-[372px] overflow-hidden shadow-xl md:-ml-6">
               <Swiper
@@ -136,7 +136,7 @@ export default function HeroSlider() {
               </Swiper>
 
               {/* optional overlay gradient to help text readability if needed */}
-              <div className="pointer-events-none absolute inset-0 bg-gradient-to-l from-transparent to-white/60 md:to-white/40" />
+              
             </div>
           </div>
         </div>
