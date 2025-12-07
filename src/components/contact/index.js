@@ -65,7 +65,6 @@ export default function Contact() {
               </p>
             </div>
 
-           
             {/* RIGHT: Form */}
             <div className="w-full md:w-1/2 flex items-center justify-center">
               <div className="w-full bg-green-600 text-white p-3 md:p-8 md:rounded-xl md:shadow-2xl md:max-w-xl h-auto md:h-[640px] flex flex-col shadow-lg">
@@ -100,7 +99,7 @@ export default function Contact() {
                     name="location"
                     value={form.location}
                     onChange={handleChange}
-                    placeholder="ঘটনার স্থান"
+                    placeholder="ঠিকানা"
                     required
                     className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
                   />
