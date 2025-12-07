@@ -34,7 +34,7 @@ const BlogPosts = () => {
                 )}
               </div>
 
-              {/* Right Side: Big Title + Description + Read More */}
+              {/* Right Side: Big Title + Description + Read More  */}
               <div className="md:w-2/3 p-6 flex flex-col justify-center">
                 <h2 className="text-lg md:text-xl font-bold text-gray-800 mb-3">
                   {post.title}
