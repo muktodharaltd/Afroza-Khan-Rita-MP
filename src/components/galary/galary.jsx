@@ -249,7 +249,8 @@ export default function DeluxeRoomView() {
   const viewRef = useRef(null);
 
   return (
-    <PhotoProvider>
+    <div className=" shadow-sm py-10">
+    <PhotoProvider >
       {/* ========== View Section ========== */}
       <section
         ref={viewRef}
@@ -338,5 +339,6 @@ export default function DeluxeRoomView() {
         </div>
       </section>
     </PhotoProvider>
+        </div>
   );
 }

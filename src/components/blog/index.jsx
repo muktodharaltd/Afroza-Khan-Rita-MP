@@ -5,7 +5,7 @@ import BlogData from "./blogData.json";
 
 const BlogPosts = () => {
   return (
-    <div className="max-w-7xl mx-auto py-5 ">
+    <div className="max-w-7xl mx-auto py-10 ">
       <h2 className="text-3xl font-bold mb-8 text-green-600">
         সাম্প্রতিক ব্লগ পোস্ট
       </h2>

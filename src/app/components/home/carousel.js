@@ -57,7 +57,7 @@ export default function HeroSlider() {
   }, [index])
 
   return (
-<section className="w-full bg-white mt-5 shadow-sm ">mb
+<section className="w-full bg-white mt-5 shadow-sm ">
   <div className="w-full px-0 md:px-10 py-0">
     <div className="flex flex-col md:flex-row items-center md:items-stretch gap-6">
           {/* Left Text Section */}

@@ -57,7 +57,7 @@ const womenNoticeList = [
 
 export default function UpdatesSection() {
   return (
-    <section className="w-full bg-white py-8">
+    <section className="w-full bg-white py-8 shadow-sm">
       <div className="max-w-7xl mx-auto">
 
         {/* 🔔 MAIN TOP NOTICE */}
@@ -88,7 +88,7 @@ export default function UpdatesSection() {
               আসন্ন ইভেন্ট (Upcoming Events)
             </h4>
 
-            <div className="bg-white border border-gray-200 rounded-lg shadow-xl divide-y divide-gray-100">
+            <div className="bg-white border border-gray-200 rounded-lg shadow divide-y divide-gray-100">
               {eventSample.map((e) => (
                 <article key={e.id} className="p-4 flex items-start gap-3">
                   <div className="flex-1">
@@ -117,7 +117,7 @@ export default function UpdatesSection() {
 
             
 
-            <div className="bg-white border border-gray-200 rounded-lg shadow-xl divide-y divide-gray-100">
+            <div className="bg-white border border-gray-200 rounded-lg shadow divide-y divide-gray-100">
               {womenNoticeList.map((n) => (
                 <article key={n.id} className="p-4 flex items-start gap-3">
                   <div className="flex-1">
