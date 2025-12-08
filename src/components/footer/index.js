@@ -29,22 +29,22 @@
 //           <h6 className="text-lg font-semibold text-white mb-4">Quick Links</h6>
 //           <ul className="space-y-2 text-white">
 //             <li>
-//               <Link href="/" className="hover:text-yellow-400 transition">
+//               <Link href="/" className="hover:text-brandYellow transition">
 //                 Home
 //               </Link>
 //             </li>
 //             <li>
-//               <Link href="/about" className="hover:text-yellow-400 transition">
+//               <Link href="/about" className="hover:text-brandYellow transition">
 //                 About Us
 //               </Link>
 //             </li>
 //             <li>
-//               <Link href="/services" className="hover:text-yellow-400 transition">
+//               <Link href="/services" className="hover:text-brandYellow transition">
 //                 Services
 //               </Link>
 //             </li>
 //             <li>
-//               <Link href="/contact" className="hover:text-yellow-400 transition">
+//               <Link href="/contact" className="hover:text-brandYellow transition">
 //                 Contact
 //               </Link>
 //             </li>
@@ -90,7 +90,7 @@ import Image from "next/image";
 
 const Footer = () => {
   return (
-    <footer className="bg-red-600 text-white py-8 px-4">
+    <footer className="bg-brandGreen text-white py-8 px-4">
       <div className="max-w-7xl mx-auto">
         {/* Top: responsive grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 items-start">
@@ -116,16 +116,16 @@ const Footer = () => {
              সততা এবং উন্নয়নের সাথে জনগণের সেবা করার জন্য নিবেদিতপ্রাণ। যেকোনো সম্প্রদায়ের সহায়তার জন্য যোগাযোগ করুন।
             </p>
             <div className="flex gap-2 mt-2">
-              <a href="https://www.facebook.com/afroza.rita.khanam" aria-label="Facebook" target='blank' className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
+              <a href="https://www.facebook.com/afroza.rita.khanam" aria-label="Facebook" target='blank' className="p-2 rounded-full bg-brandGreen hover:bg-brandYellow transition-shadow shadow-sm">
                 <FaFacebook />
               </a>
-              <a href="https://www.tiktok.com/@afroza_khanam_rita" target='blank' aria-label="Instagram" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
+              <a href="https://www.tiktok.com/@afroza_khanam_rita" target='blank' aria-label="Instagram" className="p-2 rounded-full bg-brandGreen hover:bg-brandYellow transition-shadow shadow-sm">
                 <FaTiktok  />
               </a>
-              <a href="https://x.com/AfrozaKRita" target='blank' aria-label="Twitter" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
+              <a href="https://x.com/AfrozaKRita" target='blank' aria-label="Twitter" className="p-2 rounded-full bg-brandGreen hover:bg-brandYellow transition-shadow shadow-sm">
                 <FaTwitter />
               </a>
-              <a href="https://www.linkedin.com/feed/" target='blank' aria-label="LinkedIn" className="p-2 rounded-full bg-red-600 hover:bg-red-500 transition-shadow shadow-sm">
+              <a href="https://www.linkedin.com/feed/" target='blank' aria-label="LinkedIn" className="p-2 rounded-full bg-brandGreen hover:bg-brandYellow transition-shadow shadow-sm">
                 <FaLinkedin />
               </a>
             </div>
@@ -135,13 +135,13 @@ const Footer = () => {
           <div className="text-sm">
             <h6 className="text-base font-semibold mb-2">Quick Links</h6>
             <nav className="flex items-center gap-2 whitespace-nowrap overflow-x-auto text-white">
-              <Link href="/" className="hover:text-yellow-300 transition">Home</Link>
+              <Link href="/" className="hover:text-brandYellow transition">Home</Link>
               <span className="opacity-80">|</span>
-              <Link href="/about" className="hover:text-yellow-300 transition">About</Link>
+              <Link href="/about" className="hover:text-brandYellow transition">About</Link>
               <span className="opacity-80">|</span>
-              <Link href="/services" className="hover:text-yellow-300 transition">Services</Link>
+              <Link href="/services" className="hover:text-brandYellow transition">Services</Link>
               <span className="opacity-80">|</span>
-              <Link href="/contact" className="hover:text-yellow-300 transition">Contact</Link>
+              <Link href="/contact" className="hover:text-brandYellow transition">Contact</Link>
             </nav>
           </div>
 
@@ -149,13 +149,13 @@ const Footer = () => {
           <div className="text-sm">
             <h6 className="text-base font-semibold mb-2">Resources</h6>
             <nav className="flex items-center gap-2 whitespace-nowrap overflow-x-auto text-white">
-              <Link href="#" className="hover:text-yellow-300 transition">News</Link>
+              <Link href="#" className="hover:text-brandYellow transition">News</Link>
               <span className="opacity-80">|</span>
-              <Link href="#" className="hover:text-yellow-300 transition">Projects</Link>
+              <Link href="#" className="hover:text-brandYellow transition">Projects</Link>
               <span className="opacity-80">|</span>
-              <Link href="#" className="hover:text-yellow-300 transition">Events</Link>
+              <Link href="#" className="hover:text-brandYellow transition">Events</Link>
               <span className="opacity-80">|</span>
-              <Link href="#" className="hover:text-yellow-300 transition">FAQ</Link>
+              <Link href="#" className="hover:text-brandYellow transition">FAQ</Link>
             </nav>
           </div>
 
@@ -167,19 +167,19 @@ const Footer = () => {
             <p className="opacity-90 mt-1">Email: info@example.com</p>
 
             <div className="mt-3">
-              <a href="/contact" className="inline-block px-3 py-1 bg-white text-red-600 font-semibold rounded-md shadow-sm hover:shadow transition text-sm">Contact Office</a>
+              <a href="/contact" className="inline-block px-3 py-1 bg-white text-brandGreen font-semibold rounded-md shadow-sm hover:shadow transition text-sm">Contact Office</a>
             </div>
           </div>
         </div>
 
         {/* Divider */}
-        <div className="border-t border-red-600 mt-6 pt-5">
+        <div className="border-t border-brandGreen mt-6 pt-5">
           <div className="flex flex-col md:flex-row items-center justify-between gap-3">
             <div className="text-sm opacity-90">© {new Date().getFullYear()} Developed by <span className="font-semibold">Muktodhara Technology Limited</span></div>
             <div className="flex items-center gap-3 text-sm">
-              <Link href="/" className="text-white hover:text-yellow-300 transition">Privacy</Link>
-              <Link href="/" className="text-white hover:text-yellow-300 transition">Terms</Link>
-              <Link href="/" className="text-white hover:text-yellow-300 transition">Sitemap</Link>
+              <Link href="/" className="text-white hover:text-brandYellow transition">Privacy</Link>
+              <Link href="/" className="text-white hover:text-brandYellow transition">Terms</Link>
+              <Link href="/" className="text-white hover:text-brandYellow transition">Sitemap</Link>
             </div>
           </div>
         </div>

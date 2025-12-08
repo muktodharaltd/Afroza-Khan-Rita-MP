@@ -55,19 +55,19 @@ export default function Contact() {
               </div>
 
               {/* Mobile Name / Title */}
-              <h1 className="mt-3 md:mt-6 text-2xl md:text-5xl font-bold text-red-600 text-center md:text-left">
+              <h1 className="mt-3 md:mt-6 text-2xl md:text-5xl font-bold text-brandGreen text-center md:text-left">
                 আফরোজা খানম রিতা
               </h1>
 
-              <p className="text-sm md:text-lg mt-1 text-green-600 text-center md:text-left">
+              <p className="text-sm md:text-lg mt-1 text-brandGreen text-center md:text-left">
                 সংসদ সদস্য
-                <span className="text-blue-500 underline">বিস্তারিত</span>
+                <span className="text-brandYellow underline">বিস্তারিত</span>
               </p>
             </div>
 
             {/* RIGHT: Form */}
             <div className="w-full md:w-1/2 flex items-center justify-center">
-              <div className="w-full bg-green-600 text-white p-3 md:p-8 md:rounded-xl md:shadow-2xl md:max-w-xl h-auto md:h-[640px] flex flex-col shadow-lg">
+              <div className="w-full bg-brandGreen text-white p-3 md:p-8 md:rounded-xl md:shadow-2xl md:max-w-xl h-auto md:h-[640px] flex flex-col shadow-lg">
                 <h4 className="text-center text-base md:text-xl font-bold mb-3 md:mb-6">
                   আপনার অভিযোগ জমা দিন
                 </h4>
@@ -83,7 +83,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="আপনার নাম"
                     required
-                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                    className="w-full p-2 rounded bg-white text-brandGray focus:ring-2 focus:ring-blue-400 outline-none"
                   />
                   <input
                     type="text"
@@ -92,7 +92,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="বিষয়"
                     required
-                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                    className="w-full p-2 rounded bg-white text-brandGray focus:ring-2 focus:ring-blue-400 outline-none"
                   />
                   <input
                     type="text"
@@ -101,7 +101,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="ঠিকানা"
                     required
-                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                    className="w-full p-2 rounded bg-white text-brandGray focus:ring-2 focus:ring-blue-400 outline-none"
                   />
                   <input
                     type="email"
@@ -109,7 +109,7 @@ export default function Contact() {
                     value={form.email}
                     onChange={handleChange}
                     placeholder="ইমেইল"
-                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                    className="w-full p-2 rounded bg-white text-brandGray focus:ring-2 focus:ring-blue-400 outline-none"
                   />
                   <input
                     type="tel"
@@ -118,7 +118,7 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="মোবাইল নম্বর"
                     required
-                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none"
+                    className="w-full p-2 rounded bg-white text-brandGray focus:ring-2 focus:ring-blue-400 outline-none"
                   />
                   <textarea
                     name="description"
@@ -126,12 +126,12 @@ export default function Contact() {
                     onChange={handleChange}
                     placeholder="বিস্তারিত বিবরণ"
                     rows="4"
-                    className="w-full p-2 rounded bg-white text-gray-800 focus:ring-2 focus:ring-blue-400 outline-none resize-none"
+                    className="w-full p-2 rounded bg-white text-brandGray focus:ring-2 focus:ring-blue-400 outline-none resize-none"
                   />
 
                   <button
                     type="submit"
-                    className="w-full bg-white text-red-600 font-semibold py-2 rounded transition"
+                    className="w-full bg-brandYellow text-white font-semibold py-2 rounded transition hover:bg-brandGreen"
                   >
                     জমা দিন
                   </button>
