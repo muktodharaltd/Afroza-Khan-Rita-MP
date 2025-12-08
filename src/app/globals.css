@@ -12,9 +12,13 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  --color-brandGreen: #0D8448;
-  --color-brandYellow: #FFB000;
+  /* --color-brandGreen: #0D8448;
+  --color-brandYellow: #FFB000; */
+  --color-brandGreen:  #788935;
+  --color-brandYellow: #ffb000;
   --color-brandGray: #545454;
+
+
 }
 
 body {

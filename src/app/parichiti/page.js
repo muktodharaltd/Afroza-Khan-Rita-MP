@@ -1,5 +1,5 @@
 import NewsPage from "@/components/news/newsPaga"
-import Report from "@/components/report"
+
 import Galary from "@/components/galary/galary"
 
 const highlightData = [
@@ -78,7 +78,7 @@ export default function ParichitiPage() {
       <section className="px-4">
         <div className="max-w-6xl mx-auto space-y-6">
           <NewsPage />
-          <Report />
+         
           <Galary />
         </div>
       </section>
