@@ -56,13 +56,13 @@ const statusBadgeClass = (status) => {
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
           <h2 className="text-3xl font-bold text-brandGreen">প্রাপ্ত অভিযোগ</h2>
 
-          <div className="flex items-center gap-3 mt-3 md:mt-0">
+          <div className="flex items-center gap-3 mt-3 md:mt-0 border-b">
             {/* View toggle buttons */}
-            <div className="flex bg-white shadow-sm rounded-md p-1">
+            <div className="flex  rounded-xl p-1">
               <button
                 onClick={() => setViewMode('table')}
-                className={`px-3 py-1 rounded-md text-sm bg-brandYellow text-white shadow-sm transition ${
-                  viewMode === 'table' ? 'ring-2 ring-brandGreen' : 'ring-0'
+                className={`px-3 py-1 rounded-md text-sm   shadow-sm transition ${
+                  viewMode === 'table' ? 'ring-2 ring-brandGreen bg-brandYellow ' : 'ring-0'
                 }`}
               >
                 Table
@@ -70,8 +70,8 @@ const statusBadgeClass = (status) => {
 
               <button
                 onClick={() => setViewMode('grid')}
-                className={`px-3 py-1 rounded-md text-sm bg-brandYellow text-white shadow-sm transition ${
-                  viewMode === 'grid' ? 'ring-2 ring-brandGreen' : 'ring-0'
+                className={`px-3 py-1 rounded-md text-sm   shadow-sm transition ${
+                  viewMode === 'grid' ? 'ring-2 ring-brandGreen bg-brandYellow' : 'ring-0'
                 }`}
               >
                 Grid
