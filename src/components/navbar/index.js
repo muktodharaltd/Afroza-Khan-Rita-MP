@@ -276,8 +276,8 @@ const Navbar = () => {
         >
           <Link
             href={item.href || "#"}
-            className={`cursor-pointer select-none flex items-center gap-1 hover:text-brandYellow ${
-              pathname === item.href ? "text-white" : ""
+            className={`cursor-pointer select-none flex items-center gap-1 text-white hover:text-brandYellow ${
+              pathname === item.href ? "text-brandYellow" : "text-white"
             }`}
           >
             <span>{item.name}</span>

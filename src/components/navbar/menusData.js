@@ -1,23 +1,22 @@
 // data/navItems.js
 
 const navItems = [
-  { name: 'প্রথম পাতা', 
-    href: '/' 
+  {
+    name: 'প্রথম পাতা',
+    href: '/',
   },
-  
   {
     name: 'পরিচিতি',
-    href: '/',
+    href: '/parichiti',
   },
   {
     name: 'যোগাযোগ',
-    href: '/',
+    href: '/contact',
   },
   {
     name: 'নারী শক্তি',
-    href: '/',
+    href: '/nari-shakti',
   },
-  
 ]
 
 export default navItems

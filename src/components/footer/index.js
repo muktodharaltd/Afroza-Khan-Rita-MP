@@ -108,14 +108,14 @@ const Footer = () => {
                 />
               </div>
               <div>
-                <p className="text-lg font-semibold leading-tight">Afroza Khan Rita</p>
+                <p className="text-lg font-semibold leading-tight">Afroza Khanam Rita</p>
                 <p className="text-sm opacity-90">Member of Parliament</p>
               </div>
             </div>
             <p className=" text-white">
              সততা এবং উন্নয়নের সাথে জনগণের সেবা করার জন্য নিবেদিতপ্রাণ। যেকোনো সম্প্রদায়ের সহায়তার জন্য যোগাযোগ করুন।
             </p>
-            <div className="flex gap-2 mt-2">
+            <div className="flex gap-2 mt-2"> 
               <a href="https://www.facebook.com/afroza.rita.khanam" aria-label="Facebook" target='blank' className="p-2 rounded-full bg-brandGreen hover:bg-brandYellow transition-shadow shadow-sm">
                 <FaFacebook />
               </a>
