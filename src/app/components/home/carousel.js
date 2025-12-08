@@ -90,7 +90,7 @@ export default function HeroSlider() {
           {/* Right Slider Section (mild overlap / mingle on desktop) */}
           <div className="w-full md:w-7/12 relative shadow-l mb-5 ">
             {/* To create a subtle 'mingle' effect on larger screens we shift the slider slightly left */}
-            <div className="relative h-[178px] md:h-[372px] overflow-hidden shadow-xl md:-ml-6">
+            <div className="relative h-[150px] md:h-[322px] overflow-hidden shadow-xl md:-ml-6 md:mt-7">
               <Swiper
                 spaceBetween={0}
                 slidesPerView={1}
@@ -105,11 +105,11 @@ export default function HeroSlider() {
                 <SwiperSlide>
                   <div className="w-full h-full relative">
                     <Image
-                      src="/carousel11.jpg"
+                      src="/carousel1.jpg"
                       alt="Slide 1"
                       width="1500"
                       height="1500"
-                      className="object-cover"
+                      className="object"
                       priority
                     />
                   </div>
@@ -118,7 +118,7 @@ export default function HeroSlider() {
                 <SwiperSlide>
                   <div className="w-full h-full relative">
                     <Image
-                      src="/carousel22.jpg"
+                      src="/carousel2.jpg"
                       alt="Slide 2"
                       width="1500"
                       height="1500"
@@ -131,10 +131,10 @@ export default function HeroSlider() {
                 <SwiperSlide>
                   <div className="w-full h-full relative">
                     <Image
-                      src="/carousel33.jpg"
+                      src="/carousel3.jpg"
                       alt="Slide 3"
-                      width="1500"
-                      height="1500"
+                      width="1800"
+                      height="1800"
                       className="object-cover"
                       priority
                     />
