@@ -197,7 +197,7 @@ export default function VideoGallery() {
   return (
     <div className="shadow-sm">
       <section className="py-12 max-w-7xl mx-auto relative">
-        <h2 className="text-3xl font-bold mb-12 text-green-600">
+        <h2 className="text-3xl font-bold mb-12 text-brandGreen">
           ভিডিও গ্যালারি
         </h2>
 
@@ -205,7 +205,7 @@ export default function VideoGallery() {
         <button
           onClick={prev}
           disabled={startIndex === 0}
-          className={`absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 ${
+          className={`absolute left-0 top-1/2 -translate-y-1/2 bg-brandYellow text-white p-2 rounded-full shadow-md z-10 transition hover:bg-brandGreen ${
             startIndex === 0 ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
@@ -214,7 +214,7 @@ export default function VideoGallery() {
         <button
           onClick={next}
           disabled={startIndex === maxStartIndex}
-          className={`absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-md z-10 ${
+          className={`absolute right-0 top-1/2 -translate-y-1/2 bg-brandYellow text-white p-2 rounded-full shadow-md z-10 transition hover:bg-brandGreen ${
             startIndex === maxStartIndex ? "opacity-50 cursor-not-allowed" : ""
           }`}
         >
@@ -242,13 +242,13 @@ export default function VideoGallery() {
                 style={{ width: `${100 / visibleCount}%` }}
                 onClick={() => setActiveVideo(video)}
               >
-                <div className="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-brandGray">
                   <video
                     src={video.src}
                     className="w-full h-56 object-cover"
                     controls
                   />
-                  <h3 className="text-lg font-semibold text-gray-700 text-center py-2">
+                  <h3 className="text-lg font-semibold text-brandGray text-center py-2">
                     {video.title}
                   </h3>
                 </div>
@@ -260,16 +260,16 @@ export default function VideoGallery() {
         {/* Modal */}
         {activeVideo && (
           <div
-            className="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50"
+            className="fixed inset-0 bg-brandGray bg-opacity-60 flex items-center justify-center z-50"
             onClick={() => setActiveVideo(null)} // Click outside to close
           >
             <div
-              className="bg-white rounded-lg overflow-hidden max-w-3xl w-full relative"
+              className="bg-white rounded-lg overflow-hidden max-w-3xl w-full relative border border-brandGreen"
               onClick={(e) => e.stopPropagation()} // Prevent inside click closing
             >
               {/* Close Button */}
               <button
-                className="absolute top-2 right-2 text-white bg-black/50 px-2 rounded-full z-50 cursor-pointer"
+                className="absolute top-2 right-2 text-white bg-brandYellow px-3 py-1 rounded-full z-50 cursor-pointer shadow-md hover:bg-brandGreen transition"
                 onClick={() => setActiveVideo(null)}
               >
                 ✕
@@ -280,10 +280,10 @@ export default function VideoGallery() {
                 src={activeVideo.src}
                 controls
                 autoPlay
-                className="w-full h-[500px] object-contain bg-black pointer-events-none"
+                className="w-full h-[500px] object-contain bg-brandGray pointer-events-none"
               />
 
-              <h3 className="text-lg font-semibold text-gray-700 text-center py-2">
+              <h3 className="text-lg font-semibold text-brandGray text-center py-2">
                 {activeVideo.title}
               </h3>
             </div>

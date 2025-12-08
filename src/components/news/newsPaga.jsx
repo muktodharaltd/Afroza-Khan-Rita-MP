@@ -62,16 +62,19 @@ export default function UpdatesSection() {
 
         {/* 🔔 MAIN TOP NOTICE */}
         <div className="mb-6 shadow-lg">
-          <div className="rounded-lg bg-green-50 border border-green-200 p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+        <div
+          className="rounded-lg border border-brandGreen p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+          style={{ backgroundColor: "rgba(13, 132, 72, 0.08)" }}
+        >
             <div className="flex-1">
-              <h3 className="text-green-700 font-semibold text-lg">{noticeSample.title}</h3>
+              <h3 className="text-brandGreen font-semibold text-lg">{noticeSample.title}</h3>
             </div>
 
             <div className="flex items-center gap-3">
-              <div className="text-sm text-green-600">{noticeSample.date}</div>
+              <div className="text-sm text-brandGreen">{noticeSample.date}</div>
               <Link
                 href={noticeSample.url}
-                className="inline-block px-3 py-1 bg-green-600 text-white rounded-md text-sm font-semibold hover:brightness-95"
+                className="inline-block px-3 py-1 bg-brandGreen text-white rounded-md text-sm font-semibold hover:bg-brandGreen/90"
               >
                 বিস্তারিত
               </Link>
@@ -84,23 +87,23 @@ export default function UpdatesSection() {
 
           {/* 📅 LEFT — Upcoming Events */}
           <div>
-            <h4 className="text-green-700 text-lg font-semibold mb-3">
+            <h4 className="text-brandGreen text-lg font-semibold mb-3">
               আসন্ন ইভেন্ট (Upcoming Events)
             </h4>
 
-            <div className="bg-white border border-gray-200 rounded-lg shadow divide-y divide-gray-100">
+            <div className="bg-white border border-brandGray rounded-lg shadow divide-y divide-brandGray">
               {eventSample.map((e) => (
                 <article key={e.id} className="p-4 flex items-start gap-3">
                   <div className="flex-1">
                     <Link href={e.url}>
-                      <h5 className="text-green-700 font-medium hover:underline">
+                      <h5 className="text-brandGreen font-medium hover:underline">
                         {e.title}
                       </h5>
                     </Link>
-                    <div className="text-xs text-green-600 mt-1">{e.date}</div>
+                    <div className="text-xs text-brandGreen mt-1">{e.date}</div>
                   </div>
                   <div className="self-start">
-                    <Link href={e.url} className="text-sm text-green-600 hover:underline">
+                    <Link href={e.url} className="text-sm text-brandGreen hover:underline">
                       পড়ুন
                     </Link>
                   </div>
@@ -111,25 +114,25 @@ export default function UpdatesSection() {
 
           {/* 👩‍🦰 RIGHT — Women Focused Notices */}
           <div>
-            <h3 className="text-pink-700 font-bold text-lg mb-2">
+            <h3 className="text-brandGreen font-bold text-lg mb-2">
               নারী বিষয়ক বিজ্ঞপ্তি (Women Notices)
             </h3>
 
             
 
-            <div className="bg-white border border-gray-200 rounded-lg shadow divide-y divide-gray-100">
+            <div className="bg-white border border-brandGray rounded-lg shadow divide-y divide-brandGray">
               {womenNoticeList.map((n) => (
                 <article key={n.id} className="p-4 flex items-start gap-3">
                   <div className="flex-1">
                     <Link href={n.url}>
-                      <h5 className="text-pink-700 font-medium hover:underline">
+                    <h5 className="text-brandGreen font-medium hover:underline">
                         {n.title}
                       </h5>
                     </Link>
-                    <div className="text-xs text-pink-600 mt-1">{n.date}</div>
+                    <div className="text-xs text-brandGreen mt-1">{n.date}</div>
                   </div>
                   <div className="self-start">
-                    <Link href={n.url} className="text-sm text-pink-700 hover:underline">
+                    <Link href={n.url} className="text-sm text-brandGreen hover:underline">
                       পড়ুন
                     </Link>
                   </div>

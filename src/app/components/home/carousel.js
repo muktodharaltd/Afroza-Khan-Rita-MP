@@ -65,24 +65,24 @@ export default function HeroSlider() {
           <div className="w-full md:w-5/12 flex items-center justify-center md:justify-start px-4  mt-10 md:mt-0 md:h-[420px]">
             {/* make inner container fill height and center vertically */}
             <div className="w-full flex flex-col justify-center h-full">
-              <h1 className="text-2xl h-10 sm:text-3xl md:text-4xl font-semibold text-green-600 leading-tight text-center md:text-left">
+              <h1 className="text-2xl h-10 sm:text-3xl md:text-4xl font-semibold text-brandGreen leading-tight text-center md:text-left">
                 <span>{display}</span>
                 <span className="inline-block ml-2 align-middle">
                   <span
                     aria-hidden="true"
-                    className="inline-block w-[3px] h-9 bg-green-600 rounded animate-pulse"
+                    className="inline-block w-[3px] h-9 bg-brandGreen rounded animate-pulse"
                   />
                 </span>
               </h1>
 
-              <p className="text-green-600 mt-14 text-base sm:text-xl md:text-2xl text-center md:text-left">
+              <p className="text-brandGreen mt-14 text-base sm:text-xl md:text-2xl text-center md:text-left">
                 আফরোজা খানম রিতা — নারী শক্তিকে এগিয়ে নেওয়ার দৃঢ় অঙ্গীকার
               </p>
 
               {/* ? register button  */}
               
               <div className="text-right  mr-20 pt-20">
-            <button  className="w-auto md:min-w-24 text-center rounded bg-red-600 text-white px-6 py-2 font-semibold hover:bg-bg-green-600 transition "> Register Now</button>
+            <button  className="w-auto md:min-w-24 text-center rounded bg-brandYellow text-white px-6 py-2 font-semibold hover:bg-brandGreen transition"> Register Now</button>
               </div>
             </div>
           </div>

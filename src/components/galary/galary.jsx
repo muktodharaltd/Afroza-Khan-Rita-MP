@@ -254,9 +254,9 @@ export default function DeluxeRoomView() {
       {/* ========== View Section ========== */}
       <section
         ref={viewRef}
-        className=" max-w-7xl mx-auto mb-5 border-gray-400 scroll-mt-17 "
+        className=" max-w-7xl mx-auto mb-5 border-brandGray scroll-mt-17 "
       >
-        <h2 className="text-3xl mb-3 font-bold text-green-600">ফটো গ্যালারি</h2>
+        <h2 className="text-3xl mb-3 font-bold text-brandGreen">ফটো গ্যালারি</h2>
 
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
 

@@ -28,17 +28,18 @@ export default function ComplaintsView() {
     return words.slice(0, wordLimit).join(' ') + '...'
   }
 
-  const getProgressColor = (progress = 0) => {
-    const p = Math.max(0, Math.min(100, Number(progress)))
-    const hue = Math.round((p * 120) / 100) // 0 red → 120 green
-    return `hsl(${hue} 75% 40%)`
-  }
+const getProgressColor = (progress = 0) => {
+  const p = Math.max(0, Math.min(100, Number(progress)))
+  if (p >= 66) return 'var(--color-brandGreen)'
+  if (p >= 33) return 'var(--color-brandYellow)'
+  return 'var(--color-brandGray)'
+}
 
-  const statusBadgeClass = (status) => {
-    if (status === 'মীমাংসিত') return 'bg-green-500'
-    if (status === 'চলমান') return 'bg-yellow-500'
-    return 'bg-red-500'
-  }
+const statusBadgeClass = (status) => {
+  if (status === 'মীমাংসিত') return 'bg-brandGreen'
+  if (status === 'চলমান') return 'bg-brandYellow'
+  return 'bg-brandGray'
+}
 
   const getStatusText = (status) => {
     if (status === 'Resolved') return 'মীমাংসিত'
@@ -53,17 +54,15 @@ export default function ComplaintsView() {
       <div className="pt-5 px-4">
         {/* Title + View Toggle */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
-          <h2 className="text-3xl font-bold text-green-600">প্রাপ্ত অভিযোগ</h2>
+          <h2 className="text-3xl font-bold text-brandGreen">প্রাপ্ত অভিযোগ</h2>
 
           <div className="flex items-center gap-3 mt-3 md:mt-0">
             {/* View toggle buttons */}
             <div className="flex bg-white shadow-sm rounded-md p-1">
               <button
                 onClick={() => setViewMode('table')}
-                className={`px-3 py-1 rounded-md text-sm ${
-                  viewMode === 'table'
-                    ? 'bg-green-600 text-white'
-                    : 'text-gray-600'
+                className={`px-3 py-1 rounded-md text-sm bg-brandYellow text-white shadow-sm transition ${
+                  viewMode === 'table' ? 'ring-2 ring-brandGreen' : 'ring-0'
                 }`}
               >
                 Table
@@ -71,10 +70,8 @@ export default function ComplaintsView() {
 
               <button
                 onClick={() => setViewMode('grid')}
-                className={`px-3 py-1 rounded-md text-sm ${
-                  viewMode === 'grid'
-                    ? 'bg-green-600 text-white'
-                    : 'text-gray-600'
+                className={`px-3 py-1 rounded-md text-sm bg-brandYellow text-white shadow-sm transition ${
+                  viewMode === 'grid' ? 'ring-2 ring-brandGreen' : 'ring-0'
                 }`}
               >
                 Grid
@@ -108,15 +105,15 @@ export default function ComplaintsView() {
                   {/* Top color bar */}
                   <div
                     className="h-2 w-full"
-                    style={{
-                      background: hasProgress
-                        ? getProgressColor(c.progress)
-                        : c.status === 'মীমাংসিত'
-                        ? '#16a34a'
-                        : c.status === 'চলমান'
-                        ? '#d97706'
-                        : '#dc2626',
-                    }}
+                  style={{
+                    background: hasProgress
+                      ? getProgressColor(c.progress)
+                      : c.status === 'মীমাংসিত'
+                      ? 'var(--color-brandGreen)'
+                      : c.status === 'চলমান'
+                      ? 'var(--color-brandYellow)'
+                      : 'var(--color-brandGray)',
+                  }}
                   />
 
                   {/* Status badge top-right */}
@@ -129,13 +126,13 @@ export default function ComplaintsView() {
                   </span>
 
                   <div className="p-4">
-                    <h3 className="text-2xl font-bold text-gray-800">{c.name}</h3>
-                    <p className="text-sm text-gray-600 mt-1">{c.subject}</p>
-                    <p className="text-xs text-gray-500 mt-1">{c.date}</p>
-                    <p className="text-sm text-gray-700 mt-3">
+                    <h3 className="text-2xl font-bold text-brandGray">{c.name}</h3>
+                    <p className="text-sm text-brandGray mt-1">{c.subject}</p>
+                    <p className="text-xs text-brandGray mt-1">{c.date}</p>
+                    <p className="text-sm text-brandGray mt-3">
                       {truncateDescription(c.description, 30)}
                     </p>
-                    <div className="mt-3 text-xs text-gray-500">
+                      <div className="mt-3 text-xs text-brandGray">
                       <p>
                         <strong>Location:</strong> {c.location}
                       </p>
@@ -145,11 +142,11 @@ export default function ComplaintsView() {
                     </div>
                     {hasProgress && (
                       <div className="mt-3">
-                        <p className="text-xs font-medium text-gray-700 mb-1">
+                        <p className="text-xs font-medium text-brandGray mb-1">
                           Progress: {Math.round(c.progress)}%
                         </p>
 
-                        <div className="w-full h-3 bg-gray-200 rounded-full overflow-hidden">
+                        <div className="w-full h-3 bg-brandGray rounded-full overflow-hidden">
                           <div
                             className="h-full"
                             style={{
@@ -162,12 +159,12 @@ export default function ComplaintsView() {
                     )}
                     <button
                       onClick={() => toggleRow(c.id)}
-                      className="text-sm text-green-600 mt-4 hover:underline"
+                      className="text-sm mt-4 bg-brandYellow text-white px-3 py-1 rounded-md shadow hover:bg-brandGreen transition"
                     >
                       {expandedRows.includes(c.id) ? 'Hide details' : 'View details'}
                     </button>
                     {expandedRows.includes(c.id) && (
-                      <div className="mt-3 text-sm text-gray-700 border-t pt-3">
+                      <div className="mt-3 text-sm text-brandGray border-t pt-3">
                         <p className="mb-2 font-semibold">Full description:</p>
                         <p>{c.description}</p>
                       </div>
@@ -184,23 +181,23 @@ export default function ComplaintsView() {
           <>
             {/* Desktop Table */}
             <div className="hidden md:block overflow-x-auto bg-white shadow-md rounded-lg">
-              <table className="min-w-full divide-y divide-gray-200">
-                <thead className="bg-gray-100">
+              <table className="min-w-full divide-y divide-brandGray">
+                <thead className="bg-brandGray">
                   <tr>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-green-600">Date</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-green-600">Name</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-green-600">Email</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-green-600">Subject</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-green-600">Location</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-green-600">Status</th>
-                    <th className="px-4 py-2 text-left text-sm font-semibold text-green-600">Details</th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">Date</th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">Name</th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">Email</th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">Subject</th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">Location</th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">Status</th>
+                    <th className="px-4 py-2 text-left text-sm font-semibold text-white">Details</th>
                   </tr>
                 </thead>
 
-                <tbody className="divide-y divide-gray-200 text-gray-700">
+                <tbody className="divide-y divide-brandGray text-brandGray">
                   {complaintsData.slice(0, visibleCount).map((c) => (
                     <React.Fragment key={c.id}>
-                      <tr className="hover:bg-gray-50">
+                      <tr className="hover:bg-brandGray-soft">
                         <td className="px-4 py-2 text-sm">{c.date}</td>
                         <td className="px-4 py-2 text-sm font-bold">{c.name}</td>
                         <td className="px-4 py-2 text-sm">{c.email}</td>
@@ -214,7 +211,7 @@ export default function ComplaintsView() {
                           </span>
                         </td>
                         <td
-                          className="px-4 py-2 text-sm text-green-600 flex items-center gap-2 cursor-pointer"
+                          className="px-4 py-2 text-sm text-brandGreen flex items-center gap-2 cursor-pointer"
                           onClick={() => toggleRow(c.id)}
                         >
                           <FaRegEye />
@@ -223,7 +220,7 @@ export default function ComplaintsView() {
 
                       {/* Description row */}
                       {expandedRows.includes(c.id) && (
-                        <tr className="bg-gray-50">
+                        <tr className="bg-white" style={{ backgroundColor: "rgba(13, 132, 72, 0.08)" }}>
                           <td colSpan={7} className="px-4 py-2 text-xl ">
                             {c.description}
                           </td>
@@ -244,15 +241,15 @@ export default function ComplaintsView() {
                     onClick={() => toggleRow(c.id)}
                   >
                     <div>
-                      <p className="font-semibold text-green-600">{c.name}</p>
-                      <p className="text-sm text-green-600">{c.subject}</p>
+                      <p className="font-semibold text-brandGreen">{c.name}</p>
+                      <p className="text-sm text-brandGreen">{c.subject}</p>
                     </div>
-                    <div className="text-green-600 font-bold">
+                    <div className="text-brandGreen font-bold">
                       {expandedRows.includes(c.id) ? '-' : '+'}
                     </div>
                   </div>
                   {expandedRows.includes(c.id) && (
-                    <div className="px-4 py-3 border-t border-gray-200 text-sm text-green-600 space-y-1">
+                    <div className="px-4 py-3 border-t border-brandGray text-sm text-brandGray space-y-1">
                       <p><strong>ইমেইল:</strong> {c.email}</p>
                       <p><strong>তারিখ:</strong> {c.date}</p>
                       <p><strong>স্থান:</strong> {c.location}</p>
@@ -278,7 +275,7 @@ export default function ComplaintsView() {
           <div className="text-center mt-6">
             <button
               onClick={handleViewAll}
-              className="bg-green-600 text-white px-4 py-2 rounded-md"
+              className="bg-brandYellow text-white px-4 py-2 rounded-md shadow hover:bg-brandGreen transition"
             >
               সব দেখুন
             </button>

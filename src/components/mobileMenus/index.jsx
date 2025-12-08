@@ -18,7 +18,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
       {/* 🔹 Overlay: full-screen dark background */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black/30 z-40"
+          className="fixed inset-0 bg-brandGray z-40"
+          style={{ opacity: 0.7 }}
           onClick={onClose}
           aria-hidden="true"
         />
@@ -29,14 +30,14 @@ const MobileMenu = ({ isOpen, onClose }) => {
         ref={menuRef}
         className={`fixed top-0 right-0 h-full w-2/3 bg-white shadow-lg z-50 transform transition-transform duration-300 ${
           isOpen ? "translate-x-0" : "translate-x-full"
-        } flex flex-col min-h-screen`}
+        } flex flex-col min-h-screen border border-brandGray`}
       >
         {/* Header */}
-        <div className="p-4 border-b border-black pb-8 flex justify-between items-center">
-          <h2 className="text-xl text-black font-semibold">Menu</h2>
+        <div className="p-4 border-b border-brandGray pb-8 flex justify-between items-center">
+          <h2 className="text-xl text-brandGray font-semibold">Menu</h2>
           <button
             onClick={onClose}
-            className="text-2xl text-black"
+            className="text-2xl text-white bg-brandYellow px-3 py-1 rounded-full"
             aria-label="Close menu"
           >
             ✕
@@ -46,7 +47,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
         {/* Menu Items */}
         <ul className="p-4 space-y-2 overflow-y-auto flex-1">
           {navItems.map((item) => (
-            <li key={item.name} className="border-b border-black pb-2">
+            <li key={item.name} className="border-b border-brandGray pb-2">
               {item.dropdown ? (
                 <>
                   {/* Dropdown Toggle */}
@@ -63,8 +64,8 @@ const MobileMenu = ({ isOpen, onClose }) => {
                     aria-expanded={activeMenu === item.name}
                     aria-controls={`${item.name}-submenu`}
                   >
-                    <span className="text-sm text-black">{item.name}</span>
-                    <span className="text-sm text-black">
+                    <span className="text-sm text-brandGray">{item.name}</span>
+                    <span className="text-sm text-brandGray">
                       {activeMenu === item.name ? (
                         <GoChevronUp />
                       ) : (
@@ -84,7 +85,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                         <li key={index}>
                           <Link
                             href={subItem.href}
-                            className="block text-black ps-2 text-sm py-2 border-b border-gray-400 hover:bg-gray-200 hover:text-sky-500"
+                          className="block text-brandGray ps-2 text-sm py-2 border-b border-brandGray hover:bg-brandGreen hover:text-brandYellow"
                             onClick={onClose}
                           >
                             {subItem.name}
@@ -98,7 +99,7 @@ const MobileMenu = ({ isOpen, onClose }) => {
                 // Non-dropdown item
                 <Link
                   href={item.href}
-                  className="block w-full text-sm text-gray-800 py-2"
+                  className="block w-full text-sm text-brandGray py-2"
                   onClick={() => {
                     onClose();
                     setActiveMenu(null);

@@ -243,8 +243,8 @@ const Navbar = () => {
   return (
     <>
       {/* 🔸 Sticky Navbar */}
-     <div
-  className="sticky top-0 uppercase font-semibold text-sm z-50 bg-red-600"
+<div
+ className="sticky top-0 uppercase font-semibold text-sm z-50 bg-brandGreen"
   style={{
     boxShadow: "0 1px 1px rgba(5, 3, 4, 0.5), 0 4px 5px rgba(5,3,4,0.5)",
   }}
@@ -276,7 +276,7 @@ const Navbar = () => {
         >
           <Link
             href={item.href || "#"}
-            className={`cursor-pointer select-none flex items-center gap-1 hover:text-green-800 ${
+            className={`cursor-pointer select-none flex items-center gap-1 hover:text-brandYellow ${
               pathname === item.href ? "text-white" : ""
             }`}
           >
@@ -311,7 +311,7 @@ const Navbar = () => {
                       className={`w-full min-w-[200px] font-mono text-sm py-2 px-4 whitespace-nowrap flex items-center justify-between duration-300 ${
                         pathname === subItem.href
                           ? "text-white"
-                          : "text-black hover:text-green-600"
+                    : "text-brandGray hover:text-brandYellow"
                       }`}
                     >
                       <span>{subItem.name}</span>
@@ -330,16 +330,16 @@ const Navbar = () => {
 
     {/* 🟦 Desktop Only Social Icons — Mobile এ লুকানো */}
     <div className="hidden md:flex gap-2 absolute right-6 top-1/2 -translate-y-1/2">
-      <a href="https://www.facebook.com/afroza.rita.khanam" target="blank" className="p-2 rounded-full bg-white hover:bg-gray-200 shadow-sm">
+      <a href="https://www.facebook.com/afroza.rita.khanam" target="blank" className="p-2 rounded-full bg-white hover:bg-brandYellow shadow-sm">
         <FaFacebook />
       </a>
-      <a href="https://www.tiktok.com/@afroza_khanam_rita" target="blank" className="p-2 rounded-full bg-white hover:bg-gray-200 shadow-sm">
+      <a href="https://www.tiktok.com/@afroza_khanam_rita" target="blank" className="p-2 rounded-full bg-white hover:bg-brandYellow shadow-sm">
         <FaTiktok />
       </a>
-      <a href="https://x.com/AfrozaKRita" target="blank" className="p-2 rounded-full bg-white hover:bg-gray-200 shadow-sm">
+      <a href="https://x.com/AfrozaKRita" target="blank" className="p-2 rounded-full bg-white hover:bg-brandYellow shadow-sm">
         <FaTwitter />
       </a>
-      <a href="https://www.linkedin.com/feed/" target="blank" className="p-2 rounded-full bg-white hover:bg-gray-200 shadow-sm">
+      <a href="https://www.linkedin.com/feed/" target="blank" className="p-2 rounded-full bg-white hover:bg-brandYellow shadow-sm">
         <FaLinkedin />
       </a>
     </div>
@@ -356,7 +356,10 @@ const Navbar = () => {
 
 
       {/* darker gray gradient shadow/separator below navbar */}
-      <div className="w-full h-3 pointer-events-none bg-gradient-to-b from-gray-900/30 to-transparent" />
+      <div
+        className="w-full h-3 pointer-events-none"
+        style={{ background: "linear-gradient(180deg, rgba(13, 132, 72, 0.4), transparent)" }}
+      />
 
       {/* 🔸 Mobile Menu Drawer — TOP SLIDE */}
       <AnimatePresence>
@@ -381,9 +384,9 @@ const Navbar = () => {
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`block w-full py-3 px-3  text-base transition-all duration-200 ${
                       pathname === item.href
-                        ? "text-red-600"
-                        : "text-gray-700"
-                    } hover:bg-gray-100`}
+                    ? "text-brandGreen"
+                        : "text-brandGray"
+                    } hover:bg-brandYellow`}
                   >
                     {item.name}
                   </Link>
@@ -398,9 +401,9 @@ const Navbar = () => {
                             onClick={() => setIsMobileMenuOpen(false)}
                             className={`block w-full py-2 px-3 border-b text-sm transition-all duration-200 ${
                               pathname === sub.href
-                                ? "text-sky-500"
-                                : "text-gray-600"
-                            } hover:bg-gray-100`}
+                                ? "text-brandYellow"
+                                : "text-brandGray"
+                            } hover:bg-brandYellow`}
                           >
                             {sub.name}
                           </Link>
