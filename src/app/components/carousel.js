@@ -105,7 +105,7 @@ export default function HeroSlider() {
                 <SwiperSlide>
                   <div className="w-full h-full relative">
                     <Image
-                      src="/carousel1.jpg"
+                      src="/carousel1.jpeg"
                       alt="Slide 1"
                       width="1500"
                       height="1500"
@@ -118,7 +118,7 @@ export default function HeroSlider() {
                 <SwiperSlide>
                   <div className="w-full h-full relative">
                     <Image
-                      src="/carousel2.jpg"
+                      src="/carousel2.jpeg"
                       alt="Slide 2"
                       width="1500"
                       height="1500"
@@ -131,7 +131,7 @@ export default function HeroSlider() {
                 <SwiperSlide>
                   <div className="w-full h-full relative">
                     <Image
-                      src="/carousel3.jpg"
+                      src="/carousel3.jpeg"
                       alt="Slide 3"
                       width="1800"
                       height="1800"
