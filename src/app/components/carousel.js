@@ -65,19 +65,16 @@ export default function HeroSlider() {
           <div className="w-full md:w-5/12 flex items-center justify-center md:justify-start px-4  mt-10 md:mt-0 md:h-[420px]">
             {/* make inner container fill height and center vertically */}
             <div className="w-full flex flex-col justify-center h-full">
-              <h1 className="text-2xl h-10 sm:text-3xl md:text-4xl font-semibold text-brandGreen leading-tight text-center md:text-left">
-                <span>{display}</span>
-                <span className="inline-block ml-2 align-middle">
-                  <span
-                    aria-hidden="true"
-                    className="inline-block w-[3px] h-9 bg-brandGreen rounded animate-pulse"
-                  />
+              <h1 className="text-xl sm:text-2xl md:text-2xl lg:text-4xl font-semibold text-brandGreen leading-snug md:leading-snug lg:leading-tight h-auto">
+                {display}
+                <span className="inline-block ml-1 align-middle">
+                  <span className="inline-block w-[3px] h-6 md:h-7 lg:h-9 bg-brandGreen rounded animate-pulse"></span>
                 </span>
               </h1>
 
-              <p className="text-brandGreen mt-24 text-base sm:text-xl md:text-2xl text-center md:text-left">
+              <p className="text-brandGreen mt-4 sm:mt-6 md:mt-8 text-sm sm:text-base md:text-base lg:text-xl leading-relaxed md:leading-relaxed lg:leading-loose">
                 আপনি বলবেন, আমি শুনবো একসাথে দেশ গড়বো। মানিকগঞ্জের প্রতিটি
-                মানুষের চাওয়াই আমার চাওয়া। আমাকে জানান আপনাদের মনের দাবিগুলো,  
+                মানুষের চাওয়াই আমার চাওয়া। আমাকে জানান আপনাদের মনের দাবিগুলো,
                 আমি আমার সর্বোচ্চ দিয়ে সেগুলো পূরণের চেষ্টা করবো।
               </p>
 
