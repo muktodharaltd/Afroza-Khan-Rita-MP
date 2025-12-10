@@ -69,7 +69,7 @@ export default function Contact() {
             <div className="w-full md:w-1/2 flex items-center justify-center">
               <div className="w-full bg-brandGreen text-white p-3 md:p-8 md:rounded-xl md:shadow-2xl md:max-w-xl h-auto md:h-[640px] flex flex-col shadow-lg">
                 <h4 className="text-center text-base md:text-xl font-bold mb-3 md:mb-6">
-                  আপনার চাওয়া জমা দিন
+                 আপনার চাওয়া জানিয়ে দিন
                 </h4>
 
                 <form
