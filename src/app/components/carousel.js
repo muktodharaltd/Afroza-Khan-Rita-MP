@@ -76,7 +76,9 @@ export default function HeroSlider() {
               </h1>
 
               <p className="text-brandGreen mt-24 text-base sm:text-xl md:text-2xl text-center md:text-left">
-                আফরোজা খানম রিতা — নারী শক্তিকে এগিয়ে নেওয়ার দৃঢ় অঙ্গীকার
+                আপনি বলবেন, আমি শুনবো একসাথে দেশ গড়বো। মানিকগঞ্জের প্রতিটি
+                মানুষের চাওয়াই আমার চাওয়া। আমাকে জানান আপনাদের মনের দাবিগুলো,  
+                আমি আমার সর্বোচ্চ দিয়ে সেগুলো পূরণের চেষ্টা করবো।
               </p>
 
               {/* ? register button  */}
