@@ -197,7 +197,7 @@ export default function VideoGallery() {
   return (
     <div className="shadow-sm">
       <section className="py-12 max-w-7xl mx-auto relative">
-        <h2 className="text-3xl font-bold mb-12 text-brandGreen">
+        <h2 className="text-3xl font-bold mb-6 ml-5 text-brandGreen">
           ভিডিও গ্যালারি
         </h2>
 

@@ -6,11 +6,11 @@ import BlogData from "./blogData.json";
 const BlogPosts = () => {
   return (
     <div className="max-w-7xl mx-auto py-10 ">
-      <h2 className="text-3xl font-bold mb-8 text-brandGreen">
+      <h2 className="text-3xl font-bold mb-8 ml-5 text-brandGreen">
         সাম্প্রতিক ব্লগ পোস্ট 
       </h2>
       {/* flex gap added */}
-      <div className="flex flex-wrap -mx-4 gap-y-8">
+      <div className="flex flex-wrap  gap-y-8">
         {BlogData.map((post) => (
           <div key={post.id} className="w-full md:w-1/2 px-4">
             <div
