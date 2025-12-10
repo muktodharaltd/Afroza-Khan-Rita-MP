@@ -208,7 +208,7 @@ const Footer = () => {
 
           {/* Contact - compact, brief info and small CTA */}
           <div className="text-sm">
-            <p>ঠিকানা</p>
+            <p className='text-xl'>ঠিকানা</p>
             <p>মুন্নু সিটি, গিলন্ড, মানিকগঞ্জ সদর, মানিকগঞ্জ-১৮০০</p>
 
             <div className="mt-3">
