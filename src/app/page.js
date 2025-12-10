@@ -1,12 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import Homes from './components/home/page'
+import AllPage from '@/app/components/page'
 
 export default function Home() {
   return (
     <div>
-      <Homes />
+      <AllPage />
+      
     </div>
   )
 }
