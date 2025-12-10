@@ -115,7 +115,6 @@ const Footer = () => {
                 <p className="text-lg font-semibold leading-tight">
                   Afroza Khanam Rita
                 </p>
-                <p className="text-sm opacity-90">Member of Parliament</p>
               </div>
             </div>
             <p className=" text-white">
@@ -210,10 +209,8 @@ const Footer = () => {
 
           {/* Contact - compact, brief info and small CTA */}
           <div className="text-sm">
-            <h6 className="text-base font-semibold mb-2">Contact</h6>
-            <p className="opacity-90">Office: 123, Parliament Rd, Dhaka</p>
-            <p className="opacity-90 mt-1">Phone: +880 1234 567890</p>
-            <p className="opacity-90 mt-1">Email: info@example.com</p>
+            <p>ঠিকানা</p>
+            <p>মুন্নু সিটি, গিলন্ড, মানিকগঞ্জ সদর, মানিকগঞ্জ-১৮০০</p>
 
             <div className="mt-3">
               <Link href="/contact">

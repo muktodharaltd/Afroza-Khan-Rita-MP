@@ -75,7 +75,7 @@ export default function HeroSlider() {
                 </span>
               </h1>
 
-              <p className="text-brandGreen mt-14 text-base sm:text-xl md:text-2xl text-center md:text-left">
+              <p className="text-brandGreen mt-24 text-base sm:text-xl md:text-2xl text-center md:text-left">
                 আফরোজা খানম রিতা — নারী শক্তিকে এগিয়ে নেওয়ার দৃঢ় অঙ্গীকার
               </p>
 

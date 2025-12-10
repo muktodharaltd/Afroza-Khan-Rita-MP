@@ -58,11 +58,6 @@ export default function Contact() {
               <h1 className="mt-3 md:mt-6 text-2xl md:text-5xl font-bold text-brandGreen text-center md:text-left">
                 আফরোজা খানম রিতা
               </h1>
-
-              <p className="text-sm md:text-lg mt-1 text-brandGreen text-center md:text-left">
-                সংসদ সদস্য
-                <span className="text-brandYellow underline">বিস্তারিত</span>
-              </p>
             </div>
 
             {/* RIGHT: Form */}
@@ -112,11 +107,11 @@ export default function Contact() {
                     className="w-full p-2 rounded bg-white text-brandGray focus:ring-2 focus:ring-blue-400 outline-none"
                   />
                   <input
-                    type="tel"
-                    name="mobile"
+                    type="text"
+                    name="nid"
                     value={form.mobile}
                     onChange={handleChange}
-                    placeholder="মোবাইল নম্বর"
+                    placeholder="জাতীয় পরিচয় পত্রের নাম্বার"
                     required
                     className="w-full p-2 rounded bg-white text-brandGray focus:ring-2 focus:ring-blue-400 outline-none"
                   />
