@@ -2,7 +2,7 @@ import Navber from "@/components/navbar"
 import Footer from "@/components/footer"
 
 export const metadata = {
-  title: "নারী শক্তি | Afroza Khan Rita",
+  title: "আফরোজা খানম রিতা",
   description:
     "নারী ক্ষমতায়ন, শিক্ষা ও স্বনির্ভরতার গল্প এবং উদ্যোগের বিস্তারিত ব্যাখ্যা।",
 }

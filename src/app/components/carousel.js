@@ -8,10 +8,10 @@ import Image from 'next/image'
 import Button from '@/components/common/Button'
 
 const slogans = [
-  'প্রতিটি নারীর স্বপ্ন পূরণের পাশে রিতা',
-  'নারী উন্নয়নে নতুন দিগন্ত — রিতার নেতৃত্বে',
-  'নারীকে সুযোগ দিলে—দেশ পায় সম্ভাবনা',
-  'নারীর হাসিই উন্নয়নের আসল সাফল্য',
+  'আপনি বলবেন, আমি শুনবো একসাথে দেশ গড়বো',
+  'মানিকগঞ্জের প্রতিটি মানুষের চাওয়াই আমার চাওয়া,',
+  ' আমাকে জানান আপনাদের মনের দাবিগুলো,',
+  ' আমি আমার সর্বোচ্চ দিয়ে সেগুলো পূরণের চেষ্টা করবো।',
 ]
 
 export default function HeroSlider() {
@@ -80,9 +80,12 @@ export default function HeroSlider() {
               </p>
 
               {/* ? register button  */}
-              
+
               <div className="text-right  mr-20 pt-20">
-            <button  className="w-auto md:min-w-24 text-center rounded bg-brandYellow text-white px-6 py-2 font-semibold hover:bg-brandGreen transition"> Register Now</button>
+                <button className="w-auto md:min-w-24 text-center rounded bg-brandYellow text-white px-6 py-2 font-semibold hover:bg-brandGreen transition">
+                  {' '}
+                  Register Now
+                </button>
               </div>
             </div>
           </div>

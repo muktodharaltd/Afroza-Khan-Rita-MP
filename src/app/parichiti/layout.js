@@ -2,7 +2,7 @@ import Navber from "@/components/navbar"
 import Footer from "@/components/footer"
 
 export const metadata = {
-  title: "পরিচিতি | Afroza Khan Rita",
+  title: "আফরোজা খানম রিতা",
   description:
     "আফরোজা খানম রিতার পরিচিতি, মূল উদ্দেশ্য, এবং জনগণের জন্য নেওয়া উদ্যোগগুলোর সারসংক্ষেপ।",
 }

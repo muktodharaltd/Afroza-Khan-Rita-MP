@@ -2,7 +2,7 @@ import Navber from "@/components/navbar"
 import Footer from "@/components/footer"
 
 export const metadata = {
-  title: "যোগাযোগ | Afroza Khan Rita",
+  title: "আফরোজা খানম রিতা",
   description: "সমর্থন বা অভিযোগের জন্য অফিসে যোগাযোগের বিস্তারিত ও অনলাইন ফর্ম।",
 }
 

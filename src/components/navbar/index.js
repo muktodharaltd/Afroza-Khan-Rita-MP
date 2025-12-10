@@ -244,10 +244,11 @@ const Navbar = () => {
     <>
       {/* 🔸 Sticky Navbar */}
 <div
- className="sticky top-0 uppercase font-semibold text-sm z-50 bg-brandGreen"
-  style={{
-    boxShadow: "0 1px 1px rgba(5, 3, 4, 0.5), 0 4px 5px rgba(5,3,4,0.5)",
-  }}
+ className="sticky top-0 uppercase font-semibold text-sm z-50 bg-brandGreen shadow-sm"
+//  style={{
+//     boxShadow: "0 1px 1px rgba(5, 3, 4, 0.5), 0 4px 5px rgba(5,3,4,0.5)",
+//   }}
+  
 >
   <div className="w-full mx-auto px-6 h-13 md:h-17 py-4 flex items-center justify-between md:justify-center relative">
 
