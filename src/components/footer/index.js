@@ -164,12 +164,12 @@ const Footer = () => {
                 Home
               </Link>
               <span className="opacity-80">|</span>
-              <Link href="/about" className="hover:text-brandYellow transition">
+              <Link href="/parichiti" className="hover:text-brandYellow transition">
                 About
               </Link>
               <span className="opacity-80">|</span>
               <Link
-                href="/services"
+                href="/nari-shakti"
                 className="hover:text-brandYellow transition"
               >
                 Services
