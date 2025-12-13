@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import Image from 'next/image'
+import Link from 'next/link'
 
 const slogans = [
   'আপনি বলবেন, আমি শুনবো একসাথে দেশ গড়বো',
@@ -27,7 +28,7 @@ export default function HeroSlider() {
     }
 
     return () => clearTimeout(timer)
-  }, [display])
+  }, [display, fullText])
 
 
   return (
@@ -74,9 +75,11 @@ export default function HeroSlider() {
 
               {/* Button */}
               <div className="text-center md:text-left ">
+                <Link href="/nari-shakti">
                 <button className="w-auto md:min-w-24 text-center rounded bg-brandYellow text-white px-6 py-2 font-semibold hover:bg-brandGreen transition">
                   Register Now
                 </button>
+                </Link>
               </div>
 
             </div>
