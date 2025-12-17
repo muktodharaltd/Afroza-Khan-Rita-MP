@@ -1,99 +1,39 @@
-// "use client";
-// import React from "react";
-// import Link from "next/link";
-// import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
-// import Image from "next/image";
-
-// const Footer = () => {
-//   return (
-//     <footer className="bg-red-500 text-gray-300 py-4 px-6">
-//       {/* Top Section */}
-//       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-10">
-
-//         {/* Branding */}
-//         <div className="flex flex-col items-start space-y-3 md:w-1/3">
-//           <div className="flex items-center gap-3">
-//             <Image src="/logo.jpg" alt="logo" width={60} height={60} className="rounded-full" />
-//             <div>
-//               <p className="text-xl font-semibold text-white">Afroza Khan Rita</p>
-//               <p className="text-sm text-white">Member of Parliament</p>
-//             </div>
-//           </div>
-//           <p className="text-sm text-white max-w-xs">
-//             Dedicated to serving the people with integrity and development.
-//           </p>
-//         </div>
-
-//         {/* Navigation Links */}
-//         <div className="md:w-1/3">
-//           <h6 className="text-lg font-semibold text-white mb-4">Quick Links</h6>
-//           <ul className="space-y-2 text-white">
-//             <li>
-//               <Link href="/" className="hover:text-brandYellow transition">
-//                 Home
-//               </Link>
-//             </li>
-//             <li>
-//               <Link href="/about" className="hover:text-brandYellow transition">
-//                 About Us
-//               </Link>
-//             </li>
-//             <li>
-//               <Link href="/services" className="hover:text-brandYellow transition">
-//                 Services
-//               </Link>
-//             </li>
-//             <li>
-//               <Link href="/contact" className="hover:text-brandYellow transition">
-//                 Contact
-//               </Link>
-//             </li>
-//           </ul>
-//         </div>
-
-//         {/* Social Links */}
-//         <div className="md:w-1/3">
-//           <h6 className="text-lg font-semibold text-white mb-4">Follow Us</h6>
-//           <div className="flex space-x-5 text-green-600 text-2xl">
-//             <Link href="#"><FaFacebook className="hover:text-white transition" /></Link>
-//             <Link href="#"><FaInstagram className="hover:text-white transition" /></Link>
-//             <Link href="#"><FaTwitter className="hover:text-white transition" /></Link>
-//             <Link href="#"><FaLinkedin className="hover:text-white transition" /></Link>
-//           </div>
-//         </div>
-//       </div>
-
-//       {/* Divider */}
-//       <hr className="my-4 border-gray-700" />
-
-//       {/* Footer Bottom */}
-//       <div className="text-center text-sm text-white">
-//         © {new Date().getFullYear()} Developed by{" "}
-//         <span className="text-white font-semibold">
-//           Muktodhara Technology Limited
-//         </span>
-
-//       </div>
-//     </footer>
-//   );
-// };
-
-// export default Footer;
-
 'use client'
 
 import React from 'react'
 import Link from 'next/link'
-import {
-  FaFacebook,
-  FaInstagram,
-  FaTwitter,
-  FaLinkedin,
-  FaTiktok,
-} from 'react-icons/fa'
+import { FaFacebook, FaTwitter, FaLinkedin, FaTiktok } from 'react-icons/fa'
 import Image from 'next/image'
 
-const Footer = () => {
+const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
+console.log(API_BASE)
+
+export default function Footer() {
+  const { useState, useEffect } = React
+  const [logoName, setLogoName] = useState([])
+
+  useEffect(() => {
+    console.log('API BASE 👉', API_BASE)
+
+    if (!API_BASE) return
+
+    const fetchLogoName = async () => {
+      try {
+        const response = await fetch(`${API_BASE}/api/header-logos`)
+        const data = await response.json()
+        setLogoName(data.data || [])
+        console.log('Fetched logo name:', data)
+      } catch (error) {
+        console.error('Error fetching logo name:', error)
+        setLogoName([])
+      } finally {
+        // You can set loading heare if needed
+      }
+    }
+
+    fetchLogoName()
+  }, [])
+
   return (
     <footer className="bg-brandGreen text-white py-8 px-4">
       <div className="max-w-7xl mx-auto">
@@ -102,58 +42,64 @@ const Footer = () => {
           {/* Branding - on small screens span 2 cols so other sections can share space compactly */}
           <div className="flex flex-col gap-3 sm:col-span-2 md:col-span-1">
             <div className="flex items-center gap-3">
-              <div className="w-14 h-14 relative flex-shrink-0 rounded-full overflow-hidden shadow-md">
-                <Image
-                  src="/logo.png"
-                  alt="Afroza Khan Rita Logo"
-                  fill
-                  sizes="56px"
-                  className="object-cover"
-                />
+              <div className=" rounded-full  ">
+                {logoName?.logo_header && (
+                  <div>
+                    <div className="flex  items-center gap-2">
+                      <Image
+                        src={logoName.logo_footer}
+                        alt="Logo"
+                        width={56}
+                        height={56}
+                        className="rounded-full"
+                        unoptimized
+                      />
+                      <p className="text-white text-xl ">{logoName.name_eng}</p>
+                    </div>
+                    <p className="text-white text-sm  pt-5">
+                      {logoName.footer_description}
+                    </p>
+                  </div>
+                )}
               </div>
-              <div>
-                <p className="text-lg font-semibold leading-tight">
-                  Afroza Khanam Rita
-                </p>
+              <div></div>
+            </div>
+
+            {logoName?.logo_header && (
+              <div className="flex gap-2 mt-2">
+                <a
+                  href={logoName.facebook}
+                  target="blank"
+                  className="p-2 rounded-full bg-brandYellow hover:bg-brandGray transition-all duration-500 transform hover:rotate-y-180 shadow-sm"
+                >
+                  <FaFacebook />
+                </a>
+
+                <a
+                  href={logoName.instagram}
+                  target="blank"
+                  className="p-2 rounded-full bg-brandYellow hover:bg-brandGray transition-all duration-500 transform hover:rotate-y-180 shadow-sm"
+                >
+                  <FaTiktok />
+                </a>
+
+                <a
+                  href={logoName.twitter}
+                  target="blank"
+                  className="p-2 rounded-full bg-brandYellow hover:bg-brandGray transition-all duration-500 transform hover:rotate-y-180 shadow-sm"
+                >
+                  <FaTwitter />
+                </a>
+
+                <a
+                  href={logoName.linkedin}
+                  target="blank"
+                  className="p-2 rounded-full bg-brandYellow hover:bg-brandGray transition-all duration-500 transform hover:rotate-y-180 shadow-sm"
+                >
+                  <FaLinkedin />
+                </a>
               </div>
-            </div>
-            <p className=" text-white">
-             আপনাদের যেকোনো সমস্যা ও চাওয়াগুলো এখানে জানান। আমি চেষ্টা করবো সেগুলোর বাস্তবমুখী সমাধানের খুঁজে বের করার।
-            </p>
-
-            <div className="flex gap-2 mt-2">
-              <a
-                href="https://www.facebook.com/afroza.rita.khanam"
-                target="blank"
-                className="p-2 rounded-full bg-brandYellow hover:bg-brandGray transition-all duration-500 transform hover:rotate-y-180 shadow-sm"
-              >
-                <FaFacebook />
-              </a>
-
-              <a
-                href="https://www.tiktok.com/@afroza_khanam_rita"
-                target="blank"
-                className="p-2 rounded-full bg-brandYellow hover:bg-brandGray transition-all duration-500 transform hover:rotate-y-180 shadow-sm"
-              >
-                <FaTiktok />
-              </a>
-
-              <a
-                href="https://x.com/AfrozaKRita"
-                target="blank"
-                className="p-2 rounded-full bg-brandYellow hover:bg-brandGray transition-all duration-500 transform hover:rotate-y-180 shadow-sm"
-              >
-                <FaTwitter />
-              </a>
-
-              <a
-                href="https://www.linkedin.com/feed/"
-                target="blank"
-                className="p-2 rounded-full bg-brandYellow hover:bg-brandGray transition-all duration-500 transform hover:rotate-y-180 shadow-sm"
-              >
-                <FaLinkedin />
-              </a>
-            </div>
+            )}
           </div>
 
           {/* Quick Links - single row with pipe separators */}
@@ -164,7 +110,10 @@ const Footer = () => {
                 Home
               </Link>
               <span className="opacity-80">|</span>
-              <Link href="/parichiti" className="hover:text-brandYellow transition">
+              <Link
+                href="/parichiti"
+                className="hover:text-brandYellow transition"
+              >
                 About
               </Link>
               <span className="opacity-80">|</span>
@@ -207,9 +156,12 @@ const Footer = () => {
           </div>
 
           {/* Contact - compact, brief info and small CTA */}
+          {logoName?.logo_header && (
           <div className="text-sm">
-            <p className='text-xl'>ঠিকানা</p>
-            <p>মুন্নু সিটি, গিলন্ড, মানিকগঞ্জ সদর, মানিকগঞ্জ-১৮০০</p>
+            <p className="text-xl">ঠিকানা</p>
+            <p className='mt-2'>{logoName.address} </p>
+            <p className='mt-2'>ফোন: {logoName.phone} </p>
+            <p className='mt-2'>ইমেইল: {logoName.email} </p>
 
             <div className="mt-3">
               <Link href="/contact">
@@ -219,6 +171,7 @@ const Footer = () => {
               </Link>
             </div>
           </div>
+          )}  
         </div>
 
         {/* Divider */}
@@ -256,5 +209,3 @@ const Footer = () => {
     </footer>
   )
 }
-
-export default Footer
