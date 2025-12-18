@@ -179,9 +179,11 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-3">
             <div className="text-sm opacity-90">
               © {new Date().getFullYear()} Developed by{' '}
+              <Link href="https://muktodharaltd.com/" target="_blank" className="hover:text-brandYellow transition">
               <span className="font-semibold">
                 Muktodhara Technology Limited
               </span>
+              </Link>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <Link

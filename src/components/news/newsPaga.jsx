@@ -1,86 +1,73 @@
-// components/UpdatesSection.jsx
+
+
+
+
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 
-// 🔔 Top Main Notice
-const noticeSample = {
-  title: "নারী সুরক্ষা সচেতনতা সভা: ১৫ ডিসেম্বর সকাল ১০টায় অনুষ্ঠিত হবে",
-  date: "১৫ ডিসেম্বর ২০২৫",
-  url: "/notice/1",
-};
-
-// 📅 LEFT — Event List
-const eventSample = [
-  {
-    id: 1,
-    title: "গ্রামীণ রাস্তা সংস্কার কার্যক্রম শুরু",
-    date: "২০ ডিসেম্বর ২০২৫",
-    url: "/event/1",
-  },
-  {
-    id: 2,
-    title: "বন্যা পুনর্বাসন সহায়তা বিতরণ",
-    date: "১৮ ডিসেম্বর ২০২৫",
-    url: "/event/2",
-  },
-  {
-    id: 3,
-    title: "স্বাস্থ্যসেবা ক্যাম্প – বিনামূল্যে চেকআপ",
-    date: "১৬ ডিসেম্বর ২০২৫",
-    url: "/event/3",
-  },
-];
-
-// 👩‍🦰 RIGHT — Women Focused Notices
-const womenNoticeList = [
-  {
-    id: 1,
-    title: "নারী উদ্যোক্তা প্রশিক্ষণ কর্মশালার নিবন্ধন শুরু",
-    date: "১৪ ডিসেম্বর ২০২৫",
-    url: "/women/1",
-  },
-  {
-    id: 2,
-    title: "নারী প্রকল্পের নতুন ব্যাচে ভর্তি চলছে",
-    date: "১০ ডিসেম্বর ২০২৫",
-    url: "/women/2",
-  },
-  {
-    id: 3,
-    title: "নারীদের জন্য বিনামূল্যে ডিজিটাল স্কিল ট্রেনিং",
-    date: "৫ ডিসেম্বর ২০২৫",
-    url: "/women/3",
-  },
-];
+const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL;
 
 export default function UpdatesSection() {
+  const [events, setEvents] = useState([]);
+  const [womenNotices, setWomenNotices] = useState([]);
+  const [topNotice, setTopNotice] = useState(null);
+
+  useEffect(() => {
+    // 📅 Events
+    fetch(`${API_BASE}/api/events`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          setEvents(res.data || []);
+          setTopNotice(res.data?.[0] || null); // first event as top notice
+        }
+      })
+      .catch(console.error);
+
+    // 👩‍🦰 Women Notices
+    fetch(`${API_BASE}/api/woman-notices`)
+      .then((res) => res.json())
+      .then((res) => {
+        if (res.success) {
+          setWomenNotices(res.data || []);
+        }
+      })
+      .catch(console.error);
+  }, []);
+
   return (
     <section className="w-full bg-white py-8 shadow-sm">
       <div className="max-w-7xl mx-auto">
 
         {/* 🔔 MAIN TOP NOTICE */}
-        <div className="mb-6 shadow-lg">
-        <div
-          className="rounded-lg border border-brandGreen p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
-          style={{ backgroundColor: "rgba(13, 132, 72, 0.08)" }}
-        >
-            <div className="flex-1">
-              <h3 className="text-brandGreen font-semibold text-lg">{noticeSample.title}</h3>
-            </div>
+        {topNotice && (
+          <div className="mb-6 shadow-lg">
+            <div
+              className="rounded-lg border border-brandGreen p-5 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4"
+              style={{ backgroundColor: "rgba(13, 132, 72, 0.08)" }}
+            >
+              <div className="flex-1">
+                <h3 className="text-brandGreen font-semibold text-lg">
+                  {topNotice.title}
+                </h3>
+              </div>
 
-            <div className="flex items-center gap-3">
-              <div className="text-sm text-brandGreen">{noticeSample.date}</div>
-              <Link
-                href={noticeSample.url}
-                className="inline-block px-3 py-1 bg-brandGreen text-white rounded-md text-sm font-semibold hover:bg-brandGreen/90"
-              >
-                বিস্তারিত
-              </Link>
+              <div className="flex items-center gap-3">
+                <div className="text-sm text-brandGreen">
+                  {new Date(topNotice.date).toLocaleDateString("bn-BD")}
+                </div>
+                <Link
+                  href={`/event/${topNotice.id}`}
+                  className="inline-block px-3 py-1 bg-brandGreen text-white rounded-md text-sm font-semibold hover:bg-brandGreen/90"
+                >
+                  বিস্তারিত
+                </Link>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* 🔻 TWO COLUMN LAYOUT */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -92,52 +79,70 @@ export default function UpdatesSection() {
             </h4>
 
             <div className="bg-white border border-brandGray rounded-lg shadow divide-y divide-brandGray">
-              {eventSample.map((e) => (
+              {events.map((e) => (
                 <article key={e.id} className="p-4 flex items-start gap-3">
                   <div className="flex-1">
-                    <Link href={e.url}>
+                    <Link href={`/event/${e.id}`}>
                       <h5 className="text-brandGreen font-medium hover:underline">
                         {e.title}
                       </h5>
                     </Link>
-                    <div className="text-xs text-brandGreen mt-1">{e.date}</div>
+                    <div className="text-xs text-brandGreen mt-1">
+                      {new Date(e.date).toLocaleDateString("bn-BD")}
+                    </div>
                   </div>
                   <div className="self-start">
-                    <Link href={e.url} className="text-sm text-brandGreen hover:underline">
+                    <Link
+                      href={`/event/${e.id}`}
+                      className="text-sm text-brandGreen hover:underline"
+                    >
                       পড়ুন
                     </Link>
                   </div>
                 </article>
               ))}
+
+              {events.length === 0 && (
+                <p className="p-4 text-sm text-brandGray">কোনো ইভেন্ট পাওয়া যায়নি</p>
+              )}
             </div>
           </div>
 
-          {/* 👩‍🦰 RIGHT — Women Focused Notices */}
+          {/* 👩‍🦰 RIGHT — Women Notices */}
           <div>
             <h3 className="text-brandGreen font-bold text-lg mb-2">
               নারী বিষয়ক বিজ্ঞপ্তি (Women Notices)
             </h3>
 
-            
-
             <div className="bg-white border border-brandGray rounded-lg shadow divide-y divide-brandGray">
-              {womenNoticeList.map((n) => (
+              {womenNotices.map((n) => (
                 <article key={n.id} className="p-4 flex items-start gap-3">
                   <div className="flex-1">
-                    <Link href={n.url}>
-                    <h5 className="text-brandGreen font-medium hover:underline">
+                    <Link href={`/women/${n.id}`}>
+                      <h5 className="text-brandGreen font-medium hover:underline">
                         {n.title}
                       </h5>
                     </Link>
-                    <div className="text-xs text-brandGreen mt-1">{n.date}</div>
+                    <div className="text-xs text-brandGreen mt-1">
+                      {new Date(n.date).toLocaleDateString("bn-BD")}
+                    </div>
                   </div>
                   <div className="self-start">
-                    <Link href={n.url} className="text-sm text-brandGreen hover:underline">
+                    <Link
+                      href={`/women/${n.id}`}
+                      className="text-sm text-brandGreen hover:underline"
+                    >
                       পড়ুন
                     </Link>
                   </div>
                 </article>
               ))}
+
+              {womenNotices.length === 0 && (
+                <p className="p-4 text-sm text-brandGray">
+                  কোনো নারী বিষয়ক বিজ্ঞপ্তি নেই
+                </p>
+              )}
             </div>
           </div>
 
