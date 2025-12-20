@@ -2,7 +2,7 @@
 
 'use client'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
@@ -20,6 +20,25 @@ export default function Contact() {
   })
 
   const [loading, setLoading] = useState(false)
+  const [formImage, setFormImage] = useState(null)
+
+  /* 🔹 FETCH FORM IMAGE */
+  useEffect(() => {
+    const fetchImage = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/request-form-image`)
+        const data = await res.json()
+
+        if (res.ok && data.success) {
+          setFormImage(data.data.image)
+        }
+      } catch (error) {
+        console.error('Image fetch error:', error)
+      }
+    }
+
+    fetchImage()
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -38,7 +57,6 @@ export default function Contact() {
           Accept: 'application/json',
         },
         body: JSON.stringify({
-          // Map frontend field names to backend DB column names
           name: form.username,
           subject: form.subject,
           address: form.location,
@@ -67,15 +85,10 @@ export default function Contact() {
           description: '',
         })
       } else {
-        toast.error(result.message || 'কিছু সমস্যা হয়েছে!', {
-          position: 'bottom-right',
-        })
+        toast.error(result.message || 'কিছু সমস্যা হয়েছে!')
       }
     } catch (error) {
-      console.error('Submit error:', error)
-      toast.error('সার্ভারের সাথে সংযোগ সমস্যা!', {
-        position: 'bottom-right',
-      })
+      toast.error('সার্ভারের সাথে সংযোগ সমস্যা!')
     } finally {
       setLoading(false)
     }
@@ -83,21 +96,25 @@ export default function Contact() {
 
   return (
     <>
-      <section className="relative bg-cover bg-center min-h-[70vh] flex flex-col md:flex-row items-start shadow-sm">
+      <section className="relative min-h-[70vh] flex flex-col md:flex-row shadow-sm">
         <div className="w-full px-2 md:px-0">
           <div className="md:max-w-7xl md:mx-auto mb-5 md:py-5 flex flex-col md:flex-row gap-6 md:gap-12">
 
             {/* LEFT IMAGE */}
             <div className="w-full md:w-1/2 flex flex-col">
-              <div className="relative w-full h-[300px] md:h-[640px] overflow-hidden rounded-lg mt-1 md:mt-18">
-                <Image
-                  src="/contact.jpg"
-                  alt="Afroza Khanam Rita"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover"
-                  priority
-                />
+              <div className="relative w-full h-[300px] md:h-[640px] mt-17 overflow-hidden rounded-lg">
+                {formImage ? (
+                  <img
+                    src={formImage}
+                    alt="Afroza Khanam Rita"
+                 
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover"
+              
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gray-200 animate-pulse" />
+                )}
               </div>
 
               <h1 className="mt-3 md:mt-6 text-2xl md:text-5xl font-bold text-brandGreen text-center md:text-left">
@@ -107,14 +124,14 @@ export default function Contact() {
 
             {/* RIGHT FORM */}
             <div className="w-full md:w-1/2 flex items-center justify-center">
-              <div className="w-full bg-brandGreen text-white p-3 md:p-8 md:rounded-xl md:shadow-2xl md:max-w-xl md:h-[640px] flex flex-col shadow-lg">
-                <h4 className="text-center text-base md:text-xl font-bold mb-3 md:mb-6">
+              <div className="w-full bg-brandGreen text-white p-3 md:p-8 md:rounded-xl md:shadow-2xl md:max-w-xl md:h-[640px] flex flex-col">
+                <h4 className="text-center text-base md:text-xl font-bold mb-4">
                   আপনার চাওয়া জানিয়ে দিন
                 </h4>
 
                 <form
                   onSubmit={handleSubmit}
-                  className="space-y-3 md:space-y-4 overflow-auto flex-1"
+                  className="space-y-3 overflow-auto flex-1"
                 >
                   <input
                     type="text"
@@ -151,7 +168,7 @@ export default function Contact() {
                     name="email"
                     value={form.email}
                     onChange={handleChange}
-                    placeholder="ইমেইল / যদি থাকে"
+                    placeholder="ইমেইল (যদি থাকে)"
                     className="w-full p-2 rounded bg-white text-brandGray"
                   />
 
@@ -186,7 +203,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-brandYellow text-white font-semibold py-2 rounded transition hover:bg-brandGreen disabled:opacity-60"
+                    className="w-full bg-brandYellow text-white font-semibold py-2 rounded hover:bg-brandGreen hover:border disabled:opacity-60"
                   >
                     {loading ? 'জমা হচ্ছে...' : 'জমা দিন'}
                   </button>
