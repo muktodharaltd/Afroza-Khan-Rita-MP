@@ -232,15 +232,15 @@ console.log('API BASE 👉', API_BASE)
             </label>
 
             <label className="flex flex-col text-sm font-medium text-[#7a1245]">
-              বয়স
+              জন্ম তারিখ
               <input
-                type="number"
+                type="date"
                 name="age"
                 min="10"
                 value={formData.age}
                 onChange={handleChange}
-                placeholder="বয়স লিখুন"
-                className="mt-1 rounded-lg border border-[#c43d74]/40 px-3 py-2 text-brandGray focus:outline-none focus:ring-2 focus:ring-[#c43d74]/60 bg-white/80"
+                placeholder="জন্ম তারিখ লিখুন"
+                className="mt-1 w-full rounded-lg border border-[#c43d74]/40 px-3 py-2 text-brandGray focus:outline-none focus:ring-2 focus:ring-[#c43d74]/60 bg-white/80"
                 required
               />
             </label>

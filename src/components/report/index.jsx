@@ -1,5 +1,3 @@
-
-
 'use client'
 
 import React, { useState, useEffect } from 'react'
@@ -14,28 +12,26 @@ export default function ComplaintsView() {
   const [viewMode, setViewMode] = useState('table') // default table
 
   // Fetch complaints from API
-    useEffect(() => {
-      if (!API_BASE) return;
-  
-      const fetchVideos = async () => {
-        try {
-          const res = await fetch(`${API_BASE}/api/request-submissions`);
-          const result = await res.json();
-          setComplaintsData(result.data || []);
-        } catch (err) {
-          console.error("Request submissions load failed", err);
-          setComplaintsData([]);
-        }
-      };
-  
-      fetchVideos();
-    }, []);
-  
+  useEffect(() => {
+    if (!API_BASE) return
+
+    const fetchVideos = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/request-submissions`)
+        const result = await res.json()
+        setComplaintsData(result.data || [])
+      } catch (err) {
+        console.error('Request submissions load failed', err)
+        setComplaintsData([])
+      }
+    }
+
+    fetchVideos()
+  }, [])
 
   const handleViewAll = () => {
     setVisibleCount(complaintsData.length)
   }
-
 
   const toggleRow = (id) => {
     if (expandedRows.includes(id)) {
@@ -66,19 +62,23 @@ export default function ComplaintsView() {
   }
 
   return (
-    <div className="shadow-lg py-6 m-0.5">
-      <div className="bg-white rounded-xl p-5 max-w-7xl mx-auto mt-5">
-        <div className="pt-5 px-4">
+    <div className="shadow-lg  m-0.5">
+      <div className="bg-white rounded-xl  max-w-7xl mx-auto mt-5">
+        <div className="pt-5 ">
           {/* Title + View Toggle */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
-            <h2 className="text-3xl font-bold text-brandGreen">প্রাপ্ত অভিযোগ</h2>
+          <div className="flex  items-start  justify-between  mb-5">
+            <h2 className="text-2xl md:text-3xl mt-1 font-bold  text-brandGreen">
+              প্রাপ্ত অভিযোগ
+            </h2>
 
-            <div className="flex items-center gap-3 mt-3 md:mt-0 border-b">
+            <div className="flex items-center gap-2  border-b">
               <div className="flex rounded-xl p-1">
                 <button
                   onClick={() => setViewMode('table')}
                   className={`px-3 py-1 rounded-md text-sm shadow-sm transition ${
-                    viewMode === 'table' ? 'ring-2 ring-brandGreen bg-brandYellow' : 'ring-0'
+                    viewMode === 'table'
+                      ? 'ring-2 ring-brandGreen bg-brandYellow'
+                      : 'ring-0'
                   }`}
                 >
                   Table
@@ -86,7 +86,9 @@ export default function ComplaintsView() {
                 <button
                   onClick={() => setViewMode('grid')}
                   className={`px-3 py-1 rounded-md text-sm shadow-sm transition ${
-                    viewMode === 'grid' ? 'ring-2 ring-brandGreen bg-brandYellow' : 'ring-0'
+                    viewMode === 'grid'
+                      ? 'ring-2 ring-brandGreen bg-brandYellow'
+                      : 'ring-0'
                   }`}
                 >
                   Grid
@@ -141,22 +143,34 @@ export default function ComplaintsView() {
                     </span>
 
                     <div className="p-4">
-                      <h3 className="text-2xl font-bold text-brandGray">{c.name}</h3>
+                      <h3 className="text-2xl font-bold text-brandGray">
+                        {c.name}
+                      </h3>
                       <p className="text-sm text-brandGray mt-1">{c.subject}</p>
                       <p className="text-xs text-brandGray mt-1">
                         {new Date(c.created_at).toLocaleDateString('bn-BD')}
                       </p>
-                      <p className="text-sm text-brandGray mt-3">{truncateDescription(c.detailed_description, 30)}</p>
+                      <p className="text-sm text-brandGray mt-3">
+                        {truncateDescription(c.detailed_description, 30)}
+                      </p>
 
                       <div className="mt-3 text-xs text-brandGray">
-                        <p><strong>Address:</strong> {c.address}</p>
-                        <p><strong>Email:</strong> {c.email}</p>
-                        <p><strong>Mobile:</strong> {c.mobile_number}</p>
+                        <p>
+                          <strong>Address:</strong> {c.address}
+                        </p>
+                        <p>
+                          <strong>Email:</strong> {c.email}
+                        </p>
+                        <p>
+                          <strong>Mobile:</strong> {c.mobile_number}
+                        </p>
                       </div>
 
                       {hasProgress && (
                         <div className="mt-3">
-                          <p className="text-xs font-medium text-brandGray mb-1">Progress: {Math.round(c.progress)}%</p>
+                          <p className="text-xs font-medium text-brandGray mb-1">
+                            Progress: {Math.round(c.progress)}%
+                          </p>
                           <div className="w-full h-3 bg-brandGray rounded-full overflow-hidden">
                             <div
                               className="h-full"
@@ -173,12 +187,16 @@ export default function ComplaintsView() {
                         onClick={() => toggleRow(c.id)}
                         className="text-sm mt-4 bg-brandYellow text-white px-3 py-1 rounded-md shadow hover:bg-brandGreen transition"
                       >
-                        {expandedRows.includes(c.id) ? 'Hide details' : 'View details'}
+                        {expandedRows.includes(c.id)
+                          ? 'Hide details'
+                          : 'View details'}
                       </button>
 
                       {expandedRows.includes(c.id) && (
                         <div className="mt-3 text-sm text-brandGray border-t pt-3">
-                          <p className="mb-2 font-semibold">Full description:</p>
+                          <p className="mb-2 font-semibold">
+                            Full description:
+                          </p>
                           <p>{c.detailed_description}</p>
                         </div>
                       )}
@@ -192,17 +210,31 @@ export default function ComplaintsView() {
           {/* ---------------- TABLE VIEW ---------------- */}
           {viewMode === 'table' && (
             <>
-              <div className="hidden md:block overflow-x-auto bg-white shadow-md rounded-lg">
+              <div className="  overflow-x-auto bg-white shadow-md rounded-lg">
                 <table className="min-w-full divide-y divide-brandGray">
                   <thead className="bg-brandGray">
                     <tr>
-                      <th className="px-4 py-2 text-left text-sm font-semibold text-white">Date</th>
-                      <th className="px-4 py-2 text-left text-sm font-semibold text-white">Name</th>
-                      <th className="px-4 py-2 text-left text-sm font-semibold text-white">Email</th>
-                      <th className="px-4 py-2 text-left text-sm font-semibold text-white">Subject</th>
-                      <th className="px-4 py-2 text-left text-sm font-semibold text-white">Address</th>
-                      <th className="px-4 py-2 text-left text-sm font-semibold text-white">Status</th>
-                      <th className="px-4 py-2 text-left text-sm font-semibold text-white">Details</th>
+                      <th className="px-0 py-2 text-left text-sm font-semibold text-white hidden md:block">
+                        Date
+                      </th>
+                      <th className="px-2 py-2 text-left text-sm font-semibold text-white">
+                        Name
+                      </th>
+                      <th className="px-0 py-2 text-left text-sm font-semibold text-white hidden md:block">
+                        Email
+                      </th>
+                      <th className="px-0 py-2 text-left text-sm font-semibold text-white">
+                        Subject
+                      </th>
+                      <th className="px-0 py-2 text-left text-sm font-semibold text-white">
+                        Address
+                      </th>
+                      <th className="px-0 py-2 text-left text-sm font-semibold text-white">
+                        Status
+                      </th>
+                      <th className="pr-2 py-2 text-left text-sm font-semibold text-white">
+                        Details
+                      </th>
                     </tr>
                   </thead>
 
@@ -210,20 +242,28 @@ export default function ComplaintsView() {
                     {complaintsData.slice(0, visibleCount).map((c) => (
                       <React.Fragment key={c.id}>
                         <tr className="hover:bg-brandGray-soft">
-                          <td className="px-4 py-2 text-sm">{new Date(c.created_at).toLocaleDateString('bn-BD')}</td>
-                          <td className="px-4 py-2 text-sm font-bold">{c.name}</td>
-                          <td className="px-4 py-2 text-sm">{c.email}</td>
-                          <td className="px-4 py-2 text-sm">{c.subject}</td>
-                          <td className="px-4 py-2 text-sm">{c.address}</td>
-                          <td className="px-4 py-2 text-sm">
+                          <td className="px-1 py-2 text-sm hidden md:block">
+                            {new Date(c.created_at).toLocaleDateString('bn-BD')}
+                          </td>
+                          <td className="px-2 py-2 text-sm font-bold">
+                            {c.name}
+                          </td>
+                          <td className="px-1 py-2 text-sm hidden md:block">
+                            {c.email}
+                          </td>
+                          <td className="px-1 py-2 text-sm">{c.subject}</td>
+                          <td className="px-1 py-2 text-sm">{c.address}</td>
+                          <td className="px-1 py-2 text-sm">
                             <span
-                              className={`px-2 py-1 rounded-full text-white text-xs font-semibold ${statusBadgeClass(c.status)}`}
+                              className={`px-2 py-1 rounded-full text-white text-xs font-semibold ${statusBadgeClass(
+                                c.status
+                              )}`}
                             >
                               {c.status}
                             </span>
                           </td>
-                          <td
-                            className="px-4 py-2 text-sm text-brandGreen flex items-center gap-2 cursor-pointer"
+                         <td
+                            className="px-0 py-2 text-sm text-brandGreen flex md:justify-start justify-center items-center gap-2 cursor-pointer"
                             onClick={() => toggleRow(c.id)}
                           >
                             <FaRegEye />
@@ -231,7 +271,12 @@ export default function ComplaintsView() {
                         </tr>
 
                         {expandedRows.includes(c.id) && (
-                          <tr className="bg-white" style={{ backgroundColor: "rgba(13, 132, 72, 0.08)" }}>
+                          <tr
+                            className="bg-white"
+                            style={{
+                              backgroundColor: 'rgba(13, 132, 72, 0.08)',
+                            }}
+                          >
                             <td colSpan={7} className="px-4 py-2 text-xl">
                               {c.detailed_description}
                             </td>
