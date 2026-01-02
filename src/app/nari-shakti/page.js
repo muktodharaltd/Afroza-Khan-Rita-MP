@@ -25,7 +25,7 @@
 //           </p>
 
 //           <form className="mt-6 space-y-4">
-            
+
 //               <label className="flex flex-col text-sm font-medium text-[#7a1245]">
 //                 নাম
 //                 <input
@@ -45,7 +45,6 @@
 //                   required
 //                 />
 //               </label>
-            
 
 //             <label className="flex flex-col text-sm font-medium text-[#7a1245]">
 //               স্বামী/ পিতার নাম
@@ -86,8 +85,6 @@
 //               />
 //             </label>
 
-            
-
 //             <div className="flex flex-col sm:flex-row gap-3 pt-2">
 //               <button
 //                 type="submit"
@@ -109,78 +106,73 @@
 //   )
 // }
 
+'use client'
 
+import { useState } from 'react'
 
-
-
-"use client";
-
-import { useState } from "react";
-
-
-const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL;
+const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
 
 export default function NariShaktiPage() {
   const [formData, setFormData] = useState({
-    name: "",
-    age: "",
-    husband_father_name: "",
-    mother_name: "",
-    address: "",
-    voter_id: "",
-  });
+    name: '',
+    age: '',
+    husband_father_name: '',
+    mother_name: '',
+    address: '',
+    voter_id: '',
+  })
 
-  const [loading, setLoading] = useState(false);
-  const [message, setMessage] = useState(null);
+  const [loading, setLoading] = useState(false)
+  const [message, setMessage] = useState(null)
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
+    const { name, value } = e.target
+    setFormData((prev) => ({ ...prev, [name]: value }))
+  }
 
   const handleReset = () => {
     setFormData({
-      name: "",
-      age: "",
-      husband_father_name: "",
-      mother_name: "",
-      address: "",
-      voter_id: "",
-    });
-    setMessage(null);
-  };
+      name: '',
+      age: '',
+      husband_father_name: '',
+      mother_name: '',
+      address: '',
+      voter_id: '',
+    })
+    setMessage(null)
+  }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setMessage(null);
+    e.preventDefault()
+    setLoading(true)
+    setMessage(null)
 
     try {
       const res = await fetch(`${API_BASE}/api/woman-empower-card`, {
-        method: "POST",
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
-      });
+      })
 
-      const data = await res.json();
+      const data = await res.json()
 
       if (res.ok) {
-        setMessage({ type: "success", text: data.message });
-        handleReset();
+        setMessage({ type: 'success', text: data.message })
+        handleReset()
       } else {
-        setMessage({ type: "error", text: data.message || "Submission failed" });
+        setMessage({ type: 'error', text: data.message || 'Submission failed' })
       }
     } catch (err) {
-      console.error(err);
-      setMessage({ type: "error", text: "Submission failed" });
+      console.error(err)
+      setMessage({ type: 'error', text: 'Submission failed' })
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
   const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
-console.log('API BASE 👉', API_BASE)
+  console.log('API BASE 👉', API_BASE)
 
   return (
     <div className="px-4 py-10">
@@ -210,7 +202,7 @@ console.log('API BASE 👉', API_BASE)
           {message && (
             <p
               className={`mt-3 text-center font-medium ${
-                message.type === "success" ? "text-green-600" : "text-red-600"
+                message.type === 'success' ? 'text-green-600' : 'text-red-600'
               }`}
             >
               {message.text}
@@ -231,7 +223,7 @@ console.log('API BASE 👉', API_BASE)
               />
             </label>
 
-            <label className="flex flex-col text-sm font-medium text-[#7a1245]">
+            {/* <label className="flex flex-col text-sm font-medium text-[#7a1245]">
               জন্ম তারিখ
               <input
                 type="date"
@@ -240,6 +232,21 @@ console.log('API BASE 👉', API_BASE)
                 value={formData.age}
                 onChange={handleChange}
                 placeholder="জন্ম তারিখ লিখুন"
+                className="mt-1 w-full rounded-lg border border-[#c43d74]/40 px-3 py-2 text-brandGray focus:outline-none focus:ring-2 focus:ring-[#c43d74]/60 bg-white/80"
+                required
+              />
+            </label> */}
+
+            <label className="flex flex-col text-sm font-medium text-[#7a1245]">
+              জন্ম তারিখ
+              <input
+                type="text"
+                name="age"
+                value={formData.age}
+                placeholder="YYYY-MM-DD"
+                onFocus={(e) => (e.target.type = 'date')}
+                onBlur={(e) => (e.target.type = 'text')}
+                onChange={handleChange}
                 className="mt-1 w-full rounded-lg border border-[#c43d74]/40 px-3 py-2 text-brandGray focus:outline-none focus:ring-2 focus:ring-[#c43d74]/60 bg-white/80"
                 required
               />
@@ -303,7 +310,7 @@ console.log('API BASE 👉', API_BASE)
                 disabled={loading}
                 className="w-full sm:w-auto bg-[#b12462] hover:bg-[#7a1245] text-white font-semibold px-5 py-3 rounded-xl shadow-md transition disabled:opacity-50"
               >
-                {loading ? "জমা হচ্ছে..." : "রেজিস্ট্রেশন করুন"}
+                {loading ? 'জমা হচ্ছে...' : 'রেজিস্ট্রেশন করুন'}
               </button>
 
               <button
@@ -318,5 +325,5 @@ console.log('API BASE 👉', API_BASE)
         </div>
       </section>
     </div>
-  );
+  )
 }

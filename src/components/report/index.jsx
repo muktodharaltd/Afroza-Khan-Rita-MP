@@ -214,7 +214,7 @@ export default function ComplaintsView() {
                 <table className="min-w-full divide-y divide-brandGray">
                   <thead className="bg-brandGray">
                     <tr>
-                      <th className="px-0 py-2 text-left text-sm font-semibold text-white hidden md:block">
+                      <th className="px-2 py-2 text-left text-sm font-semibold text-white hidden md:block">
                         Date
                       </th>
                       <th className="px-2 py-2 text-left text-sm font-semibold text-white">
@@ -242,7 +242,7 @@ export default function ComplaintsView() {
                     {complaintsData.slice(0, visibleCount).map((c) => (
                       <React.Fragment key={c.id}>
                         <tr className="hover:bg-brandGray-soft">
-                          <td className="px-1 py-2 text-sm hidden md:block">
+                          <td className="px-2 py-2 text-sm hidden md:block">
                             {new Date(c.created_at).toLocaleDateString('bn-BD')}
                           </td>
                           <td className="px-2 py-2 text-sm font-bold">
