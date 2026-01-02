@@ -243,7 +243,7 @@ export default function NariShaktiPage() {
                 type="text"
                 name="age"
                 value={formData.age}
-                placeholder="YYYY-MM-DD"
+                placeholder="mm-dd-yyyy"
                 onFocus={(e) => (e.target.type = 'date')}
                 onBlur={(e) => (e.target.type = 'text')}
                 onChange={handleChange}
