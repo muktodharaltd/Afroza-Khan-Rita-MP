@@ -1,6 +1,8 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers"; // 🔹 নতুন Providers import
+import Navbar from './../components/navbar/index';
+import Footer from "@/components/footer/index";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,7 +22,9 @@ export default function RootLayout({ children }) {
         className={`${inter.variable} antialiased`}
       >
         {/* 🔹 এখন react-query provider পুরো অ্যাপকে wrap করবে */}
+        <Navbar />
         <Providers>{children}</Providers>
+        <Footer />
       </body>
     </html>
   );
