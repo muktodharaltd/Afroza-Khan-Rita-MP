@@ -144,7 +144,7 @@ export default function HeroSlider() {
                           src={item.image}
                           alt="Hero slider"
                           fill
-                          className="object-cover"
+                          className="object-contain"
                           priority
                           unoptimized
                         />
