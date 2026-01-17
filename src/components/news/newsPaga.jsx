@@ -72,7 +72,7 @@ export default function UpdatesSectionExpandable() {
 
           {/* Events */}
           <div>
-            <h4 className="text-brandGreen text-lg font-semibold mb-3">আসন্ন ইভেন্ট</h4>
+            <h4 className="text-brandGreen text-lg font-semibold mb-3">সাম্প্রতিক ইভেন্ট</h4>
             <div className="bg-white border border-brandGray rounded-lg shadow divide-y divide-brandGray">
               {events.length === 0 && <p className="p-4 text-sm text-brandGray">কোনো ইভেন্ট পাওয়া যায়নি</p>}
               {events.map(event => (
@@ -92,7 +92,7 @@ export default function UpdatesSectionExpandable() {
 
           {/* Women Notices */}
           <div>
-            <h4 className="text-brandGreen text-lg font-semibold mb-3">নারী বিষয়ক বিজ্ঞপ্তি</h4>
+            <h4 className="text-brandGreen text-lg font-semibold mb-3">বিজ্ঞপ্তি</h4>
             <div className="bg-white border border-brandGray rounded-lg shadow divide-y divide-brandGray">
               {womenNotices.length === 0 && <p className="p-4 text-sm text-brandGray">কোনো নারী বিষয়ক বিজ্ঞপ্তি নেই</p>}
               {womenNotices.map(notice => (

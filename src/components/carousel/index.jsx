@@ -111,9 +111,9 @@ export default function HeroSlider() {
               </p>
 
               <div className="text-center md:text-left">
-                <Link href="/nari-shakti">
+                <Link href="/contact">
                   <button className="w-auto md:min-w-24 rounded bg-brandYellow text-white px-6 py-2 font-semibold hover:bg-brandGreen transition">
-                    Register Now
+                    মতামত দিন
                   </button>
                 </Link>
               </div>
