@@ -235,6 +235,9 @@ export default function ComplaintsView() {
                       <th className="pr-2 py-2 text-left text-sm font-semibold text-white">
                         Details
                       </th>
+                      <th className="pr-2 py-2 text-left text-sm font-semibold text-white">
+                        Details 2
+                      </th>
                     </tr>
                   </thead>
 
@@ -268,6 +271,7 @@ export default function ComplaintsView() {
                           >
                             <FaRegEye />
                           </td>
+                          <td className="px-1 py-2 text-sm">{c.admin_answer}</td>
                         </tr>
 
                         {expandedRows.includes(c.id) && (
