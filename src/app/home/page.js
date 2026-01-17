@@ -15,9 +15,12 @@ export default function HomePage() {
       <Contact />
       <Report />
       <NewsPage />
+      <Blog />
       <Galary />
       <Video />
-      <Blog />
     </div>
   )
 }
+
+
+
