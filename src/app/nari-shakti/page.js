@@ -147,7 +147,7 @@
 //     setMessage(null)
 
 //     try {
-//       const res = await fetch(`${API_BASE}/api/woman-empower-card`, {
+//       const res = await fetch(`${API_BASE}/api/gender-empower-card`, {
 //         method: 'POST',
 //         headers: { 'Content-Type': 'application/json' },
 //         body: JSON.stringify(formData),
@@ -167,7 +167,6 @@
 //       setLoading(false)
 //     }
 //   }
-
 
 //   return (
 //     <div className="px-4 py-10">
@@ -340,7 +339,6 @@
 //   </div>
 // )}
 
-
 //             <label className="flex flex-col text-sm font-medium text-[#7a1245]">
 //               জাতীয় পরিচয় পত্রের নাম্বার
 //               <textarea
@@ -402,10 +400,6 @@
 //   )
 // }
 
-
-
-
-
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -424,6 +418,7 @@ export default function NariShaktiPage() {
     address: '',
     voter_id: '',
     occupation: '',
+    gender: '',
     mobile_number: '',
   })
 
@@ -531,6 +526,7 @@ export default function NariShaktiPage() {
       address: '',
       voter_id: '',
       occupation: '',
+      gender: '',
       mobile_number: '',
     })
     setOtp('')
@@ -551,7 +547,7 @@ export default function NariShaktiPage() {
     setLoading(true)
 
     try {
-      const res = await fetch(`${API_BASE}/api/woman-empower-card`, {
+      const res = await fetch(`${API_BASE}/api/gender-empower-card`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
@@ -575,34 +571,49 @@ export default function NariShaktiPage() {
   return (
     <div className="px-4 py-10">
       <section className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-stretch">
-
         {/* Card visual */}
-        <div className="bg-white/80 border border-[#c43d74]/20 rounded-3xl shadow-xl w-full lg:w-1/2 flex justify-center items-center p-4">
+     
+         <div className="flex flex-col bg-white/80 border  border-[#c43d74]/20 rounded-3xl shadow-xl w-full lg:w-1/2  justify-center items-center p-4">
           <img
             src="/narisokti.jpeg"
             alt="নারীশক্তি কার্ড"
             className="max-w-full h-auto rounded-3xl"
           />
+          <div className='mt-10 p-3 text-xl bg-rose-100 rounded-2xl'>
+
+          <p  className='text-2xl'> কেন এই রেজিস্ট্রেশন প্রয়োজন?</p>
+          <p  className='mt-5'> 
+             প্রাথমিক তালিকায় নাম অন্তর্ভুক্ত থাকলে
+            কার্যক্রম শুরু হওয়া মাত্রই আপনি অগ্রাধিকার ভিত্তিতে সেবাগুলো পাবেন।
+            মানিকগঞ্জের প্রতিটি নারীর হাতে ‘নারীশক্তি কার্ড’ পৌঁছে দেওয়া এবং
+            তাঁদের ক্ষমতায়ন নিশ্চিত করাই আমাদের মূল লক্ষ্য। মানিকগঞ্জের নারীদের
+            মূলধারার অর্থনীতিতে সম্পৃক্ত করা এবং তাঁদের নিজেদের পায়ে দাঁড়াতে
+            সাহায্য করার লক্ষ্যে আমরা প্রবর্তন করতে যাচ্ছি ‘নারীশক্তি কার্ড’। এই
+            কার্ডের মাধ্যমে নারীরা বিভিন্ন সুযোগ-সুবিধা ও সহযোগিতার আওতায় আসবেন,
+            যা তাঁদের জীবনযাত্রার মানোন্নয়নে সহায়ক হবে।
+          </p>
+          </div>
         </div>
+       
+  
 
         {/* Registration form */}
         <div className="bg-white/90 backdrop-blur border border-[#c43d74]/30 rounded-3xl shadow-xl p-6 md:p-8 w-full lg:w-1/2 flex flex-col">
-
           <p className="text-sm uppercase text-[#b12462] font-semibold text-center">
             নারীশক্তি কার্ড রেজিস্ট্রেশন
           </p>
 
-          <h1 className="text-3xl md:text-4xl font-bold text-[#7a1245] text-center mt-2">
-            আপনার তথ্য পূরণ করুন
+          <h1 className="text-xl md:text-xl font-bold text-[#7a1245] text-center mt-2">
+            আপনি যদি একজন নারী হন এবং এই উদ্যোগের অংশ হতে চান, তবে নিচের
+            তথ্যগুলো প্রদান করে আপনার আবেদনটি সম্পন্ন করুন।
           </h1>
 
-          <p className="text-sm md:text-base text-brandGray/80 text-center mt-3 leading-relaxed">
+          {/* <p className="text-sm md:text-base text-brandGray/80 text-center mt-3 leading-relaxed">
             সুরক্ষিত ও সুবিধাভোগী হতে প্রয়োজনীয় তথ্য জমা দিন। জমাকৃত তথ্য শুধু
             কমিউনিটি সহায়তা ও যাচাইয়ের উদ্দেশ্যে ব্যবহৃত হবে।
-          </p>
+          </p> */}
 
           <form className="mt-6 space-y-1" onSubmit={handleSubmit}>
-
             {/* NAME */}
             <label className="flex flex-col text-sm font-medium text-[#7a1245]">
               নাম
@@ -744,6 +755,19 @@ export default function NariShaktiPage() {
                 required
               />
             </label>
+            <label className="flex flex-col text-sm font-medium text-[#7a1245]">
+              লিঙ্গ / শুধুমাত্র নারী
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                className="mt-1 rounded-lg border border-[#c43d74]/40 px-3 py-3 bg-white/80"
+                required
+              >
+                <option value="">নির্বাচন করুন</option>
+                <option value="female">নারী</option>
+              </select>
+            </label>
 
             {/* ADDRESS */}
             <label className="flex flex-col text-sm font-medium text-[#7a1245]">
@@ -776,7 +800,6 @@ export default function NariShaktiPage() {
                 রিসেট
               </button>
             </div>
-
           </form>
         </div>
       </section>
