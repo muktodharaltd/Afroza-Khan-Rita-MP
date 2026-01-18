@@ -418,7 +418,7 @@ export default function NariShaktiPage() {
     address: '',
     voter_id: '',
     occupation: '',
-    gender: '',
+    gender: 1,
     mobile_number: '',
   })
 
@@ -526,7 +526,7 @@ export default function NariShaktiPage() {
       address: '',
       voter_id: '',
       occupation: '',
-      gender: '',
+      gender: 1,
       mobile_number: '',
     })
     setOtp('')
@@ -572,30 +572,27 @@ export default function NariShaktiPage() {
     <div className="px-4 py-10">
       <section className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-stretch">
         {/* Card visual */}
-     
-         <div className="flex flex-col bg-white/80 border  border-[#c43d74]/20 rounded-3xl shadow-xl w-full lg:w-1/2  justify-center items-center p-4">
+
+        <div className="flex flex-col bg-white/80 border  border-[#c43d74]/20 rounded-3xl shadow-xl w-full lg:w-1/2  justify-center items-center p-4">
           <img
             src="/narisokti.jpeg"
             alt="নারীশক্তি কার্ড"
             className="max-w-full h-auto rounded-3xl"
           />
-          <div className='mt-10 p-3 text-xl bg-rose-100 rounded-2xl'>
-
-          <p  className='text-2xl'> কেন এই রেজিস্ট্রেশন প্রয়োজন?</p>
-          <p  className='mt-5'> 
-             প্রাথমিক তালিকায় নাম অন্তর্ভুক্ত থাকলে
-            কার্যক্রম শুরু হওয়া মাত্রই আপনি অগ্রাধিকার ভিত্তিতে সেবাগুলো পাবেন।
-            মানিকগঞ্জের প্রতিটি নারীর হাতে ‘নারীশক্তি কার্ড’ পৌঁছে দেওয়া এবং
-            তাঁদের ক্ষমতায়ন নিশ্চিত করাই আমাদের মূল লক্ষ্য। মানিকগঞ্জের নারীদের
-            মূলধারার অর্থনীতিতে সম্পৃক্ত করা এবং তাঁদের নিজেদের পায়ে দাঁড়াতে
-            সাহায্য করার লক্ষ্যে আমরা প্রবর্তন করতে যাচ্ছি ‘নারীশক্তি কার্ড’। এই
-            কার্ডের মাধ্যমে নারীরা বিভিন্ন সুযোগ-সুবিধা ও সহযোগিতার আওতায় আসবেন,
-            যা তাঁদের জীবনযাত্রার মানোন্নয়নে সহায়ক হবে।
-          </p>
+          <div className="mt-10 p-3 text-xl bg-rose-100 rounded-2xl">
+            <p className="text-2xl"> কেন এই রেজিস্ট্রেশন প্রয়োজন?</p>
+            <p className="mt-5">
+              প্রাথমিক তালিকায় নাম অন্তর্ভুক্ত থাকলে কার্যক্রম শুরু হওয়া মাত্রই
+              আপনি অগ্রাধিকার ভিত্তিতে সেবাগুলো পাবেন। মানিকগঞ্জের প্রতিটি নারীর
+              হাতে ‘নারীশক্তি কার্ড’ পৌঁছে দেওয়া এবং তাঁদের ক্ষমতায়ন নিশ্চিত
+              করাই আমাদের মূল লক্ষ্য। মানিকগঞ্জের নারীদের মূলধারার অর্থনীতিতে
+              সম্পৃক্ত করা এবং তাঁদের নিজেদের পায়ে দাঁড়াতে সাহায্য করার লক্ষ্যে
+              আমরা প্রবর্তন করতে যাচ্ছি ‘নারীশক্তি কার্ড’। এই কার্ডের মাধ্যমে
+              নারীরা বিভিন্ন সুযোগ-সুবিধা ও সহযোগিতার আওতায় আসবেন, যা তাঁদের
+              জীবনযাত্রার মানোন্নয়নে সহায়ক হবে।
+            </p>
           </div>
         </div>
-       
-  
 
         {/* Registration form */}
         <div className="bg-white/90 backdrop-blur border border-[#c43d74]/30 rounded-3xl shadow-xl p-6 md:p-8 w-full lg:w-1/2 flex flex-col">
@@ -759,7 +756,7 @@ export default function NariShaktiPage() {
               লিঙ্গ / শুধুমাত্র নারী
               <select
                 name="gender"
-                value={formData.gender}
+                value={1}
                 onChange={handleChange}
                 className="mt-1 rounded-lg border border-[#c43d74]/40 px-3 py-3 bg-white/80"
                 required
@@ -787,7 +784,9 @@ export default function NariShaktiPage() {
               <button
                 type="submit"
                 disabled={loading}
-                onClick={(e)=>{handleSubmit(e)}}
+                onClick={(e) => {
+                  handleSubmit(e)
+                }}
                 className="w-full sm:w-auto bg-[#b12462] hover:bg-[#7a1245] text-white font-semibold px-5 py-3 rounded-xl shadow-md disabled:opacity-50"
               >
                 {loading ? 'জমা হচ্ছে...' : 'রেজিস্ট্রেশন করুন'}
@@ -795,7 +794,9 @@ export default function NariShaktiPage() {
 
               <button
                 type="button"
-                 onClick={(e)=>{handleReset(e)}}
+                onClick={(e) => {
+                  handleReset(e)
+                }}
                 className="w-full sm:w-auto bg-white text-[#7a1245] font-semibold px-5 py-3 rounded-xl border border-[#c43d74]/50 hover:bg-[#ffe6f0]"
               >
                 রিসেট
