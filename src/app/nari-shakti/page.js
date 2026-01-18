@@ -547,7 +547,7 @@ export default function NariShaktiPage() {
     setLoading(true)
 
     try {
-      const res = await fetch(`${API_BASE}/api/woman-empower-cards`, {
+      const res = await fetch(`${API_BASE}/api/woman-empower-card`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
