@@ -1,58 +1,56 @@
+'use client'
 
-"use client";
+import { useEffect, useState } from 'react'
+import Image from 'next/image'
+import NewsPage from '@/components/event/event'
+import Galary from '@/components/galary/galary'
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import NewsPage from "@/components/news/newsPaga";
-import Galary from "@/components/galary/galary";
-
-const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL;
+const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
 
 export default function ParichitiPage() {
-  const [hero, setHero] = useState(null);
-  const [highlights, setHighlights] = useState([]);
-  const [missionPoints, setMissionPoints] = useState([]);
+  const [hero, setHero] = useState(null)
+  const [highlights, setHighlights] = useState([])
+  const [missionPoints, setMissionPoints] = useState([])
 
   useEffect(() => {
     // Hero Section
     const fetchHero = async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/hero-sections`);
-        const result = await res.json();
-        if (result.success && result.data.length > 0) setHero(result.data[0]);
+        const res = await fetch(`${API_BASE}/api/hero-sections`)
+        const result = await res.json()
+        if (result.success && result.data.length > 0) setHero(result.data[0])
       } catch (err) {
-        console.error("Hero load failed", err);
+        console.error('Hero load failed', err)
       }
-    };
+    }
 
     // About / Highlights
     const fetchHighlights = async () => {
       try {
-        const res = await fetch(`${API_BASE}/api/abouts`);
-        const result = await res.json();
+        const res = await fetch(`${API_BASE}/api/abouts`)
+        const result = await res.json()
         if (result.success && result.data.length > 0) {
           // Filter highlights (assuming title != "মিশন")
           const highlightItems = result.data.filter(
-            (item) => item.title !== "মিশন"
-          );
-          setHighlights(highlightItems);
+            (item) => item.title !== 'মিশন'
+          )
+          setHighlights(highlightItems)
 
           // Mission subjects
-          const mission = result.data.find((item) => item.title === "মিশন");
-          if (mission?.subjects) setMissionPoints(mission.subjects);
+          const mission = result.data.find((item) => item.title === 'মিশন')
+          if (mission?.subjects) setMissionPoints(mission.subjects)
         }
       } catch (err) {
-        console.error("Highlights load failed", err);
+        console.error('Highlights load failed', err)
       }
-    };
+    }
 
-    fetchHero();
-    fetchHighlights();
-  }, []);
+    fetchHero()
+    fetchHighlights()
+  }, [])
 
   return (
     <div className="space-y-12">
-
       {/* Hero Section */}
       {hero && (
         <section className="bg-gradient-to-r from-brandGreen/20 via-white to-brandYellow/30 px-4 py-12">
@@ -81,7 +79,6 @@ export default function ParichitiPage() {
       {/* Highlights + Mission */}
       <section className="px-4">
         <div className="max-w-6xl mx-auto space-y-6">
-
           {/* Highlights */}
           {highlights.length > 0 && (
             <div className="grid md:grid-cols-3 gap-4">
@@ -112,7 +109,6 @@ export default function ParichitiPage() {
               </ul>
             </div>
           )}
-
         </div>
       </section>
 
@@ -124,5 +120,5 @@ export default function ParichitiPage() {
         </div>
       </section>
     </div>
-  );
+  )
 }

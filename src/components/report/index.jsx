@@ -126,10 +126,10 @@ export default function ComplaintsView() {
                         background: hasProgress
                           ? getProgressColor(c.progress)
                           : c.status === 'মীমাংসিত'
-                          ? 'var(--color-brandGreen)'
-                          : c.status === 'চলমান'
-                          ? 'var(--color-brandYellow)'
-                          : 'var(--color-brandGray)',
+                            ? 'var(--color-brandGreen)'
+                            : c.status === 'চলমান'
+                              ? 'var(--color-brandYellow)'
+                              : 'var(--color-brandGray)',
                       }}
                     />
 
@@ -235,9 +235,6 @@ export default function ComplaintsView() {
                       <th className="pr-2 py-2 text-left text-sm font-semibold text-white">
                         Details
                       </th>
-                      <th className="pr-2 py-2 text-left text-sm font-semibold text-white">
-                        Details 2
-                      </th>
                     </tr>
                   </thead>
 
@@ -265,13 +262,12 @@ export default function ComplaintsView() {
                               {c.status}
                             </span>
                           </td>
-                         <td
+                          <td
                             className="px-0 py-2 text-sm text-brandGreen flex md:justify-start justify-center items-center gap-2 cursor-pointer"
                             onClick={() => toggleRow(c.id)}
                           >
                             <FaRegEye />
                           </td>
-                          <td className="px-1 py-2 text-sm">{c.admin_answer}</td>
                         </tr>
 
                         {expandedRows.includes(c.id) && (
@@ -281,8 +277,17 @@ export default function ComplaintsView() {
                               backgroundColor: 'rgba(13, 132, 72, 0.08)',
                             }}
                           >
-                            <td colSpan={7} className="px-4 py-2 text-xl">
-                              {c.detailed_description}
+                            <td
+                              colSpan={7}
+                              className="px-4 py-2 text-xl bg-white relative"
+                            >
+                              <p className="mb-4">
+                                <strong>আপনার প্রশ্ন :</strong>{' '}
+                                {c.detailed_description}
+                              </p>
+                              <p className="pt-4 border-t border-gray-300">
+                                <strong>রিতা আপার উত্তর :</strong> {c.admin_answer}
+                              </p>
                             </td>
                           </tr>
                         )}
