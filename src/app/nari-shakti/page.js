@@ -568,6 +568,8 @@ export default function NariShaktiPage() {
     }
   }
 
+ 
+
   return (
     <div className="px-4 py-10">
       <section className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 items-stretch">
@@ -762,7 +764,7 @@ export default function NariShaktiPage() {
                 required
               >
                 <option value="">নির্বাচন করুন</option>
-                <option value="female">নারী</option>
+                <option value={1}>নারী</option>
               </select>
             </label>
 
