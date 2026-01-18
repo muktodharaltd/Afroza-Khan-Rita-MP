@@ -613,7 +613,7 @@ export default function NariShaktiPage() {
             কমিউনিটি সহায়তা ও যাচাইয়ের উদ্দেশ্যে ব্যবহৃত হবে।
           </p> */}
 
-          <form className="mt-6 space-y-1" onSubmit={handleSubmit}>
+          <div className="mt-6 space-y-1">
             {/* NAME */}
             <label className="flex flex-col text-sm font-medium text-[#7a1245]">
               নাম
@@ -787,6 +787,7 @@ export default function NariShaktiPage() {
               <button
                 type="submit"
                 disabled={loading}
+                onClick={(e)=>{handleSubmit(e)}}
                 className="w-full sm:w-auto bg-[#b12462] hover:bg-[#7a1245] text-white font-semibold px-5 py-3 rounded-xl shadow-md disabled:opacity-50"
               >
                 {loading ? 'জমা হচ্ছে...' : 'রেজিস্ট্রেশন করুন'}
@@ -794,13 +795,13 @@ export default function NariShaktiPage() {
 
               <button
                 type="button"
-                onClick={handleReset}
+                 onClick={(e)=>{handleReset(e)}}
                 className="w-full sm:w-auto bg-white text-[#7a1245] font-semibold px-5 py-3 rounded-xl border border-[#c43d74]/50 hover:bg-[#ffe6f0]"
               >
                 রিসেট
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </section>
     </div>
