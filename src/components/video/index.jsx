@@ -306,7 +306,7 @@ export default function VideoGallery() {
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                className="absolute top-2 right-2 text-white bg-brandYellow px-3 py-1 rounded-full z-50"
+                className="absolute top-2 right-2  text-white bg-brandYellow px-3 py-1 rounded-full z-50"
                 onClick={() => setActiveVideo(null)}
               >
                 ✕
@@ -322,7 +322,7 @@ export default function VideoGallery() {
 
                 {/* Play + Fullscreen Description */}
                 {activeVideo.description && (
-                  <div className="absolute top-0 left-0 w-full bg-black/60 text-white p-4 text-sm">
+                  <div className="absolute top-0 left-0 w-full bg-black/60 text-white p-4 text-2xl">
                     {activeVideo.description}
                   </div>
                 )}

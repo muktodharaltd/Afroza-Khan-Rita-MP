@@ -213,7 +213,7 @@ export default function PhotoGalleryView() {
     <div className="shadow-sm py-10">
       <PhotoProvider
         overlayRender={({ overlay }) => (
-          <div className="absolute bottom-0 left-0 w-full bg-black/60 text-white p-4 text-sm z-50">
+          <div className="absolute bottom-0 left-0 text-2xl w-full bg-black/60 text-white p-4 z-50">
             {overlay}
           </div>
         )}

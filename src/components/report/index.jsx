@@ -56,8 +56,8 @@ export default function ComplaintsView() {
   }
 
   const statusBadgeClass = (status) => {
-    if (status === 'মীমাংসিত') return 'bg-brandGreen'
-    if (status === 'চলমান') return 'bg-brandYellow'
+    if (status === 'রিতা আপার উত্তর') return 'bg-brandGreen'
+    if (status === 'মতামত গৃহীত হয়েছে') return 'bg-brandYellow'
     return 'bg-brandGray'
   }
 
@@ -68,7 +68,7 @@ export default function ComplaintsView() {
           {/* Title + View Toggle */}
           <div className="flex  items-start  justify-between  mb-5">
             <h2 className="text-2xl md:text-3xl mt-1 font-bold  text-brandGreen">
-              প্রাপ্ত অভিযোগ
+              প্রাপ্ত মতামত
             </h2>
 
             <div className="flex items-center gap-2  border-b">
@@ -125,9 +125,9 @@ export default function ComplaintsView() {
                       style={{
                         background: hasProgress
                           ? getProgressColor(c.progress)
-                          : c.status === 'মীমাংসিত'
+                          : c.status === 'রিতা আপার উত্তর'
                             ? 'var(--color-brandGreen)'
-                            : c.status === 'চলমান'
+                            : c.status === 'মতামত গৃহীত হয়েছে'
                               ? 'var(--color-brandYellow)'
                               : 'var(--color-brandGray)',
                       }}
@@ -229,7 +229,7 @@ export default function ComplaintsView() {
                       <th className="px-0 py-2 text-left text-sm font-semibold text-white">
                         Address
                       </th>
-                      <th className="px-0 py-2 text-left text-sm font-semibold text-white">
+                      <th className="px-0 py-2 w-40 text-left text-sm font-semibold text-white">
                         Status
                       </th>
                       <th className="pr-2 py-2 text-left text-sm font-semibold text-white">

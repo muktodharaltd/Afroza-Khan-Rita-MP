@@ -186,11 +186,11 @@ export default function Contact() {
   return (
     <>
       <section className="relative min-h-[70vh] flex flex-col md:flex-row shadow-sm">
-        <div className="w-full px-2 md:px-0">
+        <div className="w-full px-2 md:px-10 mt-12">
           <div className="md:max-w-7xl md:mx-auto mb-5 md:py-5 flex flex-col md:flex-row gap-6 md:gap-12">
             {/* LEFT IMAGE */}
             <div className="w-full md:w-1/2 flex flex-col">
-              <div className="relative w-full h-[300px] md:h-[640px] mt-17 overflow-hidden rounded-lg">
+              <div className="relative w-full h-[300px] md:h-[640px] overflow-hidden rounded-lg">
                 {formImage ? (
                   <img
                     src={formImage}
@@ -201,9 +201,9 @@ export default function Contact() {
                   <div className="w-full h-full bg-gray-200 animate-pulse" />
                 )}
               </div>
-              <h1 className="mt-3 md:mt-6 text-2xl md:text-5xl font-bold text-brandGreen text-center md:text-left">
+              {/* <h1 className="mt-3 md:mt-6 text-2xl md:text-5xl font-bold text-brandGreen text-center md:text-left">
                 আফরোজা খানম রিতা
-              </h1>
+              </h1> */}
             </div>
 
             {/* RIGHT FORM */}
