@@ -6,17 +6,17 @@ import Video from '@/components/video/index'
 import Blog from '@/components/blog/index'
 import Report from '@/components/report/index'
 import Galary from '@/components/galary/galary'
-import NewsPage from '@/components/event/event'
-import NewsBlog from "@/components/news/index"
+import Event from '@/components/event/event'
+import NewsRoom from "@/components/news/index"
 
 export default function HomePage() {
   return (
     <div>
-      {/* <NewsBlog /> */}
       <Carousel />
       <Contact />
       <Report />
-      <NewsPage />
+      <Event />
+      <NewsRoom />
       <Blog />
       <Galary />
       <Video />
