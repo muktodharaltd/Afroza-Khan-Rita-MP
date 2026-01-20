@@ -1,84 +1,113 @@
-'use client'
-
-import React, { useEffect, useState } from 'react'
-import { useParams, useRouter } from 'next/navigation'
 import Link from 'next/link'
 import Image from 'next/image'
+import ShareButtons from './ShareButtons'
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
 
-export default function BlogDetail() {
-  const { id } = useParams()
-  const router = useRouter()
-  const [blog, setBlog] = useState(null)
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    if (!id) return
-
-    const fetchBlog = async () => {
-      try {
-        const res = await fetch(`${API_BASE}/api/blogs`)
-        const result = await res.json()
-
-        console.log('All blogs:', result)
-
-        // Find blog by id
-        const found = result.data.find((b) => b.id === parseInt(id))
-        setBlog(found || null)
-      } catch (error) {
-        console.error('Blog fetch error:', error)
-        setBlog(null)
-      } finally {
-        setLoading(false)
-      }
+async function getBlog(id) {
+  try {
+    // Fetch fresh data every time
+    const res = await fetch(`${API_BASE}/api/blogs`, { cache: 'no-store' })
+    if (!res.ok) {
+      throw new Error('Failed to fetch blogs')
     }
+    const result = await res.json()
+    // Find blog by id
+    return result.data.find((b) => b.id === parseInt(id)) || null
+  } catch (error) {
+    console.error('Blog fetch error:', error)
+    return null
+  }
+}
 
-    fetchBlog()
-  }, [id])
+export async function generateMetadata({ params }) {
+  const { id } = await params
+  const blog = await getBlog(id)
 
-  if (loading) return <p className="ml-5 mt-5 text-gray-500">লোড হচ্ছে...</p>
-  if (!blog) return <p className="ml-5 mt-5 text-red-500">Blog পাওয়া যায়নি</p>
+  if (!blog) {
+    return {
+      title: 'Blog Not Found',
+    }
+  }
+
+  return {
+    title: blog.title,
+    description: blog.description,
+    openGraph: {
+      title: blog.title,
+      description: blog.description,
+      type: 'article',
+      images: [
+        {
+          url: blog.image,
+          width: 702,
+          height: 389,
+          alt: blog.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: blog.title,
+      description: blog.description,
+      images: [blog.image],
+    },
+  }
+}
+
+export default async function BlogDetail({ params }) {
+  const { id } = await params
+  const blog = await getBlog(id)
+
+  if (!blog) {
+    return <p className="ml-5 mt-5 text-red-500">Blog পাওয়া যায়নি</p>
+  }
 
   return (
     <div className="max-w-4xl mx-auto py-10 px-4">
-      <meta
-        property="og:image"
-        content={blog?.image}
-      />
-      <meta
-        property="og:image:secure_url"
-        content={blog?.image}
-      />
-      <meta property="og:image:width" content="702" />
-      <meta property="og:image:height" content="389" />
-      <meta
-        property="og:image:alt"
-        content={blog.title}
-      />
-      <meta property="og:image:type" content="image/png" />
-      <button
-        onClick={() => router.back()}
-        className="mb-5 text-brandGreen underline text-sm font-medium"
+      <Link
+        href="/blog"
+        className="mb-5 text-brandGreen underline text-sm font-medium inline-block"
       >
         ← Back
-      </button>
+      </Link>
 
-      <h1 className="text-4xl md:text-5xl font-bold mb-6 text-brandGreen">
+      <h1 className="text-4xl md:text-5xl font-bold mb-4 text-brandGreen">
         {blog.title}
       </h1>
 
+      {/* 🔹 Share Buttons */}
+      <ShareButtons title={blog.title} />
+
       {blog.image && (
-        <img
-          src={blog.image}
-          alt={blog.title}
-          className="w-full h-full object-container rounded-md mb-6"
-        />
+        <div className="relative w-full h-auto mb-6">
+           {/* Using standard img for simplicity with dynamic external URLs or Next Image if configured */}
+           <img
+            src={blog.image}
+            alt={blog.title}
+            className="w-full rounded-md object-cover"
+          />
+        </div>
       )}
 
-      <p className="text-gray-700 text-lg md:text-xl leading-relaxed">
-        {blog.description}
-      </p>
+      <div className="space-y-5">
+        <p className="text-gray-700 text-lg md:text-xl text-justify">
+          {blog.description}
+        </p>
+
+        {blog.description_second && (
+          <p className="text-brandGray text-lg md:text-xl text-justify">
+            {blog.description_second}
+          </p>
+        )}
+
+        {blog.description_third && (
+          <p className="text-brandGray text-lg md:text-xl text-justify">
+            {blog.description_third}
+          </p>
+        )}
+      </div>
     </div>
   )
 }
+

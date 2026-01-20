@@ -66,7 +66,7 @@ export default function ComplaintDetailsPage() {
 
       <div className="bg-white shadow rounded-lg p-6 mb-6">
         <h2 className="text-xl font-semibold mb-2">আপনার প্রশ্ন</h2>
-        <p className="text-brandGray">
+        <p className="text-brandGray text-justify">
           {data.detailed_description}
         </p>
       </div>
@@ -76,8 +76,8 @@ export default function ComplaintDetailsPage() {
           রিতা আপার উত্তর
         </h2>
 
-        {data.admin_answer ? (
-          <p className="text-brandGray">
+        {data.admin_answer ? ( 
+          <p className="text-brandGray text-justify">
             {data.admin_answer}
           </p>
         ) : (

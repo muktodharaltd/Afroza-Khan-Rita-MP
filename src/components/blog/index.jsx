@@ -65,6 +65,12 @@ export default function BlogPosts() {
                   <p className="text-brandGray mb-2 line-clamp-3">
                     {post.description}
                   </p>
+                  {/* <p className="text-brandGray mb-2 line-clamp-3">
+                    {post.description_second}
+                  </p>
+                  <p className="text-brandGray mb-2 line-clamp-3">
+                    {post.description_third}
+                  </p> */}
 
                   <Link href={`/blog/${post.id}`}>
                     <p className="text-brandGreen underline text-sm font-medium">
