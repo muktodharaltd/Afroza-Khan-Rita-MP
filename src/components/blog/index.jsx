@@ -62,7 +62,7 @@ export default function BlogPosts() {
                     </h2>
                   </Link>
 
-                  <p className="text-brandGray mb-2 line-clamp-3">
+                  <p className="text-brandGray mb-2 ">
                     {post.short_description}
                   </p>
                   {/* <p className="text-brandGray mb-2 line-clamp-3">
