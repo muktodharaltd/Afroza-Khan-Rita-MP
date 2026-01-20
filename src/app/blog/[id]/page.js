@@ -91,21 +91,13 @@ export default async function BlogDetail({ params }) {
       )}
 
       <div className="space-y-5">
-        <p className="text-gray-700 text-lg md:text-xl text-justify">
-          {blog.description}
-        </p>
+       <div
+  className="text-gray-700 text-lg md:text-xl text-justify"
+  dangerouslySetInnerHTML={{ __html: blog.description }}
+/>
 
-        {blog.description_second && (
-          <p className="text-brandGray text-lg md:text-xl text-justify">
-            {blog.description_second}
-          </p>
-        )}
 
-        {blog.description_third && (
-          <p className="text-brandGray text-lg md:text-xl text-justify">
-            {blog.description_third}
-          </p>
-        )}
+        
       </div>
     </div>
   )
