@@ -1,8 +1,9 @@
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Providers from './providers' // 🔹 Providers import
+import Providers from './providers'
 import Navbar from '@/components/navbar/index'
 import Footer from '@/components/footer/index'
+import Script from 'next/script'
 
 const inter = Inter({
   subsets: ['latin'],
@@ -18,32 +19,27 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        {/* 🔹 Google Tag Manager - Raw Script */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PWS97CF8');`,
-          }}
+        {/* 🔹 Google Analytics 4 (GA4) */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-BPHT8ZQPEB"
+          strategy="afterInteractive"
         />
-      </head>
-      <body
-        suppressHydrationWarning
-        className={`${inter.variable} antialiased`}
-      >
-        {/* 🔹 Google Tag Manager (noscript) */}
-        <noscript>
-          <iframe
-            src="https://www.googletagmanager.com/ns.html?id=GTM-PWS97CF8"
-            height="0"
-            width="0"
-            style={{ display: 'none', visibility: 'hidden' }}
-          ></iframe>
-        </noscript>
 
-        {/* 🔹 Navbar + Providers + App Content + Footer */}
+        <Script id="ga4-init" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-BPHT8ZQPEB');
+          `}
+        </Script>
+      </head>
+
+      <body
+       
+      >
+        
+
         <Navbar />
         <Providers>{children}</Providers>
         <Footer />

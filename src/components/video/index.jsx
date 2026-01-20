@@ -141,7 +141,7 @@ export default function VideoGallery() {
 
                   {/* Hover Description */}
                   {video.description && (
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-end">
+                    <div className="absolute top-0 left-0 w-full bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-end">
                       <p className="text-white text-sm p-3">{video.description}</p>
                     </div>
                   )}
