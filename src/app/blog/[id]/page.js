@@ -66,7 +66,7 @@ export default async function BlogDetail({ params }) {
   return (
     <div className="max-w-4xl mx-auto py-10 px-4">
       <Link
-        href="/blog"
+        href="/"
         className="mb-5 text-brandGreen underline text-sm font-medium inline-block"
       >
         ← Back
