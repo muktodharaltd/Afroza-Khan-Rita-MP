@@ -155,7 +155,6 @@ export default function VideoGallery() {
                       ভিডিও পাওয়া যায়নি
                     </div>
                   )}
-
                   {/* Hover Description */}
                   {video.description && (
                     <div className="absolute top-0 left-0 w-full bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-end">
