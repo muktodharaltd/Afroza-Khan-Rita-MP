@@ -37,7 +37,6 @@ export default function PhotoGalleryView() {
   const handlePrev = (id, total) => {
     setActiveIndex((prev) => ({
       ...prev,
-      [id]: prev[id] > 0 ? prev[id] - 1 : total - 1,
     }))
   }
 

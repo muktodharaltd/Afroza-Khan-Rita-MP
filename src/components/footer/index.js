@@ -157,21 +157,21 @@ export default function Footer() {
 
           {/* Contact - compact, brief info and small CTA */}
           {logoName?.logo_header && (
-          <div className="text-sm">
-            <p className="text-xl">ঠিকানা</p>
-            <p className='mt-2'>{logoName.address} </p>
-            <p className='mt-2'>ফোন: {logoName.phone} </p>
-            <p className='mt-2'>ইমেইল: {logoName.email} </p>
+            <div className="text-sm">
+              <p className="text-xl">ঠিকানা</p>
+              <p className="mt-2">{logoName.address} </p>
+              <p className="mt-2">ফোন: {logoName.phone} </p>
+              <p className="mt-2">ইমেইল: {logoName.email} </p>
 
-            <div className="mt-3">
-              <Link href="/contact">
-                <button className="text-white px-3 py-1 bg-brandYellow hover:bg-brandGray font-semibold rounded-md shadow-sm hover:shadow transition text-sm">
-                  Contact Office
-                </button>
-              </Link>
+              <div className="mt-3">
+                <Link href="/contact">
+                  <button className="text-white px-3 py-1 bg-brandYellow hover:bg-brandGray font-semibold rounded-md shadow-sm hover:shadow transition text-sm">
+                    Contact Office
+                  </button>
+                </Link>
+              </div>
             </div>
-          </div>
-          )}  
+          )}
         </div>
 
         {/* Divider */}
@@ -179,11 +179,7 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-3">
             <div className="text-sm opacity-90">
               © {new Date().getFullYear()} Developed by{' '}
-              <Link href="https://muktodharaltd.com/" target="_blank" className="hover:text-brandYellow transition">
-              <span className="font-semibold">
-                Muktodhara Technology Limited
-              </span>
-              </Link>
+              <span className="font-semibold">MTL</span>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <Link
