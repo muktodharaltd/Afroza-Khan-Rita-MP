@@ -2,7 +2,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Maximize } from "lucide-react";
+import ShareButtons from "../common/ShareButtons";
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL;
 
@@ -12,6 +13,22 @@ export default function VideoGallery() {
   const [activeVideo, setActiveVideo] = useState(null);
   const [visibleCount, setVisibleCount] = useState(4);
   const carouselRef = useRef(null);
+  const modalRef = useRef(null);
+
+  const handleFullScreen = () => {
+    const elem = modalRef.current;
+    if (!elem) return;
+
+    if (!document.fullscreenElement) {
+      elem.requestFullscreen().catch((err) => {
+        console.error(
+          `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
+        );
+      });
+    } else {
+      document.exitFullscreen();
+    }
+  };
 
   /* ---------- Responsive visible count ---------- */
   const updateVisibleCount = () => {
@@ -121,7 +138,7 @@ export default function VideoGallery() {
                     <iframe
                       src={getYoutubeEmbed(video.video_id)}
                       title={`Youtube video ${video.id}`}
-                      className="w-full h-56 object-cover"
+                      className="w-full h-56 object-cover pointer-events-none"
                       frameBorder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                       allowFullScreen
@@ -160,13 +177,23 @@ export default function VideoGallery() {
             <div
               className="relative bg-black max-w-4xl w-full"
               onClick={(e) => e.stopPropagation()}
+              ref={modalRef}
             >
-              <button
-                className="absolute top-2 right-2 text-white bg-brandYellow px-3 py-1 rounded-full z-50"
-                onClick={() => setActiveVideo(null)}
-              >
-                ✕
-              </button>
+              <div className="absolute top-2 right-2 flex gap-2 z-50">
+                <button
+                  className="text-white bg-brandYellow p-1 rounded-full hover:bg-brandGreen"
+                  onClick={handleFullScreen}
+                  title="Full Screen"
+                >
+                  <Maximize size={20} />
+                </button>
+                <button
+                  className="text-white bg-brandYellow px-3 py-1 rounded-full hover:bg-brandGreen"
+                  onClick={() => setActiveVideo(null)}
+                >
+                  ✕
+                </button>
+              </div>
 
               <div className="relative">
                 {activeVideo.type === "Youtube" && activeVideo.video_id ? (
@@ -182,6 +209,7 @@ export default function VideoGallery() {
                   <video
                     src={activeVideo.video}
                     controls
+                    controlsList="nofullscreen"
                     autoPlay
                     className="w-full h-[500px] object-contain bg-black"
                   />
@@ -197,8 +225,22 @@ export default function VideoGallery() {
                     {activeVideo.description}
                   </div>
                 )}
+                
+                {/* Share Overlay */}
+                 <div className="absolute bottom-20 right-4 z-[60]">
+                    <ShareButtons
+                      title={activeVideo.description || "Video Gallery"}
+                      className="gap-2"
+                      url={
+                        activeVideo.type === "Youtube" && activeVideo.video_id
+                          ? `https://www.youtube.com/watch?v=${activeVideo.video_id}`
+                          : undefined
+                      }
+                    />
+                 </div>
               </div>
             </div>
+
           </div>
         )}
       </section>

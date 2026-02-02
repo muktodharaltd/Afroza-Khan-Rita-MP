@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import ShareButtons from './ShareButtons'
+import ShareButtons from '@/components/common/ShareButtons'
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
 

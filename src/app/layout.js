@@ -35,11 +35,7 @@ export default function RootLayout({ children }) {
         </Script>
       </head>
 
-      <body
-       
-      >
-        
-
+      <body>
         <Navbar />
         <Providers>{children}</Providers>
         <Footer />
