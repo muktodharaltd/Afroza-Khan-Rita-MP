@@ -99,7 +99,6 @@ export async function generateMetadata({ params }) {
     // Explicit video meta tags for Facebook
     metadata.other = {
       'og:video:url': secureVideoUrl,
-      'og:video:secure_url': secureVideoUrl,
       'og:video:type': 'video/mp4',
       'og:video:width': '1280',
       'og:video:height': '720',
