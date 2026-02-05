@@ -233,7 +233,7 @@ export default function VideoGallery() {
                       url={
                         activeVideo.type === "Youtube" && activeVideo.video_id
                           ? `https://www.youtube.com/watch?v=${activeVideo.video_id}`
-                          : undefined
+                          : `${typeof window !== 'undefined' ? window.location.origin : ''}/video/${activeVideo.id}`
                       }
                     />
                  </div>
