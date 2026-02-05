@@ -194,7 +194,17 @@ export default function PhotoGalleryView() {
       try {
         const res = await fetch(`${API_BASE}/api/photo-galleries`)
         const result = await res.json()
-        setPhotos(result.data || [])
+
+        // Flatten all images from all galleries into a single array
+        const allImages = (result.data || []).flatMap(gallery =>
+          (gallery.images || []).map(imageUrl => ({
+            id: `${gallery.id}-${imageUrl}`,
+            image: imageUrl,
+            description: gallery.description
+          }))
+        )
+
+        setPhotos(allImages)
       } catch (err) {
         console.error('Gallery load failed', err)
         setPhotos([])

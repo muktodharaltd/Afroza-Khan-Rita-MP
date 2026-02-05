@@ -3,6 +3,7 @@ import Image from 'next/image'
 import ShareButtons from './ShareButtons'
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://afrozakhanamrita.com'
 
 async function getBlog(id) {
   try {
@@ -30,28 +31,42 @@ export async function generateMetadata({ params }) {
     }
   }
 
+  const pageUrl = `${SITE_URL}/blog/${id}`
+  const imageUrl = blog.image?.startsWith('http')
+    ? blog.image
+    : `${API_BASE}/${blog.image?.replace(/^\//, '')}`
+
   return {
     title: blog.title,
     description: blog.description,
+    alternates: {
+      canonical: pageUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
     openGraph: {
       title: blog.title,
       description: blog.description,
-      url: `${API_BASE}/blog/${id}`, // Best effort URL or leave out to default to current
+      url: pageUrl,
+      siteName: 'Afroza Khanrita',
       type: 'article',
       images: [
         {
-          url: blog.image,
-          width: 702,
-          height: 389,
+          url: imageUrl,
+          width: 1200,
+          height: 630,
           alt: blog.title,
         },
       ],
+      locale: 'bn_BD',
     },
     twitter: {
       card: 'summary_large_image',
       title: blog.title,
       description: blog.description,
-      images: [blog.image],
+      images: [imageUrl],
     },
   }
 }
@@ -82,8 +97,8 @@ export default async function BlogDetail({ params }) {
 
       {blog.image && (
         <div className="relative w-full h-auto mb-6">
-           {/* Using standard img for simplicity with dynamic external URLs or Next Image if configured */}
-           <img
+          {/* Using standard img for simplicity with dynamic external URLs or Next Image if configured */}
+          <img
             src={blog.image}
             alt={blog.title}
             className="w-full rounded-md object-cover"
