@@ -1,135 +1,78 @@
+"use client";
 
-import ShareButtons from '@/components/common/ShareButtons'
-import { notFound } from 'next/navigation'
+import React, { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import ShareButtons from "@/components/common/ShareButtons";
 
-const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
+const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL;
 
-async function getVideo(id) {
-  try {
-    const res = await fetch(`${API_BASE}/api/video-galleries`, {
-      cache: 'no-store', // Ensure fresh data
-    })
-    const result = await res.json()
-    return result.data?.find((v) => v.id.toString() === id.toString()) || null
-  } catch (err) {
-    console.error('Failed to fetch video', err)
-    return null
+export default function VideoDetailPage() {
+  const { id } = useParams();
+  const [video, setVideo] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!API_BASE || !id) return;
+
+    const fetchVideo = async () => {
+      try {
+        const res = await fetch(`${API_BASE}/api/video-galleries`);
+        const json = await res.json();
+
+        const found = json.data?.find(
+          (v) => String(v.id) === String(id)
+        );
+
+        setVideo(found || null);
+      } catch (err) {
+        console.error("Video load failed", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchVideo();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <p className="text-gray-500">লোড হচ্ছে...</p>
+      </div>
+    );
   }
-}
-
-export async function generateMetadata({ params }) {
-  const { id } = params
-  const video = await getVideo(id)
-
-  if (!video) {
-    return {
-      title: 'ভিডিও পাওয়া যায়নি',
-    }
-  }
-
-  const title = video.description || 'ভিডিও'
-  const videoContentUrl =
-    video.type === 'Youtube' && video.video_id
-      ? `https://www.youtube.com/v/${video.video_id}` // Flash/Direct URL format often works better for fb og:video than embed
-      : video.video
-  
-  const videoEmbedUrl =
-     video.type === 'Youtube' && video.video_id
-       ? `https://www.youtube.com/embed/${video.video_id}`
-       : video.video
-
-  const images = []
-  if (video.type === 'Youtube' && video.video_id) {
-    images.push({
-      url: `https://img.youtube.com/vi/${video.video_id}/maxresdefault.jpg`,
-      width: 1280,
-      height: 720,
-    })
-  }
-
-  return {
-    title: title,
-    description: title,
-    openGraph: {
-      title: title,
-      description: title,
-      type: 'video.other',
-      videos: [
-        {
-          url: videoEmbedUrl, // Player URL
-          secureUrl: videoEmbedUrl,
-          type: video.type === 'Youtube' ? 'text/html' : 'video/mp4',
-          width: 1280,
-          height: 720,
-        },
-        // Fallback for direct stream if applicable, handled by multiple entries if needed
-      ],
-      images: images,
-    },
-    twitter: {
-      card: 'player',
-      title: title,
-      description: title,
-      players: [
-        {
-             url: videoEmbedUrl,
-             width: 1280,
-             height: 720,
-        }
-      ],
-      images: images.map(i => i.url),
-    }
-  }
-}
-
-export default async function VideoDetailPage({ params }) {
-  const { id } = params
-  const video = await getVideo(id)
 
   if (!video) {
     return (
       <div className="flex justify-center items-center min-h-[50vh]">
         <p className="text-red-500">ভিডিও পাওয়া যায়নি</p>
       </div>
-    )
+    );
   }
 
-  const getYoutubeEmbed = (video_id) =>
-    `https://www.youtube.com/embed/${video_id}?rel=0&modestbranding=1&autoplay=1`
-
-  const shareUrl = process.env.NEXT_PUBLIC_SITE_URL 
-    ? `${process.env.NEXT_PUBLIC_SITE_URL}/video/${video.id}`
-    : undefined // Let ShareButtons handle fallback to window.location if undefined, but separate component handles hydration mismatch
-
-  // We need a wrapper for ShareButtons to avoid hydration errors if using window.location inside it without knowing we are on client. 
-  // However, ShareButtons is a client component and uses useEffect, so it's safe. 
-  // But passing a specific URL is better for server-side correctness.
-
-  /* 
-     Video Player: 
-     Youtube: iframe
-     Local: video tag
-  */
+  const getYoutubeEmbed = (id) =>
+    `https://www.youtube.com/embed/${id}?autoplay=1&rel=0&modestbranding=1`;
 
   return (
     <div className="min-h-screen bg-gray-50 py-10 px-4">
       <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
-        {/* Video Player Section */}
+        {/* 🎬 VIDEO PLAYER */}
         <div className="relative bg-black aspect-video w-full">
-          {video.type === 'Youtube' && video.video_id ? (
+          {video.type === "Youtube" && video.video_id ? (
             <iframe
               src={getYoutubeEmbed(video.video_id)}
-              title={video.description || 'Video'}
+              title={video.description || "Video"}
               className="absolute inset-0 w-full h-full"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
-            ></iframe>
-          ) : video.video ? (
+            />
+          ) : video.type === "Device" && video.video ? (
             <video
               src={video.video}
               controls
               autoPlay
+              playsInline
               className="absolute inset-0 w-full h-full object-contain"
             />
           ) : (
@@ -139,32 +82,29 @@ export default async function VideoDetailPage({ params }) {
           )}
         </div>
 
-        {/* Info Section */}
+        {/* ℹ️ INFO + SHARE */}
         <div className="p-6">
           <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">
-            {video.description || 'ভিডিও'}
+            {video.description || "ভিডিও"}
           </h1>
 
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4 border-t border-gray-100">
-            <div className="text-sm text-gray-500">
-               {/* Optional: Add date or other metadata if available */}
-            </div>
-            
+          <div className="flex justify-end pt-4 border-t">
             <div className="flex items-center gap-3">
-               <span className="text-gray-600 font-medium">শেয়ার করুন:</span>
-               <ShareButtons
-                  title={video.description || "Video"}
-                  className="gap-2"
-                  url={
-                    video.type === 'Youtube' && video.video_id
-                      ? `https://www.youtube.com/watch?v=${video.video_id}`
-                      : shareUrl 
-                  }
-               />
+              <span className="text-gray-600 font-medium">
+                শেয়ার করুন:
+              </span>
+              <ShareButtons
+                title={video.description || "Video"}
+                url={
+                  typeof window !== "undefined"
+                    ? window.location.href
+                    : ""
+                }
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
