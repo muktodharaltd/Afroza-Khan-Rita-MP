@@ -87,7 +87,7 @@ export default async function VideoDetailPage({ params }) {
   }
 
   const getYoutubeEmbed = (video_id) =>
-    `https://www.youtube.com/embed/${video_id}?rel=0&modestbranding=1&autoplay=1`
+    `https://www.youtube.com/embed/${video_id}?rel=0&modestbranding=1`
 
   const videoTitle = video.description || 'ভিডিও'
   const shareUrl = video.type === 'Youtube' && video.video_id
@@ -120,7 +120,6 @@ export default async function VideoDetailPage({ params }) {
               <video
                 src={video.video}
                 controls
-                autoPlay
                 className="absolute inset-0 w-full h-full object-contain"
               />
             ) : (
