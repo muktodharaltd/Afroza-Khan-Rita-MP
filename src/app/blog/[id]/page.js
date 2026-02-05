@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import ShareButtons from '@/components/common/ShareButtons'
+import ShareButtons from './ShareButtons'
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
 
@@ -36,6 +36,7 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: blog.title,
       description: blog.description,
+      url: `${API_BASE}/blog/${id}`, // Best effort URL or leave out to default to current
       type: 'article',
       images: [
         {
@@ -66,7 +67,7 @@ export default async function BlogDetail({ params }) {
   return (
     <div className="max-w-4xl mx-auto py-10 px-4">
       <Link
-        href="/"
+        href="/blog"
         className="mb-5 text-brandGreen underline text-sm font-medium inline-block"
       >
         ← Back
@@ -91,13 +92,21 @@ export default async function BlogDetail({ params }) {
       )}
 
       <div className="space-y-5">
-       <div
-  className="text-gray-700 text-lg md:text-xl text-justify"
-  dangerouslySetInnerHTML={{ __html: blog.description }}
-/>
+        <p className="text-gray-700 text-lg md:text-xl text-justify">
+          {blog.description}
+        </p>
 
+        {blog.description_second && (
+          <p className="text-brandGray text-lg md:text-xl text-justify">
+            {blog.description_second}
+          </p>
+        )}
 
-        
+        {blog.description_third && (
+          <p className="text-brandGray text-lg md:text-xl text-justify">
+            {blog.description_third}
+          </p>
+        )}
       </div>
     </div>
   )

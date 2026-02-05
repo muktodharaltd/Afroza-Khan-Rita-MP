@@ -6,12 +6,14 @@ import { FaFacebook, FaTwitter, FaLinkedin, FaTiktok } from 'react-icons/fa'
 import Image from 'next/image'
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
+console.log(API_BASE)
 
 export default function Footer() {
   const { useState, useEffect } = React
   const [logoName, setLogoName] = useState([])
 
-  useEffect(() => {   
+  useEffect(() => {
+    console.log('API BASE 👉', API_BASE)
 
     if (!API_BASE) return
 
@@ -20,7 +22,7 @@ export default function Footer() {
         const response = await fetch(`${API_BASE}/api/header-logos`)
         const data = await response.json()
         setLogoName(data.data || [])
-       console.log('Fetched logo name:', data)
+        console.log('Fetched logo name:', data)
       } catch (error) {
         console.error('Error fetching logo name:', error)
         setLogoName([])
@@ -155,21 +157,21 @@ export default function Footer() {
 
           {/* Contact - compact, brief info and small CTA */}
           {logoName?.logo_header && (
-            <div className="text-sm">
-              <p className="text-xl">ঠিকানা</p>
-              <p className="mt-2">{logoName.address} </p>
-              <p className="mt-2">ফোন: {logoName.phone} </p>
-              <p className="mt-2">ইমেইল: {logoName.email} </p>
+          <div className="text-sm">
+            <p className="text-xl">ঠিকানা</p>
+            <p className='mt-2'>{logoName.address} </p>
+            <p className='mt-2'>ফোন: {logoName.phone} </p>
+            <p className='mt-2'>ইমেইল: {logoName.email} </p>
 
-              <div className="mt-3">
-                <Link href="/contact">
-                  <button className="text-white px-3 py-1 bg-brandYellow hover:bg-brandGray font-semibold rounded-md shadow-sm hover:shadow transition text-sm">
-                    Contact Office
-                  </button>
-                </Link>
-              </div>
+            <div className="mt-3">
+              <Link href="/contact">
+                <button className="text-white px-3 py-1 bg-brandYellow hover:bg-brandGray font-semibold rounded-md shadow-sm hover:shadow transition text-sm">
+                  Contact Office
+                </button>
+              </Link>
             </div>
-          )}
+          </div>
+          )}  
         </div>
 
         {/* Divider */}
@@ -177,7 +179,11 @@ export default function Footer() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-3">
             <div className="text-sm opacity-90">
               © {new Date().getFullYear()} Developed by{' '}
-              <span className="font-semibold">MTL</span>
+              <Link href="https://muktodharaltd.com/" target="_blank" className="hover:text-brandYellow transition">
+              <span className="font-semibold">
+                Muktodhara Technology Limited
+              </span>
+              </Link>
             </div>
             <div className="flex items-center gap-3 text-sm">
               <Link

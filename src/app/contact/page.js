@@ -10,7 +10,7 @@ export default function ContactPage() {
   const [title, setTitle] = useState([])
 
   useEffect(() => {
-   
+    console.log('API BASE 👉', API_BASE)
     const fetchTitle = async () => {
       try {
         const response = await fetch(`${API_BASE}/api/header-logos`)
