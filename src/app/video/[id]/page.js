@@ -41,6 +41,12 @@ export async function generateMetadata({ params }) {
     ? (video.thumbnail.startsWith('http') ? video.thumbnail : `${API_BASE}/${video.thumbnail.replace(/^\//, '')}`)
     : null
 
+  console.log('[Metadata Debug]', { id, title, videoUrl, secureVideoUrl, thumbnailUrl })
+
+  const ogImages = thumbnailUrl
+    ? [{ url: thumbnailUrl, width: 1280, height: 720, alt: title }]
+    : [{ url: `${SITE_URL}/logo.jpg`, width: 1200, height: 630, alt: 'Afroza Khanrita' }]
+
   return {
     title: title,
     description: description,
@@ -68,9 +74,7 @@ export async function generateMetadata({ params }) {
           },
         ]
         : [],
-      images: thumbnailUrl
-        ? [{ url: thumbnailUrl, width: 1280, height: 720, alt: title }]
-        : [],
+      images: ogImages,
       locale: 'bn_BD',
     },
     twitter: {
