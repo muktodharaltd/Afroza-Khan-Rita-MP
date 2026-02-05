@@ -29,12 +29,14 @@ export async function generateMetadata({ params }) {
   if (!video) return { title: 'Video Not Found' }
 
   const pageUrl = `${SITE_URL}/video/${id}`
-  const videoUrl = absoluteVideoUrl(video)
+  const videoUrl = absoluteVideoUrl(video) // Can be http or https
   const title = video.title || video.description || 'ভিডিও'
   const description = video.description || title
 
-  // For Facebook to PLAY video in feed: og:video = direct HTTPS .mp4 URL.
-  const directVideoUrl = videoUrl ? String(videoUrl).replace(/^http:\/\//i, 'https://') : null
+  // Prepare URLs
+  // FB requires 'secure_url' to be HTTPS. 'url' can be HTTP or HTTPS.
+  const secureVideoUrl = videoUrl ? String(videoUrl).replace(/^http:\/\//i, 'https://') : null
+
   const thumbnailUrl = video.thumbnail
     ? (video.thumbnail.startsWith('http') ? video.thumbnail : `${API_BASE}/${video.thumbnail.replace(/^\//, '')}`)
     : null
@@ -42,32 +44,44 @@ export async function generateMetadata({ params }) {
   return {
     title: title,
     description: description,
+    alternates: {
+      canonical: pageUrl,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
     openGraph: {
       title,
       description,
       url: pageUrl,
+      siteName: 'Afroza Khanrita', // Adjust if you have a specific site name
       type: 'video.other',
-      videos: directVideoUrl
-        ? [{
-            url: directVideoUrl,
-            secureUrl: directVideoUrl,
+      videos: videoUrl
+        ? [
+          {
+            url: videoUrl, // Original URL (could be http)
+            secureUrl: secureVideoUrl, // Must be https
             type: 'video/mp4',
             width: 1280,
             height: 720,
-          }]
-        : undefined,
-      // Thumbnail = shown in share preview with title; video still plays on FB
+          },
+        ]
+        : [],
       images: thumbnailUrl
         ? [{ url: thumbnailUrl, width: 1280, height: 720, alt: title }]
-        : undefined,
+        : [],
+      locale: 'bn_BD',
     },
     twitter: {
       card: 'player',
       title,
       description,
+      site: '@afrozakhanrita', // Optional
       players: videoUrl
-        ? [{ playerUrl: pageUrl, streamUrl: videoUrl, width: 1280, height: 720 }]
-        : [{ playerUrl: pageUrl, streamUrl: pageUrl, width: 1280, height: 720 }],
+        ? [{ playerUrl: pageUrl, streamUrl: secureVideoUrl || videoUrl, width: 1280, height: 720 }]
+        : [],
+      images: thumbnailUrl ? [thumbnailUrl] : [],
     },
   }
 }
