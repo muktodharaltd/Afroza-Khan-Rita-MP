@@ -117,15 +117,15 @@ export default function VideoGallery() {
                     {/* ---------- Video Preview ---------- */}
                     {video.type === "Youtube" && video.video_id ? (
                       <div className="relative w-full h-56">
-                         <iframe
-                            src={getYoutubeEmbed(video.video_id)}
-                            title={`Youtube video ${video.id}`}
-                            className="w-full h-full object-cover pointer-events-none"
-                            frameBorder="0"
-                            tabIndex="-1"
-                          ></iframe>
-                          {/* Overlay to intercept clicks */}
-                          <div className="absolute inset-0 bg-transparent"></div>
+                        <iframe
+                          src={getYoutubeEmbed(video.video_id)}
+                          title={`Youtube video ${video.id}`}
+                          className="w-full h-full object-cover pointer-events-none"
+                          frameBorder="0"
+                          tabIndex="-1"
+                        ></iframe>
+                        {/* Overlay to intercept clicks */}
+                        <div className="absolute inset-0 bg-transparent"></div>
                       </div>
                     ) : video.video ? (
                       <video
