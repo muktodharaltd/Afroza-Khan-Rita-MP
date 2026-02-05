@@ -87,6 +87,17 @@ export async function generateMetadata({ params }) {
         : [],
       images: thumbnailUrl ? [thumbnailUrl] : [],
     },
+    // Explicit meta tags for Facebook (fallback)
+    other: {
+      'og:video': videoUrl || '',
+      'og:video:secure_url': secureVideoUrl || '',
+      'og:video:type': 'video/mp4',
+      'og:video:width': '1280',
+      'og:video:height': '720',
+      'og:image': ogImages[0]?.url || '',
+      'og:image:width': String(ogImages[0]?.width || 1200),
+      'og:image:height': String(ogImages[0]?.height || 630),
+    },
   }
 }
 
