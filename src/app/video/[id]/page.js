@@ -47,7 +47,8 @@ export async function generateMetadata({ params }) {
     ? [{ url: thumbnailUrl, width: 1280, height: 720, alt: title }]
     : [{ url: `${SITE_URL}/logo.jpg`, width: 1200, height: 630, alt: 'Afroza Khanrita' }]
 
-  return {
+  // Build metadata with explicit structure for Facebook
+  const metadata = {
     title: title,
     description: description,
     alternates: {
@@ -61,19 +62,8 @@ export async function generateMetadata({ params }) {
       title,
       description,
       url: pageUrl,
-      siteName: 'Afroza Khanrita', // Adjust if you have a specific site name
+      siteName: 'Afroza Khanrita',
       type: 'video.other',
-      videos: videoUrl
-        ? [
-          {
-            url: videoUrl, // Original URL (could be http)
-            secureUrl: secureVideoUrl, // Must be https
-            type: 'video/mp4',
-            width: 1280,
-            height: 720,
-          },
-        ]
-        : [],
       images: ogImages,
       locale: 'bn_BD',
     },
@@ -81,24 +71,33 @@ export async function generateMetadata({ params }) {
       card: 'player',
       title,
       description,
-      site: '@afrozakhanrita', // Optional
-      players: videoUrl
-        ? [{ playerUrl: pageUrl, streamUrl: secureVideoUrl || videoUrl, width: 1280, height: 720 }]
-        : [],
+      site: '@afrozakhanrita',
       images: thumbnailUrl ? [thumbnailUrl] : [],
     },
-    // Explicit meta tags for Facebook (fallback)
-    other: {
-      'og:video': videoUrl || '',
-      'og:video:secure_url': secureVideoUrl || '',
-      'og:video:type': 'video/mp4',
-      'og:video:width': '1280',
-      'og:video:height': '720',
-      'og:image': ogImages[0]?.url || '',
-      'og:image:width': String(ogImages[0]?.width || 1200),
-      'og:image:height': String(ogImages[0]?.height || 630),
-    },
   }
+
+  // Add video tags if video URL exists
+  if (secureVideoUrl) {
+    metadata.openGraph.videos = [
+      {
+        url: secureVideoUrl,
+        secureUrl: secureVideoUrl,
+        type: 'video/mp4',
+        width: 1280,
+        height: 720,
+      },
+    ]
+    metadata.twitter.players = [
+      {
+        playerUrl: pageUrl,
+        streamUrl: secureVideoUrl,
+        width: 1280,
+        height: 720,
+      },
+    ]
+  }
+
+  return metadata
 }
 
 export default async function VideoPage({ params }) {
