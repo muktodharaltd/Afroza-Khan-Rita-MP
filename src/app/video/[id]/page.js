@@ -119,39 +119,42 @@ export default async function VideoPage({ params }) {
   const title = video.title || video.description || 'ভিডিও'
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
-      <Link
-        href="/"
-        className="mb-5 text-brandGreen underline text-sm font-medium inline-block"
-      >
-        ← হোম
-      </Link>
+    <>
+      <meta property="og:video:url" content={videoSrc} />
+      <div className="max-w-4xl mx-auto py-10 px-4">
+        <Link
+          href="/"
+          className="mb-5 text-brandGreen underline text-sm font-medium inline-block"
+        >
+          ← হোম
+        </Link>
 
-      <h1 className="text-2xl md:text-3xl font-bold mb-4 text-brandGreen">
-        {title}
-      </h1>
+        <h1 className="text-2xl md:text-3xl font-bold mb-4 text-brandGreen">
+          {title}
+        </h1>
 
-      <ShareButtons
-        url={`${SITE_URL}/video/${id}`}
-        title={title}
-        description={video.description || ''}
-      />
-
-      <div className="bg-black rounded-lg overflow-hidden shadow-lg">
-        <video
-          key={videoSrc}
-          src={videoSrc}
-          controls
-          autoPlay
-          playsInline
-          className="w-full aspect-video object-contain"
-          poster={video.thumbnail ? (video.thumbnail.startsWith('http') ? video.thumbnail : `${API_BASE}/${video.thumbnail}`) : undefined}
+        <ShareButtons
+          url={`${SITE_URL}/video/${id}`}
+          title={title}
+          description={video.description || ''}
         />
-      </div>
 
-      {video.description && (
-        <p className="mt-4 text-gray-700 text-lg">{video.description}</p>
-      )}
-    </div>
+        <div className="bg-black rounded-lg overflow-hidden shadow-lg">
+          <video
+            key={videoSrc}
+            src={videoSrc}
+            controls
+            autoPlay
+            playsInline
+            className="w-full aspect-video object-contain"
+            poster={video.thumbnail ? (video.thumbnail.startsWith('http') ? video.thumbnail : `${API_BASE}/${video.thumbnail}`) : undefined}
+          />
+        </div>
+
+        {video.description && (
+          <p className="mt-4 text-gray-700 text-lg">{video.description}</p>
+        )}
+      </div>
+    </>
   )
 }
