@@ -62,9 +62,11 @@ export default function BlogPosts() {
                     </h2>
                   </Link>
 
-                  <p className="text-brandGray mb-2 line-clamp-3">
-                    {post.description}
-                  </p>
+                  <div className="text-brandGray mb-2 line-clamp-3"
+                    dangerouslySetInnerHTML={{ __html: post?.description }}
+                  />
+
+
                   {/* <p className="text-brandGray mb-2 line-clamp-3">
                     {post.description_second}
                   </p>
