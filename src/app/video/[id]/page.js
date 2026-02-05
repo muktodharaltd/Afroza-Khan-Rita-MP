@@ -1,135 +1,170 @@
 
-import { redirect } from 'next/navigation'
+import ShareButtons from '@/components/common/ShareButtons'
+import { notFound } from 'next/navigation'
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
 
 async function getVideo(id) {
   try {
-    // Fetch all videos since we might not have a single video endpoint
-    // If there is a single endpoint like /api/video-galleries/:id, that would be better
-    // But assuming the list is not huge for now based on the component code
     const res = await fetch(`${API_BASE}/api/video-galleries`, {
-      cache: 'no-store',
+      cache: 'no-store', // Ensure fresh data
     })
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch videos')
-    }
-
-    const Result = await res.json()
-    const videos = Result.data || []
-    return videos.find((v) => v.id === parseInt(id)) || null
-  } catch (error) {
-    console.error('Video fetch error:', error)
+    const result = await res.json()
+    return result.data?.find((v) => v.id.toString() === id.toString()) || null
+  } catch (err) {
+    console.error('Failed to fetch video', err)
     return null
   }
 }
 
 export async function generateMetadata({ params }) {
-  const { id } = await params
+  const { id } = params
   const video = await getVideo(id)
 
   if (!video) {
     return {
-      title: 'Video Not Found',
+      title: 'ভিডিও পাওয়া যায়নি',
     }
   }
 
-  const title = video.description || 'Video Gallery'
-  const description = video.description || 'Watch this video'
-  // Use a default image if video specific one is missing, or rely on OG video preview
-  const image = video.image || 'https://placehold.co/600x400?text=Video+Preview' 
+  const title = video.description || 'ভিডিও'
+  const videoContentUrl =
+    video.type === 'Youtube' && video.video_id
+      ? `https://www.youtube.com/v/${video.video_id}` // Flash/Direct URL format often works better for fb og:video than embed
+      : video.video
+  
+  const videoEmbedUrl =
+     video.type === 'Youtube' && video.video_id
+       ? `https://www.youtube.com/embed/${video.video_id}`
+       : video.video
 
-  // Base Open Graph
-  const openGraph = {
-    title: title,
-    description: description,
-    type: 'video.other', // or 'website' with video tags
-    url: `${process.env.NEXT_PUBLIC_API_URL || 'https://mpDetails.com'}/video/${id}`, // ideally absolute URL
-    images: [
-      {
-        url: image,
-        width: 1200,
-        height: 630,
-        alt: title,
-      },
-    ],
-  }
-
-  // Video specific tags
+  const images = []
   if (video.type === 'Youtube' && video.video_id) {
-    // Facebook handles Youtube specifically well with just the URL often, 
-    // but explicit tags help. 
-    // Secure Embed URL is key.
-    openGraph.videos = [
-      {
-        url: `https://www.youtube.com/embed/${video.video_id}`,
-        secureUrl: `https://www.youtube.com/embed/${video.video_id}`,
-        type: 'text/html',
-        width: 1280,
-        height: 720,
-      },
-      {
-        url: `https://www.youtube.com/v/${video.video_id}`,
-        secureUrl: `https://www.youtube.com/v/${video.video_id}`,
-        type: 'application/x-shockwave-flash',
-        width: 1280,
-        height: 720,
-      }
-    ]
-  } else if (video.video) {
-    // Local Video (MP4)
-    // Make sure 'video.video' is a full URL. If it's relative, we need to prepend domain (API_BASE usually serves static?)
-     // Based on previous code: src={video.video} implies it works as src. 
-     // We assume it's a full URL or relative to public. 
-     // For OG tags, it MUST be an absolute URL.
-     
-    let videoUrl = video.video
-    if (videoUrl.startsWith('/')) {
-        // It's relative, prepend backend base URL if it's served from there, or frontend if public
-        // Usually file uploads come from backend
-        videoUrl = `${API_BASE}${videoUrl}`
-    }
-
-    openGraph.videos = [
-      {
-        url: videoUrl,
-        secureUrl: videoUrl, // Must be HTTPS for FB to play inline
-        type: 'video/mp4',
-        width: 1280, // Estimates
-        height: 720,
-      },
-    ]
+    images.push({
+      url: `https://img.youtube.com/vi/${video.video_id}/maxresdefault.jpg`,
+      width: 1280,
+      height: 720,
+    })
   }
 
   return {
     title: title,
-    description: description,
-    openGraph: openGraph,
+    description: title,
+    openGraph: {
+      title: title,
+      description: title,
+      type: 'video.other',
+      videos: [
+        {
+          url: videoEmbedUrl, // Player URL
+          secureUrl: videoEmbedUrl,
+          type: video.type === 'Youtube' ? 'text/html' : 'video/mp4',
+          width: 1280,
+          height: 720,
+        },
+        // Fallback for direct stream if applicable, handled by multiple entries if needed
+      ],
+      images: images,
+    },
     twitter: {
       card: 'player',
       title: title,
-      description: description,
-      images: [image],
-      players: openGraph.videos?.map(v => ({
-        url: v.secureUrl || v.url,
-        width: v.width,
-        height: v.height
-      })) || []
-    },
+      description: title,
+      players: [
+        {
+             url: videoEmbedUrl,
+             width: 1280,
+             height: 720,
+        }
+      ],
+      images: images.map(i => i.url),
+    }
   }
 }
 
-import VideoRedirect from './VideoRedirect'
+export default async function VideoDetailPage({ params }) {
+  const { id } = params
+  const video = await getVideo(id)
 
-export default async function VideoPage({ params }) {
-  const { id } = await params
-  
+  if (!video) {
+    return (
+      <div className="flex justify-center items-center min-h-[50vh]">
+        <p className="text-red-500">ভিডিও পাওয়া যায়নি</p>
+      </div>
+    )
+  }
+
+  const getYoutubeEmbed = (video_id) =>
+    `https://www.youtube.com/embed/${video_id}?rel=0&modestbranding=1&autoplay=1`
+
+  const shareUrl = process.env.NEXT_PUBLIC_SITE_URL 
+    ? `${process.env.NEXT_PUBLIC_SITE_URL}/video/${video.id}`
+    : undefined // Let ShareButtons handle fallback to window.location if undefined, but separate component handles hydration mismatch
+
+  // We need a wrapper for ShareButtons to avoid hydration errors if using window.location inside it without knowing we are on client. 
+  // However, ShareButtons is a client component and uses useEffect, so it's safe. 
+  // But passing a specific URL is better for server-side correctness.
+
+  /* 
+     Video Player: 
+     Youtube: iframe
+     Local: video tag
+  */
+
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black text-white p-4">
-       <div className="animate-pulse">Loading video...</div>
-       <VideoRedirect destination="/" />
+    <div className="min-h-screen bg-gray-50 py-10 px-4">
+      <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-lg overflow-hidden">
+        {/* Video Player Section */}
+        <div className="relative bg-black aspect-video w-full">
+          {video.type === 'Youtube' && video.video_id ? (
+            <iframe
+              src={getYoutubeEmbed(video.video_id)}
+              title={video.description || 'Video'}
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          ) : video.video ? (
+            <video
+              src={video.video}
+              controls
+              autoPlay
+              className="absolute inset-0 w-full h-full object-contain"
+            />
+          ) : (
+            <div className="flex items-center justify-center h-full text-white">
+              ভিডিও পাওয়া যায়নি
+            </div>
+          )}
+        </div>
+
+        {/* Info Section */}
+        <div className="p-6">
+          <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">
+            {video.description || 'ভিডিও'}
+          </h1>
+
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pt-4 border-t border-gray-100">
+            <div className="text-sm text-gray-500">
+               {/* Optional: Add date or other metadata if available */}
+            </div>
+            
+            <div className="flex items-center gap-3">
+               <span className="text-gray-600 font-medium">শেয়ার করুন:</span>
+               <ShareButtons
+                  title={video.description || "Video"}
+                  className="gap-2"
+                  url={
+                    video.type === 'Youtube' && video.video_id
+                      ? `https://www.youtube.com/watch?v=${video.video_id}`
+                      : shareUrl 
+                  }
+               />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
-

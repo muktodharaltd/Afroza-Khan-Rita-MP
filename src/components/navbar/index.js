@@ -13,7 +13,6 @@ import { usePathname } from 'next/navigation'
 import { set } from 'react-hook-form'
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
-console.log(API_BASE)
 
 const Navbar = () => {
   const pathname = usePathname()
@@ -23,9 +22,7 @@ const Navbar = () => {
   const [dropdownHeight, setDropdownHeight] = useState(0)
   const [logoName, setLogoName] = useState([])
 
-  useEffect(() => {
-    console.log('API BASE 👉', API_BASE)
-
+  useEffect(() => {  
     if (!API_BASE) return
 
     const fetchLogoName = async () => {

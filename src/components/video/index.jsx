@@ -2,33 +2,16 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ChevronLeft, ChevronRight, Maximize } from "lucide-react";
-import ShareButtons from "../common/ShareButtons";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import Link from "next/link";
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL;
 
 export default function VideoGallery() {
   const [videos, setVideos] = useState([]);
   const [startIndex, setStartIndex] = useState(0);
-  const [activeVideo, setActiveVideo] = useState(null);
   const [visibleCount, setVisibleCount] = useState(4);
   const carouselRef = useRef(null);
-  const modalRef = useRef(null);
-
-  const handleFullScreen = () => {
-    const elem = modalRef.current;
-    if (!elem) return;
-
-    if (!document.fullscreenElement) {
-      elem.requestFullscreen().catch((err) => {
-        console.error(
-          `Error attempting to enable full-screen mode: ${err.message} (${err.name})`
-        );
-      });
-    } else {
-      document.exitFullscreen();
-    }
-  };
 
   /* ---------- Responsive visible count ---------- */
   const updateVisibleCount = () => {
@@ -129,119 +112,45 @@ export default function VideoGallery() {
                 className="flex-shrink-0 p-2"
                 style={{ width: `${100 / visibleCount}%` }}
               >
-                <div
-                  className="group relative bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-                  onClick={() => setActiveVideo(video)}
-                >
-                  {/* ---------- Video Preview ---------- */}
-                  {video.type === "Youtube" && video.video_id ? (
-                    <iframe
-                      src={getYoutubeEmbed(video.video_id)}
-                      title={`Youtube video ${video.id}`}
-                      className="w-full h-56 object-cover pointer-events-none"
-                      frameBorder="0"
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                    ></iframe>
-                  ) : video.video ? (
-                    <video
-                      src={video.video}
-                      className="w-full h-56 object-cover"
-                      muted
-                      playsInline
-                    />
-                  ) : (
-                    <div className="w-full h-56 bg-gray-200 flex items-center justify-center text-gray-500">
-                      ভিডিও পাওয়া যায়নি
-                    </div>
-                  )}
-                  {/* Hover Description */}
-                  {video.description && (
-                    <div className="absolute top-0 left-0 w-full bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-end">
-                      <p className="text-white text-sm p-3">{video.description}</p>
-                    </div>
-                  )}
-                </div>
+                <Link href={`/video/${video.id}`} className="block">
+                  <div className="group relative bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer h-full">
+                    {/* ---------- Video Preview ---------- */}
+                    {video.type === "Youtube" && video.video_id ? (
+                      <div className="relative w-full h-56">
+                         <iframe
+                            src={getYoutubeEmbed(video.video_id)}
+                            title={`Youtube video ${video.id}`}
+                            className="w-full h-full object-cover pointer-events-none"
+                            frameBorder="0"
+                            tabIndex="-1"
+                          ></iframe>
+                          {/* Overlay to intercept clicks */}
+                          <div className="absolute inset-0 bg-transparent"></div>
+                      </div>
+                    ) : video.video ? (
+                      <video
+                        src={video.video}
+                        className="w-full h-56 object-cover"
+                        muted
+                        playsInline
+                      />
+                    ) : (
+                      <div className="w-full h-56 bg-gray-200 flex items-center justify-center text-gray-500">
+                        ভিডিও পাওয়া যায়নি
+                      </div>
+                    )}
+                    {/* Hover Description */}
+                    {video.description && (
+                      <div className="absolute top-0 left-0 w-full bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-end h-full">
+                        <p className="text-white text-sm p-3">{video.description}</p>
+                      </div>
+                    )}
+                  </div>
+                </Link>
               </div>
             ))}
           </div>
         </div>
-
-        {/* Modal */}
-        {activeVideo && (
-          <div
-            className="fixed inset-0 bg-black/60 flex items-center justify-center z-50"
-            onClick={() => setActiveVideo(null)}
-          >
-            <div
-              className="relative bg-black max-w-4xl w-full"
-              onClick={(e) => e.stopPropagation()}
-              ref={modalRef}
-            >
-              <div className="absolute top-2 right-2 flex gap-2 z-50">
-                <button
-                  className="text-white bg-brandYellow p-1 rounded-full hover:bg-brandGreen"
-                  onClick={handleFullScreen}
-                  title="Full Screen"
-                >
-                  <Maximize size={20} />
-                </button>
-                <button
-                  className="text-white bg-brandYellow px-3 py-1 rounded-full hover:bg-brandGreen"
-                  onClick={() => setActiveVideo(null)}
-                >
-                  ✕
-                </button>
-              </div>
-
-              <div className="relative">
-                {activeVideo.type === "Youtube" && activeVideo.video_id ? (
-                  <iframe
-                    src={getYoutubeEmbed(activeVideo.video_id)}
-                    title={`Youtube video ${activeVideo.id}`}
-                    className="w-full h-[500px] object-contain"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                  ></iframe>
-                ) : activeVideo.video ? (
-                  <video
-                    src={activeVideo.video}
-                    controls
-                    controlsList="nofullscreen"
-                    autoPlay
-                    className="w-full h-[500px] object-contain bg-black"
-                  />
-                ) : (
-                  <div className="w-full h-[500px] bg-gray-900 flex items-center justify-center text-white">
-                    ভিডিও পাওয়া যায়নি
-                  </div>
-                )}
-
-                {/* Description Overlay */}
-                {activeVideo.description && (
-                  <div className="absolute top-0 left-0 w-full bg-black/60 text-white p-4 text-xl">
-                    {activeVideo.description}
-                  </div>
-                )}
-                
-                {/* Share Overlay */}
-                 <div className="absolute bottom-20 right-4 z-[60]">
-                    <ShareButtons
-                      title={activeVideo.description || "Video Gallery"}
-                      className="gap-2"
-                      url={
-                        activeVideo.type === "Youtube" && activeVideo.video_id
-                          ? `https://www.youtube.com/watch?v=${activeVideo.video_id}`
-                          : `${typeof window !== 'undefined' ? window.location.origin : ''}/video/${activeVideo.id}`
-                      }
-                    />
-                 </div>
-              </div>
-            </div>
-
-          </div>
-        )}
       </section>
     </div>
   );

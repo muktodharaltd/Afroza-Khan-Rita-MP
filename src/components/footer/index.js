@@ -6,14 +6,12 @@ import { FaFacebook, FaTwitter, FaLinkedin, FaTiktok } from 'react-icons/fa'
 import Image from 'next/image'
 
 const API_BASE = process.env.NEXT_PUBLIC_DATABASE_URL
-console.log(API_BASE)
 
 export default function Footer() {
   const { useState, useEffect } = React
   const [logoName, setLogoName] = useState([])
 
-  useEffect(() => {
-    console.log('API BASE 👉', API_BASE)
+  useEffect(() => {   
 
     if (!API_BASE) return
 
@@ -22,7 +20,7 @@ export default function Footer() {
         const response = await fetch(`${API_BASE}/api/header-logos`)
         const data = await response.json()
         setLogoName(data.data || [])
-        console.log('Fetched logo name:', data)
+       console.log('Fetched logo name:', data)
       } catch (error) {
         console.error('Error fetching logo name:', error)
         setLogoName([])
