@@ -95,6 +95,15 @@ export async function generateMetadata({ params }) {
         height: 720,
       },
     ]
+
+    // Explicit video meta tags for Facebook
+    metadata.other = {
+      'og:video:url': secureVideoUrl,
+      'og:video:secure_url': secureVideoUrl,
+      'og:video:type': 'video/mp4',
+      'og:video:width': '1280',
+      'og:video:height': '720',
+    }
   }
 
   return metadata
@@ -119,42 +128,39 @@ export default async function VideoPage({ params }) {
   const title = video.title || video.description || 'ভিডিও'
 
   return (
-    <>
-      <meta property="og:video:url" content={videoSrc} />
-      <div className="max-w-4xl mx-auto py-10 px-4">
-        <Link
-          href="/"
-          className="mb-5 text-brandGreen underline text-sm font-medium inline-block"
-        >
-          ← হোম
-        </Link>
+    <div className="max-w-4xl mx-auto py-10 px-4">
+      <Link
+        href="/"
+        className="mb-5 text-brandGreen underline text-sm font-medium inline-block"
+      >
+        ← হোম
+      </Link>
 
-        <h1 className="text-2xl md:text-3xl font-bold mb-4 text-brandGreen">
-          {title}
-        </h1>
+      <h1 className="text-2xl md:text-3xl font-bold mb-4 text-brandGreen">
+        {title}
+      </h1>
 
-        <ShareButtons
-          url={`${SITE_URL}/video/${id}`}
-          title={title}
-          description={video.description || ''}
+      <ShareButtons
+        url={`${SITE_URL}/video/${id}`}
+        title={title}
+        description={video.description || ''}
+      />
+
+      <div className="bg-black rounded-lg overflow-hidden shadow-lg">
+        <video
+          key={videoSrc}
+          src={videoSrc}
+          controls
+          playsInline
+          preload="metadata"
+          className="w-full aspect-video object-contain"
+          poster={video.thumbnail ? (video.thumbnail.startsWith('http') ? video.thumbnail : `${API_BASE}/${video.thumbnail}`) : undefined}
         />
-
-        <div className="bg-black rounded-lg overflow-hidden shadow-lg">
-          <video
-            key={videoSrc}
-            src={videoSrc}
-            controls
-            autoPlay
-            playsInline
-            className="w-full aspect-video object-contain"
-            poster={video.thumbnail ? (video.thumbnail.startsWith('http') ? video.thumbnail : `${API_BASE}/${video.thumbnail}`) : undefined}
-          />
-        </div>
-
-        {video.description && (
-          <p className="mt-4 text-gray-700 text-lg">{video.description}</p>
-        )}
       </div>
-    </>
+
+      {video.description && (
+        <p className="mt-4 text-gray-700 text-lg">{video.description}</p>
+      )}
+    </div>
   )
 }
