@@ -224,6 +224,16 @@ export default function VideoGallery() {
     if (d < -50) prev();
   };
 
+  const getYouTubeId = (url, videoIdField) => {
+    if (videoIdField) return videoIdField;
+    if (!url) return null;
+    const s = String(url).trim();
+    if (s.length === 11 && /^[a-zA-Z0-9_-]{11}$/.test(s)) return s;
+    const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i;
+    const match = s.match(regex);
+    return match ? match[1] : null;
+  };
+
   return (
     <div className="shadow-sm">
       <section className="py-12 max-w-7xl mx-auto relative">
@@ -235,8 +245,8 @@ export default function VideoGallery() {
         <button
           onClick={prev}
           disabled={startIndex === 0}
-          className={`absolute left-0 top-1/2 -translate-y-1/2 bg-brandYellow text-white p-2 rounded-full z-10 ${
-            startIndex === 0 ? "opacity-50" : "hover:bg-brandGreen"
+          className={`absolute left-0 top-1/2 -translate-y-1/2 bg-brandYellow text-white p-2 rounded-full z-10 shadow-md transition-all ${
+            startIndex === 0 ? "opacity-30 cursor-not-allowed" : "hover:bg-brandGreen opacity-100"
           }`}
         >
           <ChevronLeft />
@@ -245,8 +255,8 @@ export default function VideoGallery() {
         <button
           onClick={next}
           disabled={startIndex === maxStartIndex}
-          className={`absolute right-0 top-1/2 -translate-y-1/2 bg-brandYellow text-white p-2 rounded-full z-10 ${
-            startIndex === maxStartIndex ? "opacity-50" : "hover:bg-brandGreen"
+          className={`absolute right-0 top-1/2 -translate-y-1/2 bg-brandYellow text-white p-2 rounded-full z-10 shadow-md transition-all ${
+            startIndex === maxStartIndex ? "opacity-30 cursor-not-allowed" : "hover:bg-brandGreen opacity-100"
           }`}
         >
           <ChevronRight />
@@ -261,39 +271,83 @@ export default function VideoGallery() {
           onTouchEnd={handleTouchEnd}
         >
           <div
-            className="flex transition-transform duration-500"
+            className="flex transition-transform duration-500 ease-in-out"
             style={{
               transform: `translateX(-${(startIndex * 100) / visibleCount}%)`,
             }}
           >
-            {videos.map((video) => (
-              <div
-                key={video.id}
-                className="flex-shrink-0 p-2"
-                style={{ width: `${100 / visibleCount}%` }}
-              >
-                <Link
-                  href={`/video/${video.id}`}
-                  className="group relative block bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer"
-                >
-                  <video
-                    src={video.video}
-                    className="w-full h-56 object-cover"
-                    muted
-                    preload="metadata"
-                  />
+            {videos.map((video) => {
+              const ytId = getYouTubeId(video.video, video.video_id);
+              
+              const fixPath = (p) => {
+                if (!p) return null;
+                if (p.startsWith('http')) return p;
+                const cleanPath = p.replace(/^\/?public\//, '');
+                return `${API_BASE}/${cleanPath.replace(/^\//, '')}`;
+              };
 
-                  {/* Hover Description */}
-                  {video.description && (
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition flex items-end">
-                      <p className="text-white text-sm p-3">
-                        {video.description}
-                      </p>
+              const videoSrc = video.video?.startsWith('http') 
+                ? video.video 
+                : (video.video ? fixPath(video.video) : null);
+              
+              const ytThumb = ytId ? `https://img.youtube.com/vi/${ytId}/hqdefault.jpg` : null;
+
+              return (
+                <div
+                  key={video.id}
+                  className="flex-shrink-0 p-2"
+                  style={{ width: `${100 / visibleCount}%` }}
+                >
+                  <Link
+                    href={`/video/${video.id}`}
+                    className="group relative block bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer aspect-video border border-gray-100"
+                  >
+                    {ytId ? (
+                      /* YouTube Main Thumbnail */
+                      <div className="w-full h-full relative">
+                        <img
+                          src={ytThumb}
+                          alt={video.title || "youtube video"}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-colors">
+                          <div className="w-12 h-12 bg-red-600/90 text-white rounded-full flex items-center justify-center shadow-xl transition-transform group-hover:scale-110">
+                            <svg className="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      /* Device Video Main Thumbnail (First Frame) */
+                      <div className="w-full h-full relative">
+                        <video
+                          src={videoSrc}
+                          className="w-full h-full object-cover"
+                          muted
+                          playsInline
+                          preload="metadata"
+                        />
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/5 group-hover:bg-black/20 transition-colors">
+                          <div className="w-12 h-12 bg-brandYellow/90 text-white rounded-full flex items-center justify-center shadow-xl transition-transform group-hover:scale-110">
+                            <svg className="w-6 h-6 fill-current ml-1" viewBox="0 0 24 24">
+                              <path d="M8 5v14l11-7z" />
+                            </svg>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Hover Title */}
+                    <div className="absolute inset-x-0 bottom-0 bg-black/80 translate-y-full group-hover:translate-y-0 transition-transform duration-300 p-2">
+                       <p className="text-white text-[10px] md:text-xs line-clamp-2 text-center font-medium">
+                         {video.title || video.description || "ভিডিও দেখুন"}
+                       </p>
                     </div>
-                  )}
-                </Link>
-              </div>
-            ))}
+                  </Link>
+                </div>
+              );
+            })}
           </div>
         </div>
 
@@ -301,3 +355,4 @@ export default function VideoGallery() {
     </div>
   );
 }
+

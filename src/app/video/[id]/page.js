@@ -17,10 +17,39 @@ async function getVideo(id) {
   }
 }
 
+function getYouTubeId(url, videoIdField) {
+  if (videoIdField) return videoIdField
+  if (!url) return null
+  const s = String(url).trim()
+  
+  // 1. Raw 11-char ID
+  if (s.length === 11 && /^[a-zA-Z0-9_-]{11}$/.test(s)) return s
+
+  // 2. Standard Regex for various formats
+  const regex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=|shorts\/|live\/)|youtu\.be\/)([a-zA-Z0-9_-]{11})/i
+  const match = s.match(regex)
+  return match ? match[1] : null
+}
+
 function absoluteVideoUrl(video) {
-  if (!video?.video) return null
-  const url = video.video
-  return url.startsWith('http') ? url : `${API_BASE}/${url.replace(/^\//, '')}`
+  if (!video) return null
+  const videoId = video.video_id
+  const videoField = video.video ? String(video.video).trim() : null
+  
+  // If it's a YouTube video via ID field
+  if (videoId) return `https://www.youtube.com/watch?v=${videoId}`
+  if (!videoField) return null
+
+  // If it's a YouTube URL or already absolute
+  if (getYouTubeId(videoField)) return videoField
+  if (videoField.startsWith('http')) return videoField
+  
+  // Handle YouTube domain without protocol (v= format)
+  if (videoField.toLowerCase().includes('youtube.com') || videoField.toLowerCase().includes('youtu.be')) {
+    return videoField.startsWith('//') ? `https:${videoField}` : `https://${videoField}`
+  }
+
+  return `${API_BASE}/${videoField.replace(/^\//, '')}`
 }
 
 export async function generateMetadata({ params }) {
@@ -29,35 +58,24 @@ export async function generateMetadata({ params }) {
   if (!video) return { title: 'Video Not Found' }
 
   const pageUrl = `${SITE_URL}/video/${id}`
-  const videoUrl = absoluteVideoUrl(video) // Can be http or https
+  const videoUrl = absoluteVideoUrl(video)
   const title = video.title || video.description || 'ভিডিও'
   const description = video.description || title
-
-  // Prepare URLs
-  // FB requires 'secure_url' to be HTTPS. 'url' can be HTTP or HTTPS.
-  const secureVideoUrl = videoUrl ? String(videoUrl).replace(/^http:\/\//i, 'https://') : null
+  const ytId = getYouTubeId(videoUrl, video.video_id)
 
   const thumbnailUrl = video.thumbnail
     ? (video.thumbnail.startsWith('http') ? video.thumbnail : `${API_BASE}/${video.thumbnail.replace(/^\//, '')}`)
-    : null
-
-  console.log('[Metadata Debug]', { id, title, videoUrl, secureVideoUrl, thumbnailUrl })
+    : (ytId ? `https://img.youtube.com/vi/${ytId}/maxresdefault.jpg` : null)
 
   const ogImages = thumbnailUrl
     ? [{ url: thumbnailUrl, width: 1280, height: 720, alt: title }]
     : [{ url: `${SITE_URL}/logo.jpg`, width: 1200, height: 630, alt: 'Afroza Khanrita' }]
 
-  // Build metadata with explicit structure for Facebook
   const metadata = {
     title: title,
     description: description,
-    alternates: {
-      canonical: pageUrl,
-    },
-    robots: {
-      index: true,
-      follow: true,
-    },
+    alternates: { canonical: pageUrl },
+    robots: { index: true, follow: true },
     openGraph: {
       title,
       description,
@@ -76,8 +94,8 @@ export async function generateMetadata({ params }) {
     },
   }
 
-  // Add video tags if video URL exists
-  if (secureVideoUrl) {
+  if (videoUrl && !ytId) {
+    const secureVideoUrl = videoUrl.startsWith('http') ? videoUrl.replace(/^http:\/\//i, 'https://') : videoUrl
     metadata.openGraph.videos = [
       {
         url: secureVideoUrl,
@@ -95,14 +113,10 @@ export async function generateMetadata({ params }) {
         height: 720,
       },
     ]
-
-    // Explicit video meta tags for Facebook
     metadata.other = {
       'og:video:url': secureVideoUrl,
       'og:video:secure_url': secureVideoUrl,
       'og:video:type': 'video/mp4',
-      'og:video:width': '1280',
-      'og:video:height': '720',
     }
   }
 
@@ -116,51 +130,63 @@ export default async function VideoPage({ params }) {
   if (!video) {
     return (
       <div className="max-w-4xl mx-auto py-10 px-4">
-        <p className="text-red-500">ভিডিও পাওয়া যায়নি</p>
+        <p className="text-red-500 font-bold">ভিডিও পাওয়া যায়নি</p>
         <Link href="/" className="text-brandGreen underline mt-4 inline-block">
-          ← হোম
+          ← হোমপেজে ফিরে যান
         </Link>
       </div>
     )
   }
 
-  const videoSrc = absoluteVideoUrl(video) || video.video
+  const videoSrc = absoluteVideoUrl(video)
   const title = video.title || video.description || 'ভিডিও'
+  const ytId = getYouTubeId(videoSrc, video.video_id)
 
   return (
-    <div className="max-w-4xl mx-auto py-10 px-4">
+    <div className="max-w-4xl mx-auto py-10 px-4 min-h-screen">
       <Link
         href="/"
-        className="mb-5 text-brandGreen underline text-sm font-medium inline-block"
+        className="mb-6 text-brandGreen hover:underline text-sm font-semibold flex items-center gap-1"
       >
-        ← হোম
+        <span>←</span> হোমপেজ
       </Link>
 
-      <h1 className="text-2xl md:text-3xl font-bold mb-4 text-brandGreen">
+      <h1 className="text-2xl md:text-3xl font-extrabold mb-4 text-brandGreen leading-tight">
         {title}
       </h1>
 
-      <ShareButtons
-        url={`${SITE_URL}/video/${id}`}
-        title={title}
-        description={video.description || ''}
-      />
-
-      <div className="bg-black rounded-lg overflow-hidden shadow-lg">
-        <video
-          key={videoSrc}
-          src={videoSrc}
-          controls
-          playsInline
-          preload="metadata"
-          className="w-full aspect-video object-contain"
-          poster={video.thumbnail ? (video.thumbnail.startsWith('http') ? video.thumbnail : `${API_BASE}/${video.thumbnail}`) : undefined}
+      <div className="mb-6">
+        <ShareButtons
+          url={`${SITE_URL}/video/${id}`}
+          title={title}
+          description={video.description || ''}
         />
       </div>
 
-      {video.description && (
-        <p className="mt-4 text-gray-700 text-lg">{video.description}</p>
-      )}
+      <div className="bg-black rounded-2xl overflow-hidden shadow-2xl aspect-video relative group border-4 border-white/10">
+        {ytId ? (
+          <iframe
+            src={`https://www.youtube.com/embed/${ytId}?rel=0&autoplay=1`}
+            title={title}
+            className="absolute inset-0 w-full h-full"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        ) : (
+          <video
+            key={videoSrc}
+            src={videoSrc}
+            controls
+            playsInline
+            className="w-full h-full object-contain"
+            poster={video.thumbnail ? (video.thumbnail.startsWith('http') ? video.thumbnail : `${API_BASE}/${video.thumbnail}`) : undefined}
+          />
+        )}
+      </div>    
     </div>
   )
 }
+
+
+
